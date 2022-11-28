@@ -14,7 +14,7 @@ app.use("/auth",AuthRouter);
 app.use("/post",PostRouter);
 app.use("/user",UserRouter);
 
-let port = 8080;
+let port = process.env.PORT || 8080;
 // app.get("/",(rq, res)=>[
 //     res.send("Its working fine")
 // ])
