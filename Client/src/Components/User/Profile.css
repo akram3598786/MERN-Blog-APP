@@ -1,0 +1,14 @@
+
+#userDetail{
+    border: 5px solid teal;
+    /* color: white; */
+    width: 50%;
+    margin: auto;
+    border-radius: 15px;
+    padding: 12px 0px;
+}
+
+#userDetail img{
+    height: 8%;
+    width: 8%;
+}
