@@ -1,5 +1,4 @@
-
-.navbarDiv{
+.navbarDiv {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,8 +7,24 @@
     color: black;
     padding: 10px 0px;
 }
-.navbarDiv > *{
+
+.navLinks>* {
     color: white;
     text-decoration: none;
 }
 
+.navbarDiv {
+    column-gap: 60px;
+}
+
+.navbarDiv>div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    column-gap: 30px;
+}
+
+#SignOutBtn,.AuthLink {
+    background-color: brown;
+    cursor: pointer;
+}
