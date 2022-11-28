@@ -32,7 +32,7 @@ export default function AllBlogs() {
     return (
         <>
             <div>
-                <h2>All exist Users</h2>
+                <h2>All Exist Blogs</h2>
                 {
                     loading ? <h1>Loading...</h1> :
                         error ? <h1>Error : Something Went Wrong</h1> :
