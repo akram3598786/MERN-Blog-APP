@@ -26,7 +26,8 @@ async function CreatePost(req, res){
 
 async function getALLposts(req, res){
     try{
-       let posts = await PostModel.find();
+        const {userId} = req.params;
+       let posts = await PostModel.find({createdby : userId});
        if(posts.length > 0){
           res.status(200).send(posts);
        }else{
@@ -51,7 +52,7 @@ async function getSinglePost(req, res){
 }
 
 PostRouter.post("/:userId", CreatePost);
-PostRouter.get("/all", getALLposts);
+PostRouter.get("/:userId/all", getALLposts);
 PostRouter.get("/:postId", getSinglePost);
 
 module.exports =  PostRouter;
