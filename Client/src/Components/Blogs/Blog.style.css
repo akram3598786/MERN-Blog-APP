@@ -25,3 +25,11 @@ form{
 #title{
     width: 200px;
 }
+
+#blogView{
+    width: 70%;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 16px;
+    padding: 10px 20px;
+}

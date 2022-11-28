@@ -48,7 +48,7 @@ export default function AllBlogs() {
                                             return (
                                                 <tr key={blog._id}>
                                                     <td>{blog.title}</td>
-                                                    <td><Link to={`/post/${blog._id}`}>See Blog</Link></td>
+                                                    <td className="Links"><Link  to={`/post/${blog._id}`}>See Blog</Link></td>
                                                 </tr>
                                             )
                                         })

@@ -8,13 +8,23 @@
 }
 
 .blogsTable thead th{
-    border: 1px solid black;
+    border: 1px solid red;
     padding: 20px;
     margin: 10px;
 }
 
  .blogsTable tbody tr td{
-    border: 1px solid black;
+    border: 1px solid white;
     padding:10px 24px;
 }
-
+table{
+    background-color: teal;
+    color: wheat;
+    font-size: 1.3rem;
+    padding: 30px 90px;
+    border-radius: 15px;
+}
+.Links{
+    color: white;
+    background-color: wheat;
+}
