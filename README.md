@@ -3,8 +3,25 @@
 
 A MERN app which provide a interface to users to authenticate and create blogs. User can see its created blogs. User can perform create, read, update and delete functionalities over blogs.
 
-# Getting Started with Create React App
+# Used Stacks
+<li>React</li>
+<li>JavaScript</li>
+<li>Node.js</li>
+<li>Express.js</li>
+<li>Mongoose</li>
+<li>MongoDB</li>
 
+# All Bolgs Page
+![home](https://user-images.githubusercontent.com/57341544/204259220-9a125743-ae61-44c1-969e-5675971a1597.png)
+
+# Bolg View Page
+![blog view](https://user-images.githubusercontent.com/57341544/204259233-2e8bc103-5734-496a-9cae-b224777b946f.png)
+
+# Bolg Create Page
+![create](https://user-images.githubusercontent.com/57341544/204259464-34590b59-1ad9-4afa-b1b1-e18d851befc4.png)
+
+
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
