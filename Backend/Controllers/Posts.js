@@ -6,7 +6,7 @@ const PostRouter = express.Router();
 async function CreatePost(req, res){
     try{
         const payload = req.body;
-         const {userId} = req.params;
+         const userId = payload.createdby;
          let user = await UserModel.findById(userId);
         // console.log(user);
         if(user){
