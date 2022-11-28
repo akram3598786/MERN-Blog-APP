@@ -18,9 +18,12 @@ User also can see the profile details.
 # Bolg View Page
 ![blog view](https://user-images.githubusercontent.com/57341544/204259233-2e8bc103-5734-496a-9cae-b224777b946f.png)
 
+# User Profile Page
+![profile](https://user-images.githubusercontent.com/57341544/204268691-aa91ed2b-21df-4ff4-9389-01367a68ea70.png)
+
+
 # Bolg Create Page
 ![create](https://user-images.githubusercontent.com/57341544/204259464-34590b59-1ad9-4afa-b1b1-e18d851befc4.png)
-
 
 # Getting Started with Create React App
 
