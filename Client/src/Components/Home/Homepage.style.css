@@ -1,0 +1,18 @@
+
+#blogsDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: yellow; */
+    flex-direction: column;
+}
+
+.blogsTable thead th{
+    border: 1px solid black;
+    padding: 20px;
+}
+ .blogsTable tbody tr td{
+    border: 1px solid black;
+    padding:10px 24px;
+}
+
