@@ -18,7 +18,7 @@ form{
     display: flex;
     justify-content: center;
     align-items: center ;
-    background-color: yellow;
+    /* background-color: yellow; */
     column-gap: 30px;
     width: 50%;
 }

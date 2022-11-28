@@ -1,0 +1,32 @@
+
+#SignupDiv{
+    width: 60%;
+    margin: auto;
+    background-color: rgb(201, 75, 75);
+    padding: 10px 0px;
+    margin-top: 3%;
+    color: white;
+    border-radius: 16px;
+}
+
+form{
+    display: block;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 20px;
+}
+form label {
+    display: flex;
+    justify-content: space-between;
+    width: 65%;
+}
+input{
+    height: 20%;
+}
+#submitBtn{
+    width: 15%;
+    margin-top: 13px;
+}
