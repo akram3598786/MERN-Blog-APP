@@ -12,15 +12,18 @@ User also can see the profile details.
 <li>Mongoose</li>
 <li>MongoDB</li>
 
-# All Bolgs Page
+# All Blogs Page
 ![home](https://user-images.githubusercontent.com/57341544/204259220-9a125743-ae61-44c1-969e-5675971a1597.png)
 
-# Bolg View Page
+# Blog View Page
 ![blog view](https://user-images.githubusercontent.com/57341544/204259233-2e8bc103-5734-496a-9cae-b224777b946f.png)
 
-# Bolg Create Page
-![create](https://user-images.githubusercontent.com/57341544/204259464-34590b59-1ad9-4afa-b1b1-e18d851befc4.png)
+# User Profile Page
+![profile](https://user-images.githubusercontent.com/57341544/204268691-aa91ed2b-21df-4ff4-9389-01367a68ea70.png)
 
+
+# Blog Create Page
+![create](https://user-images.githubusercontent.com/57341544/204259464-34590b59-1ad9-4afa-b1b1-e18d851befc4.png)
 
 # Getting Started with Create React App
 
