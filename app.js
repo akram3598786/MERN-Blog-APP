@@ -21,7 +21,7 @@ let port = process.env.PORT || 8080;
 app.listen(port, async (req, res)=>{
     try{
        await ConnectDB();
-       console.log("server running on 8080 port")
+       console.log("server running on 8080 port");
     }
     catch(err){
       console.log("Error occured", err);
