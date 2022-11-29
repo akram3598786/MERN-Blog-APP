@@ -4,7 +4,8 @@ const PostRouter = require("./Controllers/Posts.js");
 const UserRouter = require("./Controllers/UsersData.js");
 const AuthRouter = require("./Middlewares/Auth.js");
 const cors = require("cors");
-require('dotenv').config()
+require('dotenv').config();
+
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
