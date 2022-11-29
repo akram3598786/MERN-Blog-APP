@@ -12,6 +12,9 @@ User also can see the profile details.
 <li>Mongoose</li>
 <li>MongoDB</li>
 
+# Registration 
+![reg](https://user-images.githubusercontent.com/57341544/204276232-821a6d81-b7e1-4e2d-851c-4b106f751628.png)
+
 # All Blogs Page
 ![home](https://user-images.githubusercontent.com/57341544/204259220-9a125743-ae61-44c1-969e-5675971a1597.png)
 
