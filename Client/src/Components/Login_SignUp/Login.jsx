@@ -25,10 +25,15 @@ export default function Login(){
            alert("Logged In Successfully");
            localStorage.setItem("LoggedUser", JSON.stringify(res.data.foundUser));
            dispatch(isAuthHandler(true));
+           navigate("/");
+        }else{
+          console.log(res)
+          alert("Kindly register first !");
         }
        }).catch((err)=>{
+        alert("Kindly register first !");
           console.log(err);
-       }).finally(()=>navigate("/"));
+       })
     }
     const handleChange=(e)=>{
         let {name,value } = e.target;

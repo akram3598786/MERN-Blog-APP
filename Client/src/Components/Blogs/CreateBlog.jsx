@@ -19,7 +19,7 @@ export default function CreateBlog(){
         let url = `https://mern-app-blog-ver01.herokuapp.com/post/${userData._id}`;
         axios.post(url, payload).
         then((res)=>{
-            if(res.status === 201) alert("Blod Posted");
+            if(res.status === 201) alert("Blog Posted");
             else alert("Something wrong !");
         }).catch((err)=>{
             console.log(err);

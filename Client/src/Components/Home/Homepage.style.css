@@ -28,3 +28,6 @@ table{
     color: white;
     background-color: wheat;
 }
+.deleteBtn{
+    cursor: pointer;
+}
