@@ -26,7 +26,7 @@ User also can see the profile details.
 
 
 # Blog Create Page
-![create](https://user-images.githubusercontent.com/57341544/204259464-34590b59-1ad9-4afa-b1b1-e18d851befc4.png)
+![create](https://user-images.githubusercontent.com/57341544/204523589-afb7ca61-ca2f-46da-b6b1-f0599ac48679.png)
 
 # Getting Started with Create React App
 
