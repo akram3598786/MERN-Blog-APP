@@ -17,9 +17,9 @@ app.use("/post",PostRouter);
 app.use("/user",UserRouter);
 
 let port = process.env.PORT || 8080;
- app.get("/",(rq, res)=>[
-     res.send("Its working fine") // for debuging purpose
- ])
+//  app.get("/",(rq, res)=>[
+//      res.send("Its working fine") // for debuging purpose
+//  ])
 app.listen(port, async (req, res)=>{
     try{
        await ConnectDB();
