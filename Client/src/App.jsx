@@ -18,7 +18,8 @@ function App() {
       <NavBar />
       {!isAuth ? 
       <>
-      {/* <Login/> */}
+    
+      Kindly login to enter in app
       <Routes>
       <Route path='/login' element={<Login />}></Route>
       <Route path='/signup' element={<SignUp />}></Route>

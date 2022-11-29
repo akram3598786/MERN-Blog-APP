@@ -34,7 +34,7 @@ export default function CreateBlog(){
         <h2>Create Blog </h2> 
         <div className="inputSec">
             <form>
-         <input type="text" name="" id="title" value={tit} onChange={(e)=>settitle(e.target.value)}  placeholder="Title"/>
+         <input className="title" type="text" name="" id="title" value={tit} onChange={(e)=>settitle(e.target.value)}  placeholder="Title"/>
          <textarea type="text" name="" id="" value={des} onChange={(e)=>setdes(e.target.value)}  placeholder="Description"/> <br />
          </form>
          <button onClick={handlePost}>Post</button>

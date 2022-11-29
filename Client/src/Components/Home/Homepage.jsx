@@ -11,7 +11,6 @@ export default function Homepage(){
 
     return(
         <div id="blogsDiv">
-         <h2>This is Home Page</h2>
          <AllBlogs/>
         </div>
     )
