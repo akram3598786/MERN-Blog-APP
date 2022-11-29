@@ -21,7 +21,8 @@ const handeChange=(e)=>{
 }
 const handlsSubmit=(e)=>{
    e.preventDefault();
-   let url = "http://127.0.0.1:8080/auth/signup";
+  //  let url = "http://127.0.0.1:8080/auth/signup";
+   let url = "https://mern-app-blog-ver01.herokuapp.com/auth/signup";
    axios.post(url, formData).
    then((res)=>{
     if(res.status === 201){

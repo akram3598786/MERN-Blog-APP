@@ -16,7 +16,8 @@ export default function AllBlogs() {
     const getAllBlogs = () => {
         let userData = JSON.parse(localStorage.getItem("LoggedUser"));
         console.log(userData._id);
-        let url = `http://127.0.0.1:8080/post/${userData._id}/all`;
+        // let url = `http://127.0.0.1:8080/post/${userData._id}/all`;
+        let url = `https://mern-app-blog-ver01.herokuapp.com/post/${userData._id}/all`;
         axios.get(url).
 
             then((res) => {

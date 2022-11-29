@@ -16,7 +16,6 @@ export default function Profile() {
         setuser(userData);
     }
 
-
     return (
 
         <>
