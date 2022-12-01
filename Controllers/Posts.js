@@ -51,6 +51,17 @@ async function getSinglePost(req, res) {
     }
 }
 
+async function EditPost(req, res){
+    try{
+        let {postId} = req.params;
+        let post = await PostModel.updateOne(postId);
+        if(post) res.status(200).send("updated");
+        else res.status(400).send("Post not updated !");
+    }catch(err){
+        res.send(err.message);
+    }
+}
+
 async function deletePost(req, res) {
     try {
         let { postId } = req.params;
@@ -64,6 +75,7 @@ async function deletePost(req, res) {
 }
 
 PostRouter.post("/:userId", CreatePost);
+PostRouter.post("/edit/:userId", EditPost);
 PostRouter.get("/:userId/all", getALLposts);
 PostRouter.get("/:postId", getSinglePost);
  PostRouter.delete("/:postId", deletePost);
