@@ -75,7 +75,7 @@ async function deletePost(req, res) {
 }
 
 PostRouter.post("/:userId", CreatePost);
-PostRouter.post("/edit/:userId", EditPost);
+PostRouter.post("/edit/:postId", EditPost);
 PostRouter.get("/:userId/all", getALLposts);
 PostRouter.get("/:postId", getSinglePost);
  PostRouter.delete("/:postId", deletePost);
