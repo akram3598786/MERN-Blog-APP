@@ -20,7 +20,7 @@ User also can see the profile details.
 
 
 # Registration 
-![reg](https://user-images.githubusercontent.com/57341544/204276232-821a6d81-b7e1-4e2d-851c-4b106f751628.png)
+![reg](https://user-images.githubusercontent.com/57341544/205097458-93f730ce-3235-4848-afee-fddc45a75265.png)
 
 # All Blogs Page
 ![home](https://user-images.githubusercontent.com/57341544/205096695-5bae6fef-0e74-41ad-9651-0bf70c003122.png)
