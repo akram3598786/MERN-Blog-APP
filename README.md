@@ -23,7 +23,7 @@ User also can see the profile details.
 ![reg](https://user-images.githubusercontent.com/57341544/204276232-821a6d81-b7e1-4e2d-851c-4b106f751628.png)
 
 # All Blogs Page
-![home](https://user-images.githubusercontent.com/57341544/204519606-fd1d3b45-79f5-4c8d-8f46-33770e867560.png)
+![home](https://user-images.githubusercontent.com/57341544/205096695-5bae6fef-0e74-41ad-9651-0bf70c003122.png)
 
 # Blog View Page
 ![blog view](https://user-images.githubusercontent.com/57341544/204259233-2e8bc103-5734-496a-9cae-b224777b946f.png)
