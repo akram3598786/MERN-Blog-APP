@@ -54,7 +54,10 @@ async function getSinglePost(req, res) {
 async function EditPost(req, res){
     try{
         let {postId} = req.params;
-        let post = await PostModel.updateOne({_id : postId});
+        let payload = req.body;
+        let post = await PostModel.findByIdAndUpdate(postId, payload,
+         {new: true});
+        // console.log(post)
         if(post) res.status(200).send("updated");
         else res.status(400).send("Post not updated !");
     }catch(err){
@@ -65,7 +68,6 @@ async function EditPost(req, res){
 async function deletePost(req, res) {
     try {
         let { postId } = req.params;
-
         let post = await PostModel.deleteOne({_id : postId});
       //  console.log(post)
         res.status(200).send("deleted");
