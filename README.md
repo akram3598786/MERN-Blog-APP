@@ -12,6 +12,13 @@ User also can see the profile details.
 <li>Mongoose</li>
 <li>MongoDB</li>
 
+# Used tools
+<li>Heroku - for backend deployment</li>
+<li>Netlify - for backend deployment</li>
+<li>Postman - for API testing</li>
+<li>VS Code </li>
+
+
 # Registration 
 ![reg](https://user-images.githubusercontent.com/57341544/204276232-821a6d81-b7e1-4e2d-851c-4b106f751628.png)
 
