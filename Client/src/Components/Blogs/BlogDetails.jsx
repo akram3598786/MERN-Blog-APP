@@ -22,7 +22,7 @@ export default function BlogDetails(){
         let url = `https://mern-app-blog-ver01.herokuapp.com/post/${blogId}`;
         axios.get(url).
             then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 setblog(res.data)
             }).
             catch((err) => {

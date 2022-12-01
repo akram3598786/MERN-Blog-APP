@@ -13,14 +13,14 @@ export default function EditBlog(){
 
     useEffect(()=>{
         getData();      
-    }, [])
+    }, []);
     
    function getData(){
     
     let url = `https://mern-app-blog-ver01.herokuapp.com/post/${blogId}`;
     axios.get(url).
     then((res)=>{
-        console.log(res.data);
+        // console.log(res.data);
         setdes(res.data.description);
         settitle(res.data.title);
     }).
@@ -28,22 +28,20 @@ export default function EditBlog(){
    }
     
     const handleUpdate=()=>{
-        
         // let userData = JSON.parse(localStorage.getItem("LoggedUser"));
         let payload = {
             title : tit,
-            description : des,
-            // createdby : userData._id
+            description : des
         }
         // let url = `http://127.0.0.1:8080/post/${userData._id}`;
         let url = `https://mern-app-blog-ver01.herokuapp.com/post/edit/${blogId}`;
         axios.patch(url, payload).
         then((res)=>{
-            if(res.status === 201) alert("Blog Edited");
+            if(res.status === 200) alert("Blog Edited");
             else alert("Something wrong !");
         }).catch((err)=>{
             console.log(err);
-        })
+        });
     }
 
     return (
