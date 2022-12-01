@@ -1,7 +1,7 @@
 
 # About App
 
-A MERN app which provide a interface to users to authenticate and create blogs. Authenticated user can see its created blogs. User can perform create, read, update and delete functionalities over blogs.
+A MERN app which provide a interface to users to authenticate and create blogs. Authenticated user can see its created blogs. User can perform create, read, update and delete functionalities over blogs. Blogs can be search by title name.
 User also can see the profile details.
 
 # Used Stacks
