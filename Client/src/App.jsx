@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import BlogDetails from './Components/Blogs/BlogDetails';
 import CreateBlog from './Components/Blogs/CreateBlog';
 import Profile from './Components/User/Profile';
+import EditBlog from './Components/Blogs/EditBlog';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage />}></Route>
         <Route path='/post/:blogId' element={<BlogDetails />}></Route>
+        <Route path='/post/edit/:blogId' element={<EditBlog />}></Route>
         <Route path='/create' element={<CreateBlog/> }></Route>
         <Route path='/profile' element={<Profile/> }></Route>
         <Route path='/login' element={<Login />}></Route>

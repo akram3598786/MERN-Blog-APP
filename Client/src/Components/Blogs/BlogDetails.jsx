@@ -12,12 +12,12 @@ export default function BlogDetails(){
 
     useEffect(() => {
         setloading(true);
-        getAllBlogs();
+        getBlog();
     }, [])
 
-    const getAllBlogs = () => {
+    const getBlog = () => {
         let userData = JSON.parse(localStorage.getItem("LoggedUser"));
-        console.log(userData._id);
+       // console.log(userData._id);
         // let url = `http://127.0.0.1:8080/post/${blogId}`;
         let url = `https://mern-app-blog-ver01.herokuapp.com/post/${blogId}`;
         axios.get(url).

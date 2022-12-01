@@ -55,6 +55,7 @@ export default function AllBlogs() {
                                 <thead>
                                     <th>Title</th>
                                     <th>Links</th>
+                                    <th>Edit Blog</th>
                                     <th>Remove Blog</th>
                                 </thead>
                                 <tbody>
@@ -64,6 +65,7 @@ export default function AllBlogs() {
                                                 <tr key={blog._id}>
                                                     <td>{blog.title}</td>
                                                     <td className="Links"><Link  to={`/post/${blog._id}`}>See Blog</Link></td>
+                                                    <td className="Links"><Link  to={`/post/edit/${blog._id}`}>Edit Blog</Link></td>
                                                     <td><button className="deleteBtn" onClick={()=>handleDelete(blog._id)}>Remove</button></td>
                                                 </tr>
                                             )
