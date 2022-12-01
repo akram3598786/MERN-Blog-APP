@@ -54,7 +54,7 @@ async function getSinglePost(req, res) {
 async function EditPost(req, res){
     try{
         let {postId} = req.params;
-        let post = await PostModel.updateOne(postId);
+        let post = await PostModel.updateOne({_id : postId});
         if(post) res.status(200).send("updated");
         else res.status(400).send("Post not updated !");
     }catch(err){
