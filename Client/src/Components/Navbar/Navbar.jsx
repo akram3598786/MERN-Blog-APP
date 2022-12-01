@@ -8,13 +8,16 @@ export default function NavBar() {
   const isAuth = useSelector((store) => store.isAuth.isAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-//console.log(isAuth)
+  //console.log(isAuth)
   const handleSignout = () => {
-    console.log('Sign oyt clickex')
     dispatch(isAuthHandler(false));
     navigate("/login");
   }
+  const handleSearch=()=>{
+    
+  }
 
+  // console.log(document.location.pathname);
   return (
     <div id="Navbar">
       <nav className="navbarDiv">
@@ -29,6 +32,14 @@ export default function NavBar() {
               <Link className="AuthLink" to="/login">Login</Link></>
           }
         </div>
+        {
+          document.location.pathname === "/" ?
+            <div id="searchBar">
+                <input type="search" /> <button onClick={handleSearch}>Search</button>
+            </div>
+            : null
+        }
+
       </nav>
     </div>
   );

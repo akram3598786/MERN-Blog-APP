@@ -20,7 +20,7 @@
 table{
     background-color: teal;
     color: wheat;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     padding: 30px 90px;
     border-radius: 15px;
 }
@@ -30,4 +30,7 @@ table{
 }
 .deleteBtn{
     cursor: pointer;
+}
+#searchBar{
+    margin: 10px 0px;
 }
