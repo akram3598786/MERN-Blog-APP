@@ -10,7 +10,7 @@ async function SignUp(req, res){
        const userData = req.body;
        await UserModel.create(userData);
        let user = await UserModel.find({email : userData.email},{name: 1});
-       //console.log(user)
+     //  console.log(user)
        res.status(201).send({message : `${user[0].name} Registed`, user})
     }
     catch(err){
