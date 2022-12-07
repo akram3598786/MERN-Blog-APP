@@ -1,11 +1,18 @@
 const mongoose = require("mongoose");
-const username = encodeURIComponent("akram2407");
-const password = encodeURIComponent("Akram@3598786");
 
+
+// let un = process.env.USER_NAME;
+// let ps = process.env.PASSWORD;
+
+// const username = encodeURIComponent(un);
+// const password = encodeURIComponent(ps);
+// console.log(un, username);
+// console.log(ps, password);
+// console.log(process.env.MONGODB_URI);
 async function ConnectDB(req, res){
-    // let url = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/MERN-APP"
-    let url = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/MERN-APP";
-   // console.log("uri",process.env.MONGODB_URI);
+  // let url =  "mongodb://127.0.0.1:27017/MERN-APP";
+   let url =  "mongodb+srv://akram2407:akram3598786@mern-app-blog.sgvzudd.mongodb.net/?retryWrites=true&w=majority";
+
   return new Promise((resolve, reject)=>{
     mongoose.connect(url).
     then(()=>{
@@ -13,7 +20,7 @@ async function ConnectDB(req, res){
         resolve();
     }).catch((err)=>{
         console.log("Cannot connect to Database");
-        reject(err)
+        reject(err);
     })
   })
 }
