@@ -6,6 +6,7 @@ User also can see the profile details.
 
 # Used Stacks
 <li>React</li>
+<li>Redux</li>
 <li>JavaScript</li>
 <li>Node.js</li>
 <li>Express.js</li>
