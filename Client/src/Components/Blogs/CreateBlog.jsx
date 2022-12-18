@@ -15,8 +15,8 @@ export default function CreateBlog(){
             description : des,
             createdby : userData._id
         }
-        // let url = `http://127.0.0.1:8080/post/${userData._id}`;
-        let url = `https://mern-app-blog-ver01.herokuapp.com/post/${userData._id}`;
+        // let url = `https://mern-app-blog-ver01.herokuapp.com/post/${userData._id}`;
+        let url = `https://mern-app-blog-ver01.onrender.com/post/${userData._id}`;
         axios.post(url, payload).
         then((res)=>{
             if(res.status === 201) alert("Blog Posted");

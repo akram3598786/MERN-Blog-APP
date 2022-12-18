@@ -21,17 +21,17 @@ const handeChange=(e)=>{
 }
 const handlsSubmit=(e)=>{
    e.preventDefault();
-  //  let url = "http://127.0.0.1:8080/auth/signup";
-   let url = "https://mern-app-blog-ver01.herokuapp.com/auth/signup";
+  //  let url = "https://mern-app-blog-ver01.herokuapp.com/auth/signup";
+   let url = "https://mern-app-blog-ver01.onrender.com/auth/signup";
    axios.post(url, formData).
    then((res)=>{
     if(res.status === 201){
         alert(`${name} registred successfully`);
         navigate("/login");
     } 
-    else console.log("something went wrong !")
+    else console.log("something went wrong !");
    }).catch((err)=>{
-      console.error(err);
+      console.log(err);
    })
 
 }

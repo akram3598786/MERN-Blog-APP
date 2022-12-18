@@ -17,7 +17,7 @@ export default function EditBlog(){
     
    function getData(){
     
-    let url = `https://mern-app-blog-ver01.herokuapp.com/post/${blogId}`;
+    let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
     axios.get(url).
     then((res)=>{
         // console.log(res.data);
@@ -33,8 +33,8 @@ export default function EditBlog(){
             title : tit,
             description : des
         }
-        // let url = `http://127.0.0.1:8080/post/${userData._id}`;
-        let url = `https://mern-app-blog-ver01.herokuapp.com/post/edit/${blogId}`;
+        // let url = `https://mern-app-blog-ver01.herokuapp.com/post/edit/${blogId}`;
+        let url = `https://mern-app-blog-ver01.onrender.com/post/edit/${blogId}`;
         axios.patch(url, payload).
         then((res)=>{
             if(res.status === 200) alert("Blog Edited");

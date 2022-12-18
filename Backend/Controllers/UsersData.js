@@ -7,7 +7,6 @@ UserRouter.get("/:userId", getUserData);
 
 async function getAllUsers(req, res){
     try{
-     
         let users = await UserModel.find();
 
         if(users.length > 0){

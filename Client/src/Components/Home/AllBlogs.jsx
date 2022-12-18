@@ -17,13 +17,12 @@ export default function AllBlogs() {
 
     const getAllBlogs = () => {
         let userData = JSON.parse(localStorage.getItem("LoggedUser"));
-        // console.log(userData._id);
-        // let url = `http://127.0.0.1:8080/post/${userData._id}/all`;
-        let url = `https://mern-app-blog-ver01.herokuapp.com/post/${userData._id}/all`;
+        // let url = `https://mern-app-blog-ver01.herokuapp.com/post/${userData._id}/all`;
+        let url = `https://mern-app-blog-ver01.onrender.com/post/${userData._id}/all`;
         axios.get(url).
             then((res) => {
                 // console.log(res.data)
-                setblogs(res.data)
+                setblogs(res.data);
             }).
             catch((err) => {
                 console.log(err)
@@ -32,45 +31,46 @@ export default function AllBlogs() {
             finally((res) => setloading(false));
     }
 
-    const handleDelete=(id)=>{
-        let url = `https://mern-app-blog-ver01.herokuapp.com/post/${id}`;
+    const handleDelete = (id) => {
+        // let url = `https://mern-app-blog-ver01.herokuapp.com/post/${id}`;
+        let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
 
         axios.delete(url).
-        then((res)=>{
-           // console.log(res)
-            if(res.status === 200){
-                alert("Blog deleted");
-                getAllBlogs();
-            }
-            
-        }).catch((err)=>console.log(err));
+            then((res) => {
+                // console.log(res)
+                if (res.status === 200) {
+                    alert("Blog deleted");
+                    getAllBlogs();
+                }
+
+            }).catch((err) => console.log(err));
     }
 
-    const handleSearch=()=>{
-        let filtered="";
-       if(searchStr.length > 0){
-         filtered = blogs.filter((blg)=>{
-           let cur =  blg.title.toLowerCase();
-        //   console.log(searchStr.toLowerCase())
-            if(cur.includes(searchStr.toLowerCase())) return blg;
-        });
-       }else{
-         getAllBlogs();
-       }
-    if(filtered.length === 0) getAllBlogs();
-    setblogs(filtered);
+    const handleSearch = () => {
+        let filtered = "";
+        if (searchStr.length > 0) {
+            filtered = blogs.filter((blg) => {
+                let cur = blg.title.toLowerCase();
+                //   console.log(searchStr.toLowerCase())
+                if (cur.includes(searchStr.toLowerCase())) return blg;
+            });
+        } else {
+            getAllBlogs();
+        }
+        if (filtered.length === 0) getAllBlogs();
+        setblogs(filtered);
     }
     return (
         <>
             <div>
-            <h2>All Exist Blogs</h2>
+                <h2>All Exist Blogs</h2>
 
-            <div id="searchBar">
-                <input type="search" value={searchStr} onChange={(e)=>setsearchStr(e.target.value)} placeholder="Search Blog"/> <button onClick={handleSearch} >Search</button>
-            </div>
+                <div id="searchBar">
+                    <input type="search" value={searchStr} onChange={(e) => setsearchStr(e.target.value)} placeholder="Search Blog" /> <button onClick={handleSearch} >Search</button>
+                </div>
                 {
                     loading ? <h1>Loading...</h1> :
-                        error ? <h1>No Post yet or Something Went Wrong</h1>  :
+                        error ? <h1>No Post yet or Something Went Wrong</h1> :
                             <table className="blogsTable">
                                 <thead>
                                     <th>Title</th>
@@ -80,13 +80,13 @@ export default function AllBlogs() {
                                 </thead>
                                 <tbody>
                                     {
-                                        blogs.map((blog)=>{
+                                        blogs.map((blog) => {
                                             return (
                                                 <tr key={blog._id}>
                                                     <td>{blog.title}</td>
-                                                    <td className="Links"><Link  to={`/post/${blog._id}`}>See Blog</Link></td>
-                                                    <td className="Links"><Link  to={`/post/edit/${blog._id}`}>Edit Blog</Link></td>
-                                                    <td><button className="deleteBtn" onClick={()=>handleDelete(blog._id)}>Remove</button></td>
+                                                    <td className="Links"><Link to={`/post/${blog._id}`}>See Blog</Link></td>
+                                                    <td className="Links"><Link to={`/post/edit/${blog._id}`}>Edit Blog</Link></td>
+                                                    <td><button className="deleteBtn" onClick={() => handleDelete(blog._id)}>Remove</button></td>
                                                 </tr>
                                             )
                                         })
