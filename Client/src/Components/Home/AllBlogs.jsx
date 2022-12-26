@@ -9,6 +9,7 @@ export default function AllBlogs() {
     const [searchStr, setsearchStr] = useState("");
     const [blogs, setblogs] = useState([]);
     let [nofound, setnotfound] = useState(false);
+    let token = localStorage.getItem("token");
 
     useEffect(() => {
         setloading(true);
@@ -17,9 +18,16 @@ export default function AllBlogs() {
 
     const getAllBlogs = () => {
         let userData = JSON.parse(localStorage.getItem("LoggedUser"));
-        // let url = `https://mern-app-blog-ver01.herokuapp.com/post/${userData._id}/all`;
-        let url = `https://mern-app-blog-ver01.onrender.com/post/${userData._id}/all`;
-        axios.get(url).
+        
+        let url = `http://localhost:8080/post/${userData._id}/all`;
+        // let url = `https://mern-app-blog-ver01.onrender.com/post/${userData._id}/all`; 
+        const authAxios = axios.create({
+            baseURL : url,
+            headers :{
+                Authorization : `Bearer ${token}`,
+            }
+        });
+        authAxios.get(url).
             then((res) => {
                 // console.log(res.data)
                 setblogs(res.data);
@@ -32,10 +40,16 @@ export default function AllBlogs() {
     }
 
     const handleDelete = (id) => {
-        // let url = `https://mern-app-blog-ver01.herokuapp.com/post/${id}`;
-        let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
 
-        axios.delete(url).
+        let url = `http://localhost:8080/post/${id}`;
+        // let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
+        const authAxios = axios.create({
+            baseURL : url,
+            headers :{
+                Authorization : `Bearer ${token}`,
+            }
+        });
+        authAxios.delete(url).
             then((res) => {
                 // console.log(res)
                 if (res.status === 200) {

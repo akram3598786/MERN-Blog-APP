@@ -15,9 +15,17 @@ export default function CreateBlog(){
             description : des,
             createdby : userData._id
         }
-        // let url = `https://mern-app-blog-ver01.herokuapp.com/post/${userData._id}`;
-        let url = `https://mern-app-blog-ver01.onrender.com/post/${userData._id}`;
-        axios.post(url, payload).
+
+        let url = `http://localhost:8080/post/${userData._id}`;
+        // let url = `https://mern-app-blog-ver01.onrender.com/post/${userData._id}`;
+        let token = localStorage.getItem("token");
+        const authAxios = axios.create({
+            baseURL : url,
+            headers :{
+                Authorization : `Bearer ${token}`,
+            }
+        });
+        authAxios.post(url, payload).
         then((res)=>{
             if(res.status === 201) alert("Blog Posted");
             else alert("Something wrong !");

@@ -15,14 +15,15 @@ export default function Login(){
   const dispatch = useDispatch();
 
     const handleSubmit=()=>{
-      //  let url = "https://mern-app-blog-ver01.herokuapp.com/auth/login";
-       let url = "https://mern-app-blog-ver01.onrender.com/auth/login";
+       let url = "http://localhost:8080/auth/login";
+      //  let url = "https://mern-app-blog-ver01.onrender.com/auth/login";
        axios.post(url, formData).
        then((res)=>{
         if(res.status === 201){
             console.log(res);
            alert("Logged In Successfully");
-           localStorage.setItem("LoggedUser", JSON.stringify(res.data.foundUser));
+           localStorage.setItem("LoggedUser", JSON.stringify(res.data.user));
+           localStorage.setItem("token", res.data.token);
            dispatch(isAuthHandler(true));
            navigate("/");
         }else{

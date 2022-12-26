@@ -21,8 +21,8 @@ const handeChange=(e)=>{
 }
 const handlsSubmit=(e)=>{
    e.preventDefault();
-  //  let url = "https://mern-app-blog-ver01.herokuapp.com/auth/signup";
-   let url = "https://mern-app-blog-ver01.onrender.com/auth/signup";
+   let url = "http://localhost:8080/auth/signup";
+  //  let url = "https://mern-app-blog-ver01.onrender.com/auth/signup";
    axios.post(url, formData).
    then((res)=>{
     if(res.status === 201){

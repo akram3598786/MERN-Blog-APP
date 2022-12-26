@@ -18,9 +18,16 @@ export default function BlogDetails(){
     const getBlog = () => {
         let userData = JSON.parse(localStorage.getItem("LoggedUser"));
        // console.log(userData._id);
-        // let url = `https://mern-app-blog-ver01.herokuapp.com/post/${blogId}`;
-        let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
-        axios.get(url).
+        let url = `http://localhost:8080/post/${blogId}`;
+        // let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
+        let token = localStorage.getItem("token");
+        const authAxios = axios.create({
+            baseURL : url,
+            headers :{
+                Authorization : `Bearer ${token}`,
+            }
+        });
+        authAxios.get(url).
             then((res) => {
                 // console.log(res.data)
                 setblog(res.data)

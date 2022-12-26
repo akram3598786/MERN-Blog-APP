@@ -17,8 +17,17 @@ export default function EditBlog(){
     
    function getData(){
     
-    let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
-    axios.get(url).
+    let url = `http://localhost:8080/post/${blogId}`;
+    // let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
+    let token = localStorage.getItem("token");
+    const authAxios = axios.create({
+        baseURL : url,
+        headers :{
+            Authorization : `Bearer ${token}`,
+        }
+    });
+
+    authAxios.get(url).
     then((res)=>{
         // console.log(res.data);
         setdes(res.data.description);
@@ -33,9 +42,16 @@ export default function EditBlog(){
             title : tit,
             description : des
         }
-        // let url = `https://mern-app-blog-ver01.herokuapp.com/post/edit/${blogId}`;
-        let url = `https://mern-app-blog-ver01.onrender.com/post/edit/${blogId}`;
-        axios.patch(url, payload).
+        let url = `http://localhost:8080/post/edit/${blogId}`;
+        // let url = `https://mern-app-blog-ver01.onrender.com/post/edit/${blogId}`;
+        let token = localStorage.getItem("token");
+        const authAxios = axios.create({
+            baseURL : url,
+            headers :{
+                Authorization : `Bearer ${token}`,
+            }
+        });
+        authAxios.patch(url, payload).
         then((res)=>{
             if(res.status === 200) alert("Blog Edited");
             else alert("Something wrong !");
