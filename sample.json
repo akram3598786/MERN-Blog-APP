@@ -1,0 +1,42 @@
+{
+  "expenseData": [
+    {
+      "amount": 10,
+      "startDate": "2020-05-01T00:00:00.000Z"
+    },
+    {
+      "amount": 30,
+      "startDate": "2020-03-01T00:00:00.000Z"
+    },
+    {
+      "amount": 20,
+      "startDate": "2015-02-01T00:00:00.000Z"
+    },
+    {
+      "amount": 50,
+      "startDate": "2015-01-01T00:00:00.000Z"
+    },
+    {
+      "amount": 60,
+      "startDate": "2014-11-01T00:00:00.000Z"
+    }
+  ],
+  "revenueData": [
+    {
+      "amount": 60,
+      "startDate": "2020-03-01T00:00:00.000Z"
+    },
+     {
+      "amount": 0,
+      "startDate": "2020-02-01T00:00:00.000Z"
+    },
+    {
+      "amount": 10,
+      "startDate": "2020-03-01T00:00:00.000Z"
+    },
+    {
+      "amount": 40,
+      "startDate": "2020-01-01T00:00:00.000Z"
+    }
+  ]
+}

@@ -1,22 +1,14 @@
 const mongoose = require("mongoose");
+const Mongodb = require("mongodb");
 
-
-// let un = process.env.USER_NAME;
-// let ps = process.env.PASSWORD;
-
-// const username = encodeURIComponent(un);
-// const password = encodeURIComponent(ps);
-// console.log(un, username);
-// console.log(ps, password);
-// console.log(process.env.MONGODB_URI);
 async function ConnectDB(req, res){
-  // let url =  "mongodb://127.0.0.1:27017/MERN-APP";
-   let url =  "mongodb+srv://akram2407:akram3598786@mern-app-blog.sgvzudd.mongodb.net/?retryWrites=true&w=majority";
+   let url =  "mongodb://127.0.0.1:27017/MERN-APP";
+    // let url =  process.env.MONGODB_URI;
 
   return new Promise((resolve, reject)=>{
     mongoose.connect(url).
     then(()=>{
-        console.log("Connected to Database");
+        // console.log("Connected to Database");
         resolve();
     }).catch((err)=>{
         console.log("Cannot connect to Database");
@@ -24,5 +16,34 @@ async function ConnectDB(req, res){
     })
   })
 }
+  // await ConnectMultiple(); NOTE :  get All present databases
+/*
+function  ConnectMultiple(){
+ 
+// Connection URL
+const url = 'mongodb://localhost:27017/';
+ 
+// Database name
+const databasename = "GFG";
 
+ MongoClient.connect(url).then((client) => {
+ 
+   // Use admin request
+   const connect = client.db(databasename).admin();
+  
+   connect.listDatabases((err,dbs) => {
+      // Printing the databases
+      if(!err) console.log(dbs);
+      dbs.databases.forEach(db => {
+        // let collections  = db.listCollections(); // Not working
+        console.log(db)
+      });
+   })
+}).catch((err) => {
+ 
+   // Printing the error message
+   console.log(err.Message);
+})
+}
+*/
 module.exports =  ConnectDB;
