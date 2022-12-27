@@ -13,8 +13,14 @@ export default function Login(){
   const [formData, setformData] = useState(obj);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [doing, setdoing] = useState(false);
 
     const handleSubmit=()=>{
+      if(doing){
+        alert("Wait for some time !");
+      }else{
+
+      setdoing(true);
        let url = "http://localhost:8080/auth/login";
       //  let url = "https://mern-app-blog-ver01.onrender.com/auth/login";
        axios.post(url, formData).
@@ -33,7 +39,8 @@ export default function Login(){
        }).catch((err)=>{
         alert("Kindly register first !");
           console.log(err);
-       })
+       }).finally(()=>setdoing(false));
+      }
     }
     const handleChange=(e)=>{
         let {name,value } = e.target;
@@ -46,7 +53,7 @@ export default function Login(){
           <h2>Login Form</h2>
           <input type="email" value={email} name="email" id="" placeholder="Enter Email" onChange={handleChange}/>
           <input type="password" value={password} name="password" id="" placeholder="Enter Password" onChange={handleChange}/>
-          <button onClick={handleSubmit}>Login</button> <br /><br />
+          <button onClick={()=>handleSubmit()}>Login</button> <br /><br />
           <p>If you dont have Account : <Link to="/signup">Create Account</Link></p>
         </>
     )

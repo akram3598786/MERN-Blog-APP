@@ -1,38 +1,28 @@
-const express = require("express");
-const UserModel = require("../Models/User.model");
-const AuthRouter = express.Router();
+const { Verify } = require("../Utilities/JWT.js");
 
-AuthRouter.post("/signup",SignUp);
-AuthRouter.post("/login",Login);
 
-async function SignUp(req, res){
-    try{
-       const userData = req.body;
-       await UserModel.create(userData);
-       let user = await UserModel.find({email : userData.email},{name: 1});
-     //  console.log(user)
-       res.status(201).send({message : `${user[0].name} Registed`, user})
-    }
-    catch(err){
-        res.status(500).send(err.message)
-    }
-}
+async function auth(req, res, next) {
 
-async function Login(req, res){
-    let token = 2345678
- try{
-   const payload = req.body;
-   let foundUser = await UserModel.findOne(payload);
-   foundUser = foundUser.toJSON();
-   delete foundUser.password;
-  // console.log(foundUser)
-  if(foundUser)  res.status(201).send({message : `${foundUser.name} logged in successfully`, token, foundUser })
-  else res.status(404).send("User not registered");
-  
- }
- catch(err){
-    res.status(500).send(err.message)
-  } 
-}
+  // const token = req.headers
+  const authHeader = req.headers.authorization;
 
-module.exports = AuthRouter;
+  if (authHeader) {
+    // "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzM0NzVkYzdlOWIzNzc2M2MyZDgyZmQiLCJuYW1lIjoiVW1ha2FudCIsInBhc3N3b3JkIjoicGFzc3dvcmQiLCJlbWFpbCI6ImVtYWlsMkBleGFtcGxlLmNvbSIsImlhdCI6MTY2NDM4MjQ3NCwiZXhwIjoxNjY0ODE0NDc0fQ.MYz01oP6m3nr-z3ijKqQgLVZ86f25VXF_a1OH_RaVLs"
+    const token = authHeader.split(' ')[1];
+    if (token) {
+      try {
+        const decoded = Verify(token);
+        req.user = decoded;
+        next();
+      } catch (err) {
+        console.error(err);
+        res.send("Unauthorised Request");
+      }
+    } 
+  }else {
+    res.status(400).send("Unauthorised User");
+  }
+    
+  }
+
+  module.exports = auth;

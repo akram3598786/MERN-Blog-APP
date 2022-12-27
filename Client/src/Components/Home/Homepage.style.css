@@ -23,6 +23,7 @@ table{
     font-size: 1.1rem;
     padding: 30px 90px;
     border-radius: 15px;
+    height: 400px;
 }
 .Links{
     color: white;
@@ -33,4 +34,17 @@ table{
 }
 #searchBar{
     margin: 10px 0px;
+}
+.pageBtns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+    background-color: gray;
+    
+}
+.pageBtns > button{
+    width: 200px;
+    background-color: black;
+    color: white;
 }

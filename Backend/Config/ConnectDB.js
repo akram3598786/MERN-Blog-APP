@@ -1,19 +1,14 @@
 const mongoose = require("mongoose");
 const Mongodb = require("mongodb");
- let {MongoClient} = Mongodb;
-//  console.log(MongoClient)  will contain admin function to provide all dbs.
-
-// let un = process.env.USER_NAME;
-// let ps = process.env.PASSWORD;
 
 async function ConnectDB(req, res){
-  // let url =  "mongodb://127.0.0.1:27017/MERN-APP";
-    let url =  "mongodb+srv://akram2407:akram3598786@mern-app-blog.sgvzudd.mongodb.net/?retryWrites=true&w=majority";
+   let url =  "mongodb://127.0.0.1:27017/MERN-APP";
+    // let url =  process.env.MONGODB_URI;
 
   return new Promise((resolve, reject)=>{
     mongoose.connect(url).
     then(()=>{
-        console.log("Connected to Database");
+        // console.log("Connected to Database");
         resolve();
     }).catch((err)=>{
         console.log("Cannot connect to Database");

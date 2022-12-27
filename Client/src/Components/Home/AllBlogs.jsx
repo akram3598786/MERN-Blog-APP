@@ -1,36 +1,38 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import style from "./Homepage.style.css";
+import styles from "./Homepage.style.css";
 
 export default function AllBlogs() {
     const [loading, setloading] = useState(false);
     const [error, setError] = useState(false);
     const [searchStr, setsearchStr] = useState("");
     const [blogs, setblogs] = useState([]);
-    let [nofound, setnotfound] = useState(false);
+    const [page, setPage] = useState(1);
+    let [totalCount, setTotalCount] = useState(0);
+
     let token = localStorage.getItem("token");
 
     useEffect(() => {
         setloading(true);
         getAllBlogs();
-    }, [])
+    }, [page])
 
     const getAllBlogs = () => {
         let userData = JSON.parse(localStorage.getItem("LoggedUser"));
-        
-        let url = `http://localhost:8080/post/${userData._id}/all`;
+        let url = `http://localhost:8080/post/${userData._id}/all?_limit=6&&page=${page-1}`;
         // let url = `https://mern-app-blog-ver01.onrender.com/post/${userData._id}/all`; 
         const authAxios = axios.create({
-            baseURL : url,
-            headers :{
-                Authorization : `Bearer ${token}`,
+            baseURL: url,
+            headers: {
+                Authorization: `Bearer ${token}`,
             }
         });
         authAxios.get(url).
             then((res) => {
-                // console.log(res.data)
-                setblogs(res.data);
+                 console.log(res)
+                setblogs(res.data.posts);
+                setTotalCount(res.data.totalCount)
             }).
             catch((err) => {
                 console.log(err)
@@ -44,9 +46,9 @@ export default function AllBlogs() {
         let url = `http://localhost:8080/post/${id}`;
         // let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
         const authAxios = axios.create({
-            baseURL : url,
-            headers :{
-                Authorization : `Bearer ${token}`,
+            baseURL: url,
+            headers: {
+                Authorization: `Bearer ${token}`,
             }
         });
         authAxios.delete(url).
@@ -102,12 +104,19 @@ export default function AllBlogs() {
                                                     <td className="Links"><Link to={`/post/edit/${blog._id}`}>Edit Blog</Link></td>
                                                     <td><button className="deleteBtn" onClick={() => handleDelete(blog._id)}>Remove</button></td>
                                                 </tr>
+
                                             )
                                         })
                                     }
                                 </tbody>
                             </table>
                 }
+
+                <div className={styles.pageBtns}>
+                    <button disabled={page==1 ? true : false} onClick={() => setPage((prev) => prev - 1)}>Prev</button>
+                    <span>{page}</span>
+                    <button disabled={page == Math.ceil(totalCount/6) ? true : false} onClick={() => setPage((prev) => prev + 1)}>Next</button>
+                </div>
             </div>
         </>
     );

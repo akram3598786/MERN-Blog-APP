@@ -26,10 +26,20 @@ async function CreatePost(req, res) {
 
 async function getALLposts(req, res) {
     try {
+
+        let _limit = parseInt(req.query._limit);
+        let page = parseInt(req.query.page);
         const { userId } = req.params;
-        let posts = await PostModel.find({ createdby: userId });
+        let posts = [];
+        if (_limit && page >= 0) {
+            posts = await PostModel.find({ createdby: userId }).limit(_limit * 1).skip(page * _limit).exec();
+        } else {
+            posts = await PostModel.find({ createdby: userId });
+        }
+        let totalCount = await PostModel.find({ createdby: userId }).count();
+
         if (posts.length > 0) {
-            res.status(200).send(posts);
+            res.status(200).send({posts,totalCount});
         } else {
             res.status(404).send("No post exist");
         }
@@ -51,16 +61,16 @@ async function getSinglePost(req, res) {
     }
 }
 
-async function EditPost(req, res){
-    try{
-        let {postId} = req.params;
+async function EditPost(req, res) {
+    try {
+        let { postId } = req.params;
         let payload = req.body;
         let post = await PostModel.findByIdAndUpdate(postId, payload,
-         {new: true});
+            { new: true });
         // console.log(post)
-        if(post) res.status(200).send("updated");
+        if (post) res.status(200).send("updated");
         else res.status(400).send("Post not updated !");
-    }catch(err){
+    } catch (err) {
         res.send(err.message);
     }
 }
@@ -68,18 +78,20 @@ async function EditPost(req, res){
 async function deletePost(req, res) {
     try {
         let { postId } = req.params;
-        let post = await PostModel.deleteOne({_id : postId});
-      //  console.log(post)
+        let post = await PostModel.deleteOne({ _id: postId });
+        //  console.log(post)
         res.status(200).send("deleted");
     } catch (err) {
         res.status(400).send({ msg: "Error occured", Error: err.message });
     }
 }
 
+
 PostRouter.post("/:userId", CreatePost);
 PostRouter.patch("/edit/:postId", EditPost);
 PostRouter.get("/:userId/all", getALLposts);
 PostRouter.get("/:postId", getSinglePost);
 PostRouter.delete("/:postId", deletePost);
+
 
 module.exports = PostRouter;
