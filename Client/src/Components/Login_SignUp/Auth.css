@@ -1,15 +1,18 @@
 
 #SignupDiv{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     width: 60%;
     margin: auto;
-    background-color: rgb(201, 75, 75);
-    padding: 10px 0px;
-    margin-top: 3%;
-    color: white;
-    border-radius: 16px;
+    padding: 20px 0px;
 }
 
-form{
+#SignupDiv form{
     display: block;
     margin: auto;
     display: flex;
@@ -18,15 +21,37 @@ form{
     flex-direction: column;
     row-gap: 20px;
 }
-form label {
+#SignupDiv form label {
     display: flex;
     justify-content: space-between;
     width: 65%;
 }
-input{
-    height: 20%;
+#SignupDiv form input{
+    height: 23px;
+    /* width: 220px; */
+    border-radius: 9px;
 }
 #submitBtn{
     width: 15%;
     margin-top: 13px;
+}
+
+/* Login Component CSS */
+
+.LoginMainDiv{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    width: 60%;
+    margin: auto;
+}
+
+.LoginMainDiv input{
+    width: 220px;
+    height: 30px;
+    border-radius: 8px;
 }

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import {  useNavigate,Link } from "react-router-dom";
 import './Auth.css';
 
 
@@ -46,6 +46,7 @@ let {name, email, mobile, password} = formData;
        <label htmlFor=""><span>Password  : </span> <input type="password" name="password" value={password} onChange={handeChange} placeholder="PASSWORD" /></label>
      </form>
      <button id="submitBtn" onClick={handlsSubmit}>Submit</button>
+     <p>Already have an account : <Link to="/login">Sign In</Link></p>
    </div>
   );
    

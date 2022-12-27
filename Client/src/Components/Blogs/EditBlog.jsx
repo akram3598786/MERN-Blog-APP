@@ -2,7 +2,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import style from "./Blog.style.css";
+import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
+import  "./Blog.css";
 
 
 export default function EditBlog(){
@@ -16,17 +17,10 @@ export default function EditBlog(){
     }, []);
     
    function getData(){
-    
-    let url = `http://localhost:8080/post/${blogId}`;
-    // let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
-    let token = localStorage.getItem("token");
-    const authAxios = axios.create({
-        baseURL : url,
-        headers :{
-            Authorization : `Bearer ${token}`,
-        }
-    });
+    // let url = `http://localhost:8080/post/${blogId}`;
+     let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
 
+    const authAxios = EmbedJWTToken(url);
     authAxios.get(url).
     then((res)=>{
         // console.log(res.data);
@@ -44,13 +38,8 @@ export default function EditBlog(){
         }
         let url = `http://localhost:8080/post/edit/${blogId}`;
         // let url = `https://mern-app-blog-ver01.onrender.com/post/edit/${blogId}`;
-        let token = localStorage.getItem("token");
-        const authAxios = axios.create({
-            baseURL : url,
-            headers :{
-                Authorization : `Bearer ${token}`,
-            }
-        });
+
+        const authAxios = EmbedJWTToken(url);
         authAxios.patch(url, payload).
         then((res)=>{
             if(res.status === 200) alert("Blog Edited");

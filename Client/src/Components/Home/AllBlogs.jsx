@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 import styles from "./Homepage.style.css";
 
 export default function AllBlogs() {
@@ -11,7 +12,7 @@ export default function AllBlogs() {
     const [page, setPage] = useState(1);
     let [totalCount, setTotalCount] = useState(0);
 
-    let token = localStorage.getItem("token");
+    
 
     useEffect(() => {
         setloading(true);
@@ -20,14 +21,10 @@ export default function AllBlogs() {
 
     const getAllBlogs = () => {
         let userData = JSON.parse(localStorage.getItem("LoggedUser"));
-        let url = `http://localhost:8080/post/${userData._id}/all?_limit=6&&page=${page-1}`;
-        // let url = `https://mern-app-blog-ver01.onrender.com/post/${userData._id}/all`; 
-        const authAxios = axios.create({
-            baseURL: url,
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        });
+        // let url = `http://localhost:8080/post/${userData._id}/all?_limit=6&&page=${page-1}`;
+         let url = `https://mern-app-blog-ver01.onrender.com/post/${userData._id}/all?_limit=6&&page=${page-1}`; 
+       
+        const authAxios = EmbedJWTToken(url);
         authAxios.get(url).
             then((res) => {
                  console.log(res)
@@ -45,12 +42,8 @@ export default function AllBlogs() {
 
         let url = `http://localhost:8080/post/${id}`;
         // let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
-        const authAxios = axios.create({
-            baseURL: url,
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        });
+
+        const authAxios = EmbedJWTToken(url);
         authAxios.delete(url).
             then((res) => {
                 // console.log(res)

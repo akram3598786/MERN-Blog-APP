@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { isAuthHandler } from '../Redux/Auth-context/action';
+import './Auth.css';
 
 
 let obj = {
@@ -49,12 +50,12 @@ export default function Login(){
     let {email, password} = formData;
     
     return (
-        <>
+        <div className="LoginMainDiv">
           <h2>Login Form</h2>
           <input type="email" value={email} name="email" id="" placeholder="Enter Email" onChange={handleChange}/>
           <input type="password" value={password} name="password" id="" placeholder="Enter Password" onChange={handleChange}/>
           <button onClick={()=>handleSubmit()}>Login</button> <br /><br />
           <p>If you dont have Account : <Link to="/signup">Create Account</Link></p>
-        </>
+        </div>
     )
 }

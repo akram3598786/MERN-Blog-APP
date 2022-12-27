@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
+import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 
 
 export default function BlogDetails(){
@@ -16,17 +17,10 @@ export default function BlogDetails(){
     }, [])
 
     const getBlog = () => {
-        let userData = JSON.parse(localStorage.getItem("LoggedUser"));
-       // console.log(userData._id);
-        let url = `http://localhost:8080/post/${blogId}`;
-        // let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
-        let token = localStorage.getItem("token");
-        const authAxios = axios.create({
-            baseURL : url,
-            headers :{
-                Authorization : `Bearer ${token}`,
-            }
-        });
+        // let url = `http://localhost:8080/post/${blogId}`;
+        let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
+
+        const authAxios = EmbedJWTToken(url)
         authAxios.get(url).
             then((res) => {
                 // console.log(res.data)

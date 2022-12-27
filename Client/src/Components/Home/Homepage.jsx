@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AllBlogs from "./AllBlogs";
-import style from "./Homepage.style.css";
+import styles from "./Homepage.style.css";
 
 export default function Homepage(){
 

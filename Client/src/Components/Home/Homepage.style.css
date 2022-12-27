@@ -6,7 +6,10 @@
     /* background-color: yellow; */
     flex-direction: column;
 }
-
+.blogsTable{
+    /* width: 80%; */
+    margin: auto;
+}
 .blogsTable thead th{
     border: 1px solid red;
     padding: 20px;
@@ -34,6 +37,19 @@ table{
 }
 #searchBar{
     margin: 10px 0px;
+}
+#searchBar input{
+    width: 190px;
+    height: 30px;
+    border: 1px solid grey;
+    border-radius: 6px;
+}
+#searchBar button{
+    background-color: black;
+    color: white;
+    width: 90px;
+    height: 30px;
+    border-radius: 6px;
 }
 .pageBtns{
     display: flex;
