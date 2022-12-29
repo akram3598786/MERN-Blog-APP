@@ -24,7 +24,8 @@ User also can see the profile details.
 ![reg](https://user-images.githubusercontent.com/57341544/205097458-93f730ce-3235-4848-afee-fddc45a75265.png)
 
 # All Blogs Page
-![home](https://user-images.githubusercontent.com/57341544/205096695-5bae6fef-0e74-41ad-9651-0bf70c003122.png)
+![homelarge](https://user-images.githubusercontent.com/57341544/209924136-c4f75d7c-45b0-4873-b25e-d467b92567a7.png)
+
 
 # Blog View Page
 ![blog view](https://user-images.githubusercontent.com/57341544/204259233-2e8bc103-5734-496a-9cae-b224777b946f.png)
@@ -34,7 +35,9 @@ User also can see the profile details.
 
 
 # Blog Create Page
-![create](https://user-images.githubusercontent.com/57341544/204523589-afb7ca61-ca2f-46da-b6b1-f0599ac48679.png)
+![create](https://user-images.githubusercontent.com/57341544/209924290-f3ee9c90-4188-4162-9a39-586620aab39e.png)
+
+
 
 # Getting Started with Create React App
 
