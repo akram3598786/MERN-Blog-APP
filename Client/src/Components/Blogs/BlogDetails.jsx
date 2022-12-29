@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom"
 import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 
 
-export default function BlogDetails(){
+export default function BlogDetails() {
 
     const [loading, setloading] = useState(false);
     const [error, setError] = useState(false);
     const [blog, setblog] = useState({});
-    const {blogId} = useParams();
+    const { blogId } = useParams();
 
     useEffect(() => {
         setloading(true);
@@ -32,19 +32,19 @@ export default function BlogDetails(){
             }).
             finally((res) => setloading(false));
     }
-    
+
     //console.log(blogId);
     return (
         <>
-        <h1>Blog View</h1>
+            <h1>Blog View</h1>
             <div id="blogView">
                 {
                     loading ? <h1>Loading...</h1> :
                         error ? <h1>Error : Something Went Wrong</h1> :
-                          <>
-                           <h1>{blog.title}</h1>
-                           <p>{blog.description}</p>
-                           </>
+                            <>
+                                <h1>{blog.title}</h1>
+                                <p>{blog.description}</p>
+                            </>
                 }
 
             </div>

@@ -1,5 +1,7 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 import "./Blog.css";
 
@@ -8,6 +10,13 @@ export default function CreateBlog() {
 
     const [tit, settitle] = useState("");
     const [des, setdes] = useState("");
+
+    const isAuth = useSelector((store) => store.isAuth.isAuth);
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        if(!isAuth) navigate("/");
+    }, []);
 
     const handlePost = () => {
         if (tit.length === 0 || des.length === 0) {

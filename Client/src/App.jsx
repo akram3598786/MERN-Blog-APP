@@ -12,29 +12,21 @@ import EditBlog from './Components/Blogs/EditBlog';
 
 
 function App() {
-  const isAuth = useSelector((store) => store.isAuth.isAuth);
+   const isAuth = useSelector((store) => store.isAuth.isAuth);
 
   return (
     <div className="App">
       <NavBar />
-      {!isAuth ? 
-      <>
     
-      Kindly login to enter in app
       <Routes>
-      <Route path='/login' element={<Login />}></Route>
-      <Route path='/signup' element={<SignUp />}></Route>
-      </Routes>
-      </>:
-      <Routes>
-        <Route path='/' element={<Homepage />}></Route>
+        <Route path='/home' element={<Homepage />}></Route>
         <Route path='/post/:blogId' element={<BlogDetails />}></Route>
         <Route path='/post/edit/:blogId' element={<EditBlog />}></Route>
         <Route path='/create' element={<CreateBlog/> }></Route>
         <Route path='/profile' element={<Profile/> }></Route>
-        <Route path='/login' element={<Login />}></Route>
+        <Route path='/' element={<Login />}></Route>
         <Route path='/signup' element={<SignUp />}></Route>
-      </Routes>}
+      </Routes>
     </div>
   );
 }

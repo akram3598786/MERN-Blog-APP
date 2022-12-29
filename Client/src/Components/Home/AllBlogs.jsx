@@ -12,12 +12,12 @@ export default function AllBlogs() {
     const [page, setPage] = useState(1);
     let [totalCount, setTotalCount] = useState(0);
 
-    
-
     useEffect(() => {
-        setloading(true);
-        getAllBlogs();
-    }, [page])
+            setloading(true);
+            getAllBlogs();
+    },[page]);
+
+    
 
     const getAllBlogs = () => {
         let userData = JSON.parse(localStorage.getItem("LoggedUser"));
@@ -27,7 +27,7 @@ export default function AllBlogs() {
         const authAxios = EmbedJWTToken(url);
         authAxios.get(url).
             then((res) => {
-                 console.log(res)
+                //  console.log(res)
                 setblogs(res.data.posts);
                 setTotalCount(res.data.totalCount)
             }).
@@ -51,7 +51,6 @@ export default function AllBlogs() {
                     alert("Blog deleted");
                     getAllBlogs();
                 }
-
             }).catch((err) => console.log(err));
     }
 
@@ -63,17 +62,15 @@ export default function AllBlogs() {
                 //   console.log(searchStr.toLowerCase())
                 if (cur.includes(searchStr.toLowerCase())) return blg;
             });
-        } else {
+            setblogs(filtered);
+        }else if(searchStr.length === 0){
             getAllBlogs();
         }
-        if (filtered.length === 0) getAllBlogs();
-        setblogs(filtered);
     }
     return (
         <>
             <div>
                 <h2>All Exist Blogs</h2>
-
                 <div id="searchBar">
                     <input type="search" value={searchStr} onChange={(e) => setsearchStr(e.target.value)} placeholder="Search Blog" /> <button onClick={handleSearch} >Search</button>
                 </div>
@@ -106,9 +103,9 @@ export default function AllBlogs() {
                 }
 
                 <div className={styles.pageBtns}>
-                    <button disabled={page==1 ? true : false} onClick={() => setPage((prev) => prev - 1)}>Prev</button>
+                    <button className="pagebtns" disabled={page==1 ? true : false} onClick={() => setPage((prev) => prev - 1)}>Prev</button>
                     <span>{page}</span>
-                    <button disabled={page == Math.ceil(totalCount/6) ? true : false} onClick={() => setPage((prev) => prev + 1)}>Next</button>
+                    <button className="pagebtns" disabled={page == Math.ceil(totalCount/6) ? true : false} onClick={() => setPage((prev) => prev + 1)}>Next</button>
                 </div>
             </div>
         </>
