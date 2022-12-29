@@ -12,6 +12,7 @@ User also can see the profile details.
 <li>Express.js</li>
 <li>Mongoose</li>
 <li>MongoDB</li>
+<li>JWT-Auth</li>
 
 # Used tools
 <li>Heroku - for backend deployment</li>
