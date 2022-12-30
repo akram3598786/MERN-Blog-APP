@@ -22,7 +22,7 @@ User also can see the profile details.
 
 
 # Registration 
-![reg](https://user-images.githubusercontent.com/57341544/205097458-93f730ce-3235-4848-afee-fddc45a75265.png)
+![reg](https://user-images.githubusercontent.com/57341544/210092396-f23ef8ab-3a56-40d2-929a-18c56eb0d67b.png)
 
 # All Blogs Page
 ![homelarge](https://user-images.githubusercontent.com/57341544/209924136-c4f75d7c-45b0-4873-b25e-d467b92567a7.png)
