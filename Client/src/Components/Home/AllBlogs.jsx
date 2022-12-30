@@ -69,7 +69,7 @@ export default function AllBlogs() {
     }
     return (
         <>
-            <div>
+            <div className="homaMainDiv">
                 <h2>All Exist Blogs</h2>
                 <div id="searchBar">
                     <input type="search" value={searchStr} onChange={(e) => setsearchStr(e.target.value)} placeholder="Search Blog" /> <button onClick={handleSearch} >Search</button>
@@ -94,7 +94,6 @@ export default function AllBlogs() {
                                                     <td className="Links"><Link to={`/post/edit/${blog._id}`}>Edit Blog</Link></td>
                                                     <td><button className="deleteBtn" onClick={() => handleDelete(blog._id)}>Remove</button></td>
                                                 </tr>
-
                                             )
                                         })
                                     }
@@ -102,7 +101,7 @@ export default function AllBlogs() {
                             </table>
                 }
 
-                <div className={styles.pageBtns}>
+                <div >
                     <button className="pagebtns" disabled={page==1 ? true : false} onClick={() => setPage((prev) => prev - 1)}>Prev</button>
                     <span>{page}</span>
                     <button className="pagebtns" disabled={page == Math.ceil(totalCount/6) ? true : false} onClick={() => setPage((prev) => prev + 1)}>Next</button>

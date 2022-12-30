@@ -1,4 +1,5 @@
 
+
 #blogsDiv{
     display: flex;
     justify-content: center;
@@ -11,7 +12,7 @@
     margin: auto;
 }
 .blogsTable thead th{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     padding: 20px;
     margin: 10px;
 }
@@ -19,6 +20,7 @@
  .blogsTable tbody tr td{
     border: 1px solid white;
     padding:10px 24px;
+    
 }
 table{
     background-color: teal;
@@ -29,8 +31,10 @@ table{
     height: 400px;
 }
 .Links{
-    color: white;
-    background-color: wheat;
+    color: orange;
+    background-color: rgba(17, 90, 17, 0.562);
+    font-style: bold;
+    text-decoration: underline;
 }
 .deleteBtn{
     background-color: rgb(211, 63, 18);
@@ -56,19 +60,7 @@ table{
 #searchBar button :hover{
     background-color: rgba(70, 51, 51, 0.568);
 }
-.pageBtns{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 30px;
-    background-color: gray;
-    
-}
-.pageBtns > button{
-    width: 200px;
-    background-color: black;
-    color: white;
-}
+
 
 .pagebtns{
     background-color: rgba(255, 255, 255, 0.822);
@@ -78,5 +70,4 @@ table{
     padding: 3px 5px;
     border-radius: 6px;
     cursor: pointer;
-
 }

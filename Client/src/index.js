@@ -12,11 +12,11 @@ import { ChakraProvider } from '@chakra-ui/react'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-  <ChakraProvider>
   <BrowserRouter>
+  <ChakraProvider>
     <App />
+    </ChakraProvider>
   </BrowserRouter>
-  </ChakraProvider>
   </Provider>
 );
 

@@ -14,6 +14,9 @@ let obj = {
 export default function SignUp() {
   const [formData, setformData] = useState(obj);
   const navigate = useNavigate();
+  const [doing, setdoing] = useState(false);
+
+  let { name, email, mobile, password } = formData;
 
   const handeChange = (e) => {
     let { name, value } = e.target;
@@ -21,6 +24,10 @@ export default function SignUp() {
   }
   const handlsSubmit = (e) => {
     e.preventDefault();
+    if(!name || !email || !password || !mobile ) alert("Kindly fill all details !")
+    if (doing) {
+      alert("Wait for some time !");
+    } else {
     // let url = "http://localhost:8080/auth/signup";
     let url = "https://mern-app-blog-ver01.onrender.com/auth/signup";
     axios.post(url, formData).
@@ -29,16 +36,17 @@ export default function SignUp() {
           alert(`${name} registred successfully`);
           navigate("/");
         }
-        else console.log("something went wrong !");
       }).catch((err) => {
         console.log(err);
+        if(err.response.data.message == "Email is already registered.") alert("This email already registered");
+        else alert("something went wrong !");
       })
-
+    }
   }
-  let { name, email, mobile, password } = formData;
+ 
   return (
     <div id="SignupDiv">
-      <h2 >Registration Form</h2>
+      <h1 >Registration Form</h1>
       <form action="submit"  >
         <label htmlFor=""><span>Name : </span> <input type="text" name="name" value={name} onChange={handeChange} id="" placeholder="NAME" /></label>
         <label htmlFor=""><span>Email : </span><input type="email" name="email" value={email} onChange={handeChange} placeholder="EMAIL" /></label>
@@ -46,7 +54,7 @@ export default function SignUp() {
         <label htmlFor=""><span>Password  : </span> <input type="password" name="password" value={password} onChange={handeChange} placeholder="PASSWORD" /></label>
       </form>
       <button id="submitBtn" onClick={handlsSubmit}>Submit</button>
-      <p>Already have an account : <Link to="/">Sign In</Link></p>
+      <p>Already have an account : <Link style={{ color: 'blue', fontWeight:''}} to="/">Sign In</Link></p>
     </div>
   );
 

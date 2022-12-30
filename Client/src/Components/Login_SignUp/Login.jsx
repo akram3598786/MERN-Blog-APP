@@ -4,23 +4,34 @@ import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { isAuthHandler } from '../Redux/Auth-context/action';
 import './Auth.css';
+import React from "react";
 import {
   Alert,
   AlertIcon,
   AlertTitle,
   AlertDescription,
 } from '@chakra-ui/react'
+import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Input, InputGroup, InputRightElement } from '@chakra-ui/react'
+import { useEffect } from "react";
 
 
 let obj = {
   email: "",
   password: ""
 }
+
 export default function Login() {
   const [formData, setformData] = useState(obj);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [doing, setdoing] = useState(false);
+  const [sucessLogin, setsuccessLogin] = useState(false);
+  const [show, setShow] = React.useState(false);
+
+  const handleshow = () => {
+    setShow((prev) => (!prev));
+  }
 
   const handleSubmit = () => {
     if (doing) {
@@ -33,15 +44,12 @@ export default function Login() {
       axios.post(url, formData).
         then((res) => {
           if (res.status === 201) {
-            // console.log(res);
             alert("Logged In Successfully");
-         
             localStorage.setItem("LoggedUser", JSON.stringify(res.data.user));
             localStorage.setItem("token", res.data.token);
             dispatch(isAuthHandler(true));
             navigate("/home");
           } else {
-            console.log(res)
             alert("Kindly register first !");
           }
         }).catch((err) => {
@@ -54,15 +62,27 @@ export default function Login() {
     let { name, value } = e.target;
     setformData({ ...formData, [name]: value });
   }
+
   let { email, password } = formData;
 
   return (
-    <div className="LoginMainDiv">
-      <h2>Login Form</h2>
-      <input type="email" value={email} name="email" id="" placeholder="Enter Email" onChange={handleChange} />
-      <input type="password" value={password} name="password" id="" placeholder="Enter Password" onChange={handleChange} />
-      <button onClick={() => handleSubmit()}>Login</button> <br /><br />
-      <p>If you dont have Account : <Link to="/signup">Create Account</Link></p>
+    <div className="container">
+      <div className="LoginMainDiv">
+        {sucessLogin ?
+          <Alert status='success' variant='solid'>
+            <AlertIcon />
+            Data uploaded to the server. Fire on!
+          </Alert> : null}
+        <h1>Login Form</h1>
+        <div id="LoginForm">
+          <input className='Input' type="email" value={email} name="email" id="" placeholder="Email" onChange={handleChange} />
+          <input className='Input' type={show ? 'text' : 'password'} value={password} name="password" placeholder="Password" onChange={handleChange} />
+          <button style={{ marginTop: '-3px', alignSelf: 'flex-end', width: '50px', fontSize: '10px' }} onClick={handleshow} >{show ? 'Hide' : 'Show'}</button>
+          <Button size='sm' onClick={() => handleSubmit()} colorScheme='blue'>Login</Button>
+          <p>If you don't have Account : <Link style={{ color: 'blue' }} to="/signup">Create Account</Link></p>
+        </div>
+      </div>
     </div>
   )
 }
+

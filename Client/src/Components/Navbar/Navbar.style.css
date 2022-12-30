@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
     column-gap: 30px;
-    background-color: rgba(0, 0, 0, 0.884);
+    background-color: rgba(14, 10, 10, 0.884);
     color: black;
     padding: 15px 0px;
 }
@@ -44,7 +44,7 @@
 
 #SignOutBtn{
     background-color: rgb(211, 63, 18);
-    padding: 5px 10px;
+    padding: 2px 10px;
     position: absolute;
     right: 30px;
     border: 0;

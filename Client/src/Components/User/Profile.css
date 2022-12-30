@@ -6,9 +6,11 @@
     margin: auto;
     border-radius: 15px;
     padding: 12px 0px;
+    row-gap: 30px;
 }
 
 #userDetail img{
     height: 8%;
     width: 8%;
+    margin: auto;
 }
