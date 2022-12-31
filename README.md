@@ -1,7 +1,7 @@
 
 # About App
 
-A MERN app which provide a interface to users to authenticate and create blogs. Authenticated user can see its created blogs. User can perform create, read, update and delete functionalities over blogs. Blogs can be search by title name.
+A MERN app which provide a interface to users to authenticate and create blogs. Authenticated user can see its created blogs with pagination. User can perform create, read, update and delete functionalities over blogs. Blogs can be search by title name.
 User also can see the profile details.
 
 # Used Stacks
@@ -12,6 +12,7 @@ User also can see the profile details.
 <li>Express.js</li>
 <li>Mongoose</li>
 <li>MongoDB</li>
+<li>JWT-Auth</li>
 
 # Used tools
 <li>Heroku - for backend deployment</li>
@@ -21,10 +22,11 @@ User also can see the profile details.
 
 
 # Registration 
-![reg](https://user-images.githubusercontent.com/57341544/205097458-93f730ce-3235-4848-afee-fddc45a75265.png)
+![reg](https://user-images.githubusercontent.com/57341544/210092396-f23ef8ab-3a56-40d2-929a-18c56eb0d67b.png)
 
 # All Blogs Page
-![home](https://user-images.githubusercontent.com/57341544/205096695-5bae6fef-0e74-41ad-9651-0bf70c003122.png)
+![homelarge](https://user-images.githubusercontent.com/57341544/209924136-c4f75d7c-45b0-4873-b25e-d467b92567a7.png)
+
 
 # Blog View Page
 ![blog view](https://user-images.githubusercontent.com/57341544/204259233-2e8bc103-5734-496a-9cae-b224777b946f.png)
@@ -34,7 +36,9 @@ User also can see the profile details.
 
 
 # Blog Create Page
-![create](https://user-images.githubusercontent.com/57341544/204523589-afb7ca61-ca2f-46da-b6b1-f0599ac48679.png)
+![create](https://user-images.githubusercontent.com/57341544/209924290-f3ee9c90-4188-4162-9a39-586620aab39e.png)
+
+
 
 # Getting Started with Create React App
 
