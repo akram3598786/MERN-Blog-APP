@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import "./Profile.css"
+import "./Profile.css";
+import Cookies from 'universal-cookie';
+import jwt_decode from "jwt-decode";
 
 
 export default function Profile() {
@@ -17,8 +19,11 @@ export default function Profile() {
     }, []);
     
     const getUserData =async () => {
-        let userData = await JSON.parse(localStorage.getItem("LoggedUser"));
-        setuser(userData);
+
+        const cookie = new Cookies();
+        let token = cookie.get("AccessToken");
+        let decodedUser = jwt_decode(token);
+        setuser(decodedUser);
     }
 
     return (

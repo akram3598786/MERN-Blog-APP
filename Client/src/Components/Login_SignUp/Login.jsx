@@ -11,9 +11,11 @@ import {
   AlertTitle,
   AlertDescription,
 } from '@chakra-ui/react'
-import { Button, ButtonGroup } from '@chakra-ui/react'
-import { Input, InputGroup, InputRightElement } from '@chakra-ui/react'
+import { Button, ButtonGroup } from '@chakra-ui/react';
+import { Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { useEffect } from "react";
+import Cookies from 'universal-cookie';
+import jwt_decode from "jwt-decode";
 
 
 let obj = {
@@ -45,8 +47,13 @@ export default function Login() {
         then((res) => {
           if (res.status === 201) {
             alert("Logged In Successfully");
-            localStorage.setItem("LoggedUser", JSON.stringify(res.data.user));
-            localStorage.setItem("token", res.data.token);
+            const decoded = jwt_decode(res.data.token);
+            const cookies = new Cookies();
+            cookies.set("AccessToken",res.data.token,{
+              expires : new Date(decoded.exp * 1000)
+            });
+            // console.log("cookie token :",cookies.get('AccessToken'));
+            // window.location.reload();
             dispatch(isAuthHandler(true));
             navigate("/home");
           } else {

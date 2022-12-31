@@ -19,13 +19,14 @@ function App() {
       <NavBar />
     
       <Routes>
-        <Route path='/home' element={<Homepage />}></Route>
-        <Route path='/post/:blogId' element={<BlogDetails />}></Route>
-        <Route path='/post/edit/:blogId' element={<EditBlog />}></Route>
-        <Route path='/create' element={<CreateBlog/> }></Route>
-        <Route path='/profile' element={<Profile/> }></Route>
-        <Route path='/' element={<Login />}></Route>
-        <Route path='/signup' element={<SignUp />}></Route>
+         <Route path='/home' element={<Homepage />}></Route>              {/* Private Route */}
+         <Route path='/post/:blogId' element={<BlogDetails />}></Route>   {/* Private Route */}
+         <Route path='/post/edit/:blogId' element={<EditBlog />}></Route> {/* Private Route */}
+         <Route path='/create' element={<CreateBlog/> }></Route>          {/* Private Route */}
+         <Route path='/profile' element={<Profile/> }></Route>            {/* Private Route */}
+
+        <Route path='/' element={<Login />}></Route>                      {/* Public Route */}
+        <Route path='/signup' element={<SignUp />}></Route>               {/* Public Route */}
       </Routes>
     </div>
   );

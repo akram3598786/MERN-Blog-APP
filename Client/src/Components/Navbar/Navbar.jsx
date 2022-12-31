@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./Navbar.style.css";
 import { isAuthHandler } from '../Redux/Auth-context/action';
 import { FaSearch } from 'react-icons/fa';
+import Cookies from 'universal-cookie';
 
 export default function NavBar() {
   const isAuth = useSelector((store) => store.isAuth.isAuth);
@@ -10,6 +11,8 @@ export default function NavBar() {
   const navigate = useNavigate();
   //console.log(isAuth)
   const handleSignout = () => {
+    const cookies = new Cookies();
+    cookies.remove("AccessToken");
     dispatch(isAuthHandler(false));
     navigate("/");
   }
@@ -20,7 +23,7 @@ export default function NavBar() {
   // console.log(document.location.pathname);
   return (
     <div id="Navbar">
-      
+
       <nav className="navbarDiv">
 
         <div id="leftNav" className="navLinks">
@@ -28,22 +31,16 @@ export default function NavBar() {
           <Link to="/profile">Profile</Link>
           <Link to="/create">Create blog</Link>
         </div>
-       
+
         {
           document.location.pathname === "/" ?
-            <div style={isAuth ? {display:'none'} : {position:'absolute'}} id="searchBar">
-              <input type="search" 
-              fill={<FaSearch/>}
-              />
-              <button onClick={handleSearch}>Search</button>
-            </div>
-            : 
+            null
+            :
             <div id="rightNav" className="navLinks">
-            {isAuth ? <button id="SignOutBtn" onClick={handleSignout}>Sign Out</button> : null}
-          </div>
+              {isAuth ? <button id="SignOutBtn" onClick={handleSignout}>Sign Out</button> : null}
+            </div>
         }
       </nav>
-     
     </div>
   );
 }
