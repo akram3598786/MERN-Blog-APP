@@ -19,7 +19,6 @@ export default function Profile() {
     }, []);
     
     const getUserData =async () => {
-
         const cookie = new Cookies();
         let token = cookie.get("AccessToken");
         let decodedUser = jwt_decode(token);

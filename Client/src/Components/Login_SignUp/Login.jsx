@@ -17,7 +17,6 @@ import { useEffect } from "react";
 import Cookies from 'universal-cookie';
 import jwt_decode from "jwt-decode";
 
-
 let obj = {
   email: "",
   password: ""

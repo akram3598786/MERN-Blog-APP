@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "./Navbar.style.css";
+import "./Navbar.style.css";
 import { isAuthHandler } from '../Redux/Auth-context/action';
-import { FaSearch } from 'react-icons/fa';
 import Cookies from 'universal-cookie';
 
 export default function NavBar() {
@@ -15,9 +14,6 @@ export default function NavBar() {
     cookies.remove("AccessToken");
     dispatch(isAuthHandler(false));
     navigate("/");
-  }
-  const handleSearch = () => {
-
   }
 
   // console.log(document.location.pathname);
