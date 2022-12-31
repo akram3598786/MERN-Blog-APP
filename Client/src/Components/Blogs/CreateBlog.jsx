@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
+import getLoggedUser from "../Utilities/GetLoggedUser";
 import "./Blog.css";
 
 
@@ -23,15 +24,15 @@ export default function CreateBlog() {
             alert("Kindly complete your blog inputs !")
         } else {
 
-            let userData = JSON.parse(localStorage.getItem("LoggedUser"));
+            const loggedUser = getLoggedUser();
             let payload = {
                 title: tit,
                 description: des,
-                createdby: userData._id
+                createdby: loggedUser._id
             }
 
             // let url = `http://localhost:8080/post/${userData._id}`;
-            let url = `https://mern-app-blog-ver01.onrender.com/post/${userData._id}`;
+            let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}`;
 
             const authAxios = EmbedJWTToken(url);
             authAxios.post(url, payload).

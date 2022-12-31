@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
+import getLoggedUser from "../Utilities/GetLoggedUser";
 import styles from "./Homepage.style.css";
 
 export default function AllBlogs() {
@@ -17,12 +18,12 @@ export default function AllBlogs() {
             getAllBlogs();
     },[page]);
 
-    
 
     const getAllBlogs = () => {
-        let userData = JSON.parse(localStorage.getItem("LoggedUser"));
+       const loggedUser = getLoggedUser();
+      
         // let url = `http://localhost:8080/post/${userData._id}/all?_limit=6&&page=${page-1}`;
-         let url = `https://mern-app-blog-ver01.onrender.com/post/${userData._id}/all?_limit=6&&page=${page-1}`; 
+         let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all?_limit=6&&page=${page-1}`; 
        
         const authAxios = EmbedJWTToken(url);
         authAxios.get(url).

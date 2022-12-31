@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./Profile.css";
 import Cookies from 'universal-cookie';
 import jwt_decode from "jwt-decode";
+import getLoggedUser from "../Utilities/GetLoggedUser";
 
 
 export default function Profile() {
@@ -19,10 +20,8 @@ export default function Profile() {
     }, []);
     
     const getUserData =async () => {
-        const cookie = new Cookies();
-        let token = cookie.get("AccessToken");
-        let decodedUser = jwt_decode(token);
-        setuser(decodedUser);
+        const loggedUser = getLoggedUser();
+        setuser(loggedUser);
     }
 
     return (
