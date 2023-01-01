@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 function Sign(payload) {
     const SECRET = process.env.JWT_SECRET;
     return jwt.sign(payload, SECRET, {
-        expiresIn: '5m',
+        expiresIn: '20m',
     })
 }
 
@@ -14,7 +14,7 @@ function Verify(token) {
     try {
         return jwt.verify(token, SECRET)
     } catch (err) {
-        throw new Error("error in verification of token !")
+        throw new Error("error in verification of token !");
     }
 }
 
