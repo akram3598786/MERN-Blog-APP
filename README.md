@@ -29,15 +29,14 @@ User also can see the profile details.
 
 
 # Blog View Page
-![blog view](https://user-images.githubusercontent.com/57341544/204259233-2e8bc103-5734-496a-9cae-b224777b946f.png)
+![blog view](https://user-images.githubusercontent.com/57341544/210167418-b1e6296f-d832-4263-8126-dd605adb1d93.png)
 
 # User Profile Page
 ![profile](https://user-images.githubusercontent.com/57341544/204268691-aa91ed2b-21df-4ff4-9389-01367a68ea70.png)
 
 
 # Blog Create Page
-![create](https://user-images.githubusercontent.com/57341544/209924290-f3ee9c90-4188-4162-9a39-586620aab39e.png)
-
+![create](https://user-images.githubusercontent.com/57341544/210167430-6c28f299-2183-4145-b4d4-fde7df116399.png)
 
 
 # Getting Started with Create React App
