@@ -32,7 +32,7 @@ async function getALLposts(req, res) {
         const { userId } = req.params;
         let posts = [];
         if (_limit && page >= 0) {
-            posts = await PostModel.find({ createdby: userId }).limit(_limit * 1).skip(page * _limit).exec();
+            posts = await PostModel.find({ createdby: userId }).limit(_limit * 1).skip(page * _limit).sort({updatedAt : -1});
         } else {
             posts = await PostModel.find({ createdby: userId });
         }
