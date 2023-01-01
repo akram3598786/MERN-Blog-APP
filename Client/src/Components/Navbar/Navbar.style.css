@@ -11,6 +11,19 @@
     padding: 15px 0px;
 }
 
+.navbarDiv>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 30px;
+    font-size: 1.3rem;
+}
+@media screen and (max-width : 500px){
+    .navbarDiv>div{
+      column-gap: 10px;
+      font-size: 1.2rem;
+    }
+}
 .navLinks>* {
     color: white;
     text-decoration: none;
@@ -21,14 +34,6 @@
 
 .navbarDiv {
     column-gap: 20px;
-}
-
-.navbarDiv>div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    column-gap: 30px;
-    font-size: 1.3rem;
 }
 
  .navLinks > *:hover{

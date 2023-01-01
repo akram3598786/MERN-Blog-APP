@@ -51,7 +51,8 @@ export default function AllBlogs() {
                 setTotalCount(res.data.totalCount)
             }).
             catch((err) => {
-                setError(true)
+                setError(true);
+                setPage(0);
                 console.log(err)
                 
             }).

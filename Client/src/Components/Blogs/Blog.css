@@ -45,9 +45,6 @@ textarea{
     border-radius: 6px;
     padding: 3px;
 }
-#title{
-   
-}
 
 /* Blog View CSS  */
 #blogView{
@@ -56,14 +53,28 @@ textarea{
     border: 1px solid black;
     border-radius: 16px;
     padding: 10px 20px;
+    margin-top: 10px;
+}
+#blogView h1{
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 #blogView p {
     text-align: start;
 }
 #blogView img{  
-    width: 50%;
+    width: 70%;
     margin: auto;
     height: 370px;  
+}
+
+@media screen and (max-width : 700px){
+    #blogView{
+        width: 96%;
+    }
+    #blogView img{ 
+     width: 95%;
+    }
 }
 
 
