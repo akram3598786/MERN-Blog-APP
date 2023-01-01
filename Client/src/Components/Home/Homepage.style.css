@@ -40,6 +40,9 @@ table{
     background-color: rgb(211, 63, 18);
     cursor: pointer;
 }
+.deleteBtn :hover{
+    background-color:  rgb(146, 42, 10);
+}
 #searchBar{
     margin: 10px 0px;
 }

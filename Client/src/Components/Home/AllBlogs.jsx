@@ -9,40 +9,59 @@ export default function AllBlogs() {
     const [loading, setloading] = useState(false);
     const [error, setError] = useState(false);
     const [searchStr, setsearchStr] = useState("");
+    const [allbogs, setallblogs] = useState([]);
     const [blogs, setblogs] = useState([]);
     const [page, setPage] = useState(1);
     let [totalCount, setTotalCount] = useState(0);
 
     useEffect(() => {
-            setloading(true);
-            getAllBlogs();
-    },[page]);
+        setloading(true);
+        getBlogsforPage();
+        getAllBlogs(); 
+    }, [page]);
 
-
-    const getAllBlogs = () => {
-       const loggedUser = getLoggedUser();
-      
-        // let url = `http://localhost:8080/post/${userData._id}/all?_limit=6&&page=${page-1}`;
-         let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all?_limit=6&&page=${page-1}`; 
-       
+ // <================ GET all blogs for searching out of all existing =================>
+    const getAllBlogs=()=>{
+        const loggedUser = getLoggedUser();
+        let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all`
         const authAxios = EmbedJWTToken(url);
         authAxios.get(url).
             then((res) => {
-                //  console.log(res)
+                //    console.log(res)
+                setallblogs(res.data.posts);
+            }).
+            catch((err) => {
+              
+                console.log(err)
+            })
+    }
+
+    // <==================== GET blogs for page according to page limit ====================>
+    const getBlogsforPage = () => {
+        const loggedUser = getLoggedUser();
+
+        // let url = `http://localhost:8080/post/${loggedUser._id}/all?_limit=6&&page=${page-1}`;
+        let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all?_limit=6&&page=${page - 1}`;
+
+        const authAxios = EmbedJWTToken(url);
+        authAxios.get(url).
+            then((res) => {
+                //   console.log(res.data)
                 setblogs(res.data.posts);
                 setTotalCount(res.data.totalCount)
             }).
             catch((err) => {
-                console.log(err)
                 setError(true)
+                console.log(err)
+                
             }).
             finally((res) => setloading(false));
     }
 
+    // <=================== DELETE a particular blog ===================>
     const handleDelete = (id) => {
-
-        let url = `http://localhost:8080/post/${id}`;
-        // let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
+        // let url = `http://localhost:8080/post/${id}`;
+         let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
 
         const authAxios = EmbedJWTToken(url);
         authAxios.delete(url).
@@ -55,16 +74,16 @@ export default function AllBlogs() {
             }).catch((err) => console.log(err));
     }
 
+    // <=================== SEARCH blogs by titles ==========================>
     const handleSearch = () => {
         let filtered = "";
         if (searchStr.length > 0) {
-            filtered = blogs.filter((blg) => {
+            filtered = allbogs.filter((blg) => {
                 let cur = blg.title.toLowerCase();
-                //   console.log(searchStr.toLowerCase())
                 if (cur.includes(searchStr.toLowerCase())) return blg;
             });
             setblogs(filtered);
-        }else if(searchStr.length === 0){
+        } else if (searchStr.length === 0) {
             getAllBlogs();
         }
     }
@@ -103,9 +122,9 @@ export default function AllBlogs() {
                 }
 
                 <div >
-                    <button className="pagebtns" disabled={page==1 ? true : false} onClick={() => setPage((prev) => prev - 1)}>Prev</button>
-                    <span>{page}</span>
-                    <button className="pagebtns" disabled={page == Math.ceil(totalCount/6) ? true : false} onClick={() => setPage((prev) => prev + 1)}>Next</button>
+                    <button className="pagebtns" disabled={page == 1 ? true : false} onClick={() => setPage((prev) => prev - 1)} style={page == 1 ? { backgroundColor: "lightgrey" } : { backgroundColor: "white" }}>Prev</button>
+                    <span>{page } of {Math.ceil(totalCount / 6)}</span>
+                    <button className="pagebtns" disabled={page == Math.ceil(totalCount / 6) || blogs.length == 0 ? true : false} onClick={() => setPage((prev) => prev + 1)} style={page == Math.ceil(totalCount / 6) || blogs.length == 0 ? { backgroundColor: "lightgrey" } : { backgroundColor: "white" }}>Next</button>
                 </div>
             </div>
         </>

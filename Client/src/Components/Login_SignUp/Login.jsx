@@ -41,7 +41,7 @@ export default function Login() {
 
       setdoing(true);
       //  let url = "http://localhost:8080/auth/login";
-      let url = "https://mern-app-blog-ver01.onrender.com/auth/login";
+        let url = "https://mern-app-blog-ver01.onrender.com/auth/login";
       axios.post(url, formData).
         then((res) => {
           if (res.status === 201) {
@@ -51,12 +51,10 @@ export default function Login() {
             cookies.set("AccessToken",res.data.token,{
               expires : new Date(decoded.exp * 1000)
             });
-            // console.log("cookie token :",cookies.get('AccessToken'));
-            // window.location.reload();
             dispatch(isAuthHandler(true));
             navigate("/home");
           } else {
-            alert("Kindly register first !");
+            alert("Kindly register first    !");
           }
         }).catch((err) => {
           alert("Kindly register first !");

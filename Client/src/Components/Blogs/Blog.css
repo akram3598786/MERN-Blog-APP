@@ -11,6 +11,7 @@
     background-color: teal;
     border-radius: 12px;
     padding-bottom: 5px;
+    color: white;
 }
 .inputSec button{
     width: 10%;
@@ -26,28 +27,47 @@
     width: 50%;
     row-gap: 20px;
 }
+form input,form textarea{
+    color: black;
+}
 .title{
-    width: 400px;
-    height: 30px;
+    width: 150%;
+    height: 40px;
     border-radius: 6px;
+}
+.shortDesc{
+    width: 150%;
+    height: 100px;
 }
 textarea{
     width: 170%;
     height: 300px;
     border-radius: 6px;
+    padding: 3px;
 }
 #title{
-    width: 370px;
-    height: 40px;
+   
 }
 
+/* Blog View CSS  */
 #blogView{
-    width: 70%;
+    width: 90%;
     margin: auto;
     border: 1px solid black;
     border-radius: 16px;
     padding: 10px 20px;
 }
+#blogView p {
+    text-align: start;
+}
+#blogView img{  
+    width: 50%;
+    margin: auto;
+    height: 370px;  
+}
+
+
+/* Edit Blog CSS */
 .inputSec button{
     background-color:rgb(45, 42, 59); 
     color: white;
