@@ -1,6 +1,5 @@
-#Navbar{
+#Navbar {}
 
-}
 .navbarDiv {
     display: flex;
     justify-content: center;
@@ -18,36 +17,38 @@
     column-gap: 30px;
     font-size: 1.3rem;
 }
-@media screen and (max-width : 500px){
-    .navbarDiv>div{
-      column-gap: 10px;
-      font-size: 1.2rem;
-    }
-}
+
+
+
 .navLinks>* {
     color: white;
     text-decoration: none;
 }
+
+.navLinks>Link:active {
+    color: green;
+}
+
 .navLinks>* :hover {
-    text-decoration: underline; 
+    text-decoration: underline;
 }
 
 .navbarDiv {
     column-gap: 20px;
 }
 
- .navLinks > *:hover{
+.navLinks>*:hover {
     text-decoration: underline;
-}   
-
-
-#searchBar{
-  /* position: absolute; */
-  right: 10%;
-  column-gap: 5px;
 }
 
-#SignOutBtn{
+
+#searchBar {
+    /* position: absolute; */
+    right: 10%;
+    column-gap: 5px;
+}
+
+#SignOutBtn {
     background-color: rgb(211, 63, 18);
     padding: 4px 10px;
     position: absolute;
@@ -57,6 +58,21 @@
     cursor: pointer;
     font-size: medium;
 }
-#SignOutBtn :hover{
+
+#SignOutBtn :hover {
     background-color: rgba(211, 63, 18, 0.671);
+}
+
+@media screen and (max-width : 500px) {
+    .navbarDiv>div {
+        column-gap: 10px;
+        font-size: 1.2rem;
+    }
+    .navbarDiv{
+        flex-direction: column;
+    }
+    #SignOutBtn{
+        position: relative;
+        margin-top: 10px;
+    }
 }

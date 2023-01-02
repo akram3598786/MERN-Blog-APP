@@ -87,7 +87,7 @@ export default function EditBlog() {
                     <div>
                     <input type="file" multiple accept="image/*" onChange={hangleImageUpload}/>
                     <p style={{fontSize:'20px',fontWeight:'18'}}>OR</p>
-                    <input style={{width:'100%', borderRadius : '5px'}} type="text" value={linkImage} onChange={(e)=>setlinkImageURL(e.target.value)} placeholder="Image URL"/>
+                    <input id="imageLink" style={{ borderRadius : '5px'}} type="text" value={linkImage} onChange={(e)=>setlinkImageURL(e.target.value)} placeholder="Image URL"/>
                     </div>
                     {imageURL.map(imgsrc => <img src={imgsrc}/>)}
                     <textarea type="text" name="" id="" value={des} onChange={(e) => setdes(e.target.value)} placeholder="Description" /> <br />

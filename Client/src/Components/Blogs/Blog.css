@@ -1,11 +1,10 @@
-
-.inputSec{
+.inputSec {
     row-gap: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center ;
-    width: 80%;
+    align-items: center;
+    width: 90%;
     margin: auto;
     padding: 4%;
     background-color: teal;
@@ -13,41 +12,77 @@
     padding-bottom: 5px;
     color: white;
 }
-.inputSec button{
+
+.inputSec button {
     width: 10%;
     padding: 5px 10px;
     margin-top: -18px;
 }
-.inputSec form{
+
+.inputSec form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center ;
+    align-items: center;
     column-gap: 30px;
-    width: 50%;
+    width: 90%;
     row-gap: 20px;
+    padding: 2px;
 }
-form input,form textarea{
+
+form input,
+form textarea {
     color: black;
 }
-.title{
-    width: 150%;
+
+.title {
+    width: 100%;
     height: 40px;
     border-radius: 6px;
 }
-.shortDesc{
-    width: 150%;
+
+.shortDesc {
+    width: 100%;
     height: 100px;
 }
-textarea{
-    width: 170%;
+
+textarea {
+    width: 100%;
     height: 300px;
     border-radius: 6px;
     padding: 3px;
 }
 
+.inputSec form div {
+    width: 100%;
+}
+
+#imageLink {
+    width: 70%;
+}
+
+@media screen and (max-width : 700px) {
+    .inputSec {
+        width: 97%;
+        padding: 10px 0px;
+    }
+
+    .inputSec form div input {
+        align-items: flex-start;
+        /* background-color: red; */
+    }
+
+    #imageLink {
+        width: 100%;
+    }
+    .inputSec button{
+        width: 6%;
+    }
+}
+
+
 /* Blog View CSS  */
-#blogView{
+#blogView {
     width: 90%;
     margin: auto;
     border: 1px solid black;
@@ -55,38 +90,43 @@ textarea{
     padding: 10px 20px;
     margin-top: 10px;
 }
-#blogView h1{
+
+#blogView h1 {
     font-weight: bold;
     font-size: 1.5rem;
 }
+
 #blogView p {
     text-align: start;
 }
-#blogView img{  
+
+#blogView img {
     width: 70%;
     margin: auto;
-    height: 370px;  
-}
-
-@media screen and (max-width : 700px){
-    #blogView{
-        width: 96%;
-    }
-    #blogView img{ 
-     width: 95%;
-    }
+    height: 370px;
 }
 
 
 /* Edit Blog CSS */
-.inputSec button{
-    background-color:rgb(45, 42, 59); 
+.inputSec button {
+    background-color: rgb(45, 42, 59);
     color: white;
     width: 230px;
     border-radius: 5px;
     border: 1px;
     cursor: pointer;
 }
-.inputSec button:hover{
+
+.inputSec button:hover {
     background-color: grey;
+}
+
+@media screen and (max-width : 700px) {
+    #blogView {
+        width: 96%;
+    }
+
+    #blogView img {
+        width: 95%;
+    }
 }
