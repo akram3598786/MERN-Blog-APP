@@ -8,7 +8,9 @@
     background-color: rgba(14, 10, 10, 0.884);
     color: black;
     padding: 15px 0px;
+    opacity: 0.9;
 }
+
 
 .navbarDiv>div {
     display: flex;

@@ -78,7 +78,7 @@ export default function EditBlog() {
     }
 
     return (
-        <>
+        <div className="blogcreation">
             <h2>Edit Blog </h2>
             <div className="inputSec">
             <form>
@@ -94,6 +94,6 @@ export default function EditBlog() {
                 </form>
                 <button onClick={handleUpdate}>Post</button>
             </div>
-        </>
+        </div>
     )
 }

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 import getLoggedUser from "../Utilities/GetLoggedUser";
 import styles from "./Homepage.style.css";
+import ProgresSkelton from "./ProgressBlogsSkel";
 
 export default function AllBlogs() {
     const [loading, setloading] = useState(false);
@@ -18,7 +19,12 @@ export default function AllBlogs() {
         setloading(true);
         getBlogsforPage();
         getAllBlogs(); 
-    }, [page]);
+    }, []);
+
+    useEffect(()=>{
+        setloading(true);
+        getBlogsforPage();
+    },[page])
 
  // <================ GET all blogs for searching out of all existing =================>
     const getAllBlogs=()=>{
@@ -29,10 +35,12 @@ export default function AllBlogs() {
             then((res) => {
                 //    console.log(res)
                 setallblogs(res.data.posts);
+                if(res.data.posts.length == 0) setPage(0);
             }).
             catch((err) => {
-              
-                console.log(err)
+                console.log(err);
+                setPage(0);
+
             })
     }
 
@@ -52,8 +60,7 @@ export default function AllBlogs() {
             }).
             catch((err) => {
                 setError(true);
-                setPage(0);
-                console.log(err)
+                console.log(err);
                 
             }).
             finally((res) => setloading(false));
@@ -70,6 +77,7 @@ export default function AllBlogs() {
                 // console.log(res)
                 if (res.status === 200) {
                     alert("Blog deleted");
+                    getBlogsforPage();
                     getAllBlogs();
                 }
             }).catch((err) => console.log(err));
@@ -96,7 +104,7 @@ export default function AllBlogs() {
                     <input type="search" value={searchStr} onChange={(e) => setsearchStr(e.target.value)} placeholder="Search Blog" /> <button onClick={handleSearch} >Search</button>
                 </div>
                 {
-                    loading ? <h1>Loading...</h1> :
+                    loading ? <ProgresSkelton/> :
                         error ? <h1>No Post yet or Something Went Wrong</h1> :
                             <table className="blogsTable">
                                 <thead>
@@ -123,9 +131,9 @@ export default function AllBlogs() {
                 }
 
                 <div >
-                    <button className="pagebtns" disabled={page == 1 ? true : false} onClick={() => setPage((prev) => prev - 1)} style={page == 1 ? { backgroundColor: "lightgrey" } : { backgroundColor: "white" }}>Prev</button>
+                    <button className="pagebtns" disabled={page ==  1 || page == 0 ? true : false} onClick={() => setPage((prev) => prev - 1)} style={page ==  1 || page == 0 ? { backgroundColor: "grey" } : { backgroundColor: "white" }}>Prev</button>
                     <span>{page } of {Math.ceil(totalCount / 6)}</span>
-                    <button className="pagebtns" disabled={page == Math.ceil(totalCount / 6) || blogs.length == 0 ? true : false} onClick={() => setPage((prev) => prev + 1)} style={page == Math.ceil(totalCount / 6) || blogs.length == 0 ? { backgroundColor: "lightgrey" } : { backgroundColor: "white" }}>Next</button>
+                    <button className="pagebtns" disabled={page == Math.ceil(totalCount / 6) || blogs.length == 0 ? true : false} onClick={() => setPage((prev) => prev + 1)} style={page == Math.ceil(totalCount / 6) || blogs.length == 0 ? { backgroundColor: "grey" } : { backgroundColor: "white" }}>Next</button>
                 </div>
             </div>
         </>

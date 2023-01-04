@@ -59,6 +59,7 @@ export default function CreateBlog() {
                             setdes("");
                             setlinkImageURL("");
                             setshortDesc("");
+                            setImageURL([]);
                         }
                         else alert("Something wrong !");
                     }).catch((err) => {
@@ -81,7 +82,7 @@ export default function CreateBlog() {
 
 
     return (
-        <>
+        <div className="blogcreation">
             <h2>Create Blog </h2>
             <div className="inputSec">
                 <form>
@@ -97,6 +98,6 @@ export default function CreateBlog() {
                 </form>
                 <button onClick={handlePost}>Post</button>
             </div>
-        </>
+        </div>
     )
 }

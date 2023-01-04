@@ -12,7 +12,24 @@
     padding-bottom: 5px;
     color: white;
 }
-
+.blogcreation{
+    color: white;
+}
+.blogcreation::before {
+    content: '';
+    /* background: url("https://www.shutterstock.com/image-vector/vector-seamless-pattern-blogging-social-600w-434264536.jpg") no-repeat center center/cover; */
+    /* background: url("https://newjerseycog.org/wp-content/uploads/2014/08/Blog-Web-Header-Background.jpg") no-repeat center center/cover; */
+    /* background: url("https://mcdn.wallpapersafari.com/medium/9/57/PdJiN3.jpg") no-repeat center center/cover; */
+    /* background: url("https://mcdn.wallpapersafari.com/medium/18/3/voZ23G.jpg") no-repeat center center/cover; */
+    background: url("https://mcdn.wallpapersafari.com/medium/41/98/bTovEQ.jpg") no-repeat center center/cover;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    opacity: 0.8;
+  }
 .inputSec button {
     width: 10%;
     padding: 5px 10px;
@@ -33,6 +50,11 @@
 form input,
 form textarea {
     color: black;
+}
+
+.inputSec form img{
+    width: 50%;
+    height: 50%;
 }
 
 .title {
@@ -90,6 +112,21 @@ textarea {
     padding: 10px 20px;
     margin-top: 10px;
 }
+#blogView::before {
+    content: '';
+    /* background: url("https://newjerseycog.org/wp-content/uploads/2014/08/Blog-Web-Header-Background.jpg") no-repeat center center/cover; */
+    /* background: url("https://mcdn.wallpapersafari.com/medium/9/57/PdJiN3.jpg") no-repeat center center/cover; */
+    background: url("https://mcdn.wallpapersafari.com/medium/18/3/voZ23G.jpg") no-repeat center center/cover;
+    /* background: url("https://mcdn.wallpapersafari.com/medium/41/98/bTovEQ.jpg") no-repeat center center/cover; */
+    /* background: url("https://mcdn.wallpapersafari.com/medium/88/13/1RiXrN.jpg") no-repeat center center/cover; */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    opacity: 0.9;
+  }
 
 #blogView h1 {
     font-weight: bold;

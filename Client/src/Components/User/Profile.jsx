@@ -26,7 +26,7 @@ export default function Profile() {
 
     return (
 
-        <>
+        <div className="userDetailMainDiv">
             <h1>User Profile</h1>
             
             <div id="userDetail">
@@ -35,6 +35,6 @@ export default function Profile() {
                <p>EMAIL : {user.email}</p>
                <p>MOBILE : {user.mobile}</p>
             </div>
-        </>
+        </div>
     )   
 }

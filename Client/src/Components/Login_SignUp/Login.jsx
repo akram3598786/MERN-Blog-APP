@@ -16,6 +16,8 @@ import { Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { useEffect } from "react";
 import Cookies from 'universal-cookie';
 import jwt_decode from "jwt-decode";
+import { Spinner } from '@chakra-ui/react'
+import { Progress } from '@chakra-ui/react'
 
 let obj = {
   email: "",
@@ -27,7 +29,6 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [doing, setdoing] = useState(false);
-  const [sucessLogin, setsuccessLogin] = useState(false);
   const [show, setShow] = React.useState(false);
 
   const handleshow = () => {
@@ -59,7 +60,9 @@ export default function Login() {
         }).catch((err) => {
           alert("Kindly register first !");
           console.log(err);
-        }).finally(() => setdoing(false));
+        }).finally(() => {
+          setdoing(false);
+        });
     }
   }
   const handleChange = (e) => {
@@ -72,18 +75,21 @@ export default function Login() {
   return (
     <div className="container">
       <div className="LoginMainDiv">
-        {sucessLogin ?
-          <Alert status='success' variant='solid'>
-            <AlertIcon />
-            Data uploaded to the server. Fire on!
-          </Alert> : null}
+        {doing ?
+          <Spinner
+          thickness='6px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        /> : null}
         <h1>Login Form</h1>
         <div id="LoginForm">
           <input className='Input' type="email" value={email} name="email" id="" placeholder="Email" onChange={handleChange} />
           <input className='Input' type={show ? 'text' : 'password'} value={password} name="password" placeholder="Password" onChange={handleChange} />
           <button style={{ marginTop: '-3px', alignSelf: 'flex-end', width: '50px', fontSize: '10px' }} onClick={handleshow} >{show ? 'Hide' : 'Show'}</button>
           <Button size='sm' onClick={() => handleSubmit()} colorScheme='blue'>Login</Button>
-          <p>If you don't have Account : <Link style={{ color: 'blue' }} to="/signup">Create Account</Link></p>
+          <p>If you don't have an account : <Link style={{ color: 'blue' }} to="/signup">Create Account</Link></p>
         </div>
       </div>
     </div>
