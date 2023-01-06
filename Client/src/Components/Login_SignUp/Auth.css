@@ -1,5 +1,4 @@
 
-
 #SignupDiv{
     display: flex;
     flex-direction: column;
@@ -76,7 +75,9 @@
     /* background: url("https://mcdn.wallpapersafari.com/medium/9/57/PdJiN3.jpg") no-repeat center center/cover; */
     /* background: url("https://mcdn.wallpapersafari.com/medium/18/3/voZ23G.jpg") no-repeat center center/cover; */
     /* background: url("https://mcdn.wallpapersafari.com/medium/41/98/bTovEQ.jpg") no-repeat center center/cover; */
-    background: url("https://mcdn.wallpapersafari.com/medium/88/13/1RiXrN.jpg") no-repeat center center/cover;
+    /* background: url("https://mcdn.wallpapersafari.com/medium/88/13/1RiXrN.jpg") no-repeat center center/cover; */
+    background: url("../../Assets/auth_background.jpg") no-repeat center center/cover;
+    background: url("https://mcdn.wallpapersafari.com/medium/67/23/AcFZpg.jpg") no-repeat center center/cover;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -97,9 +98,18 @@
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
     width: 60%;
     margin: auto;
-    margin-top: 5%;
+    margin-top: 7%;
     background-color: cadetblue;
     padding: 5% 0;
+    padding-top: 0;
+}
+.LoginMainDiv h1{
+    font-size: x-large;
+}
+
+.spinner{
+    margin-top: 2%;
+    height: 30px;
 }
 #LoginMainDiv h1{
     font-size: large;
@@ -156,4 +166,14 @@
     #LoginForm{
         width: 80%;
     }
+}
+
+.lastHeading{
+    margin-top: 1%;
+    color: white;
+    font-size: x-large;
+    font-weight: 10px;
+}
+.lastHeading>span{
+    font-size: 40px;
 }

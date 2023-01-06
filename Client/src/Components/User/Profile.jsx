@@ -3,8 +3,6 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";
-import Cookies from 'universal-cookie';
-import jwt_decode from "jwt-decode";
 import getLoggedUser from "../Utilities/GetLoggedUser";
 
 

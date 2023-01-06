@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 import getLoggedUser from "../Utilities/GetLoggedUser";
 import "./Blog.css";
+import { Button } from '@chakra-ui/react';
 
 
 export default function EditBlog() {
@@ -15,6 +16,7 @@ export default function EditBlog() {
     const [image, setimage] = useState([]);
     const [imageURL, setImageURL] = useState([]);
     const [linkImage, setlinkImageURL] = useState('');
+    const [doing, setdoing] = useState(false);
 
     const { blogId } = useParams();
 
@@ -45,6 +47,8 @@ export default function EditBlog() {
     }
 
     const handleUpdate = () => {
+        
+        setdoing(true);
         const loggedUser = getLoggedUser();
         let payload = {
             title: tit,
@@ -63,8 +67,10 @@ export default function EditBlog() {
                 else alert("Something wrong !");
             }).catch((err) => {
                 console.log(err);
-            });
+            }).finally(()=>setdoing(false));
     }
+
+
 
     const convertImgetoURL = () => {
         const newImageURLs = [];
@@ -79,7 +85,7 @@ export default function EditBlog() {
 
     return (
         <div className="blogcreation">
-            <h2>Edit Blog </h2>
+            {/* <h2>Edit Blog </h2> */}
             <div className="inputSec">
             <form>
                     <input className="title" type="text" name="" id="title" value={tit} onChange={(e) => settitle(e.target.value)} placeholder="Title" />
@@ -93,6 +99,14 @@ export default function EditBlog() {
                     <textarea type="text" name="" id="" value={des} onChange={(e) => setdes(e.target.value)} placeholder="Description" /> <br />
                 </form>
                 <button onClick={handleUpdate}>Post</button>
+                {/* {doing ? <Button
+                    isLoading
+                    loadingText='Submitting'
+                    colorScheme='teal'
+                    variant='outline'
+                >
+                    Submit
+                </Button> : <button onClick={handleUpdate}>Post</button>} */}
             </div>
         </div>
     )

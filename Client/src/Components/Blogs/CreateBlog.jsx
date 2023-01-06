@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 import getLoggedUser from "../Utilities/GetLoggedUser";
+import { Button } from '@chakra-ui/react';
 import "./Blog.css";
 
 
@@ -33,39 +34,36 @@ export default function CreateBlog() {
     const handlePost = () => {
         if (doing) {
             alert("Wait for some time !");
+        } else if (tit.length === 0 || des.length === 0) {
+            alert("Kindly complete your blog inputs !")
         } else {
             setdoing(true);
-            if (tit.length === 0 || des.length === 0) {
-                alert("Kindly complete your blog inputs !")
-            } else {
-                const loggedUser = getLoggedUser();
-
-                let payload = {
-                    title: tit,
-                    description: des,
-                    createdby: loggedUser._id,
-                    shortDesc: shortDesc,
-                    headerImage: linkImage.length > 0 ? linkImage : imageURL[0]
-                }
-                //  let url = `http://localhost:8080/post/${loggedUser._id}`;
-                let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}`;
-
-                const authAxios = EmbedJWTToken(url);
-                authAxios.post(url, payload).
-                    then((res) => {
-                        if (res.status === 201) {
-                            alert("Blog Posted");
-                            settitle("");
-                            setdes("");
-                            setlinkImageURL("");
-                            setshortDesc("");
-                            setImageURL([]);
-                        }
-                        else alert("Something wrong !");
-                    }).catch((err) => {
-                        console.log(err);
-                    }).finally(()=>setdoing(false));
+            const loggedUser = getLoggedUser();
+            let payload = {
+                title: tit,
+                description: des,
+                createdby: loggedUser._id,
+                shortDesc: shortDesc,
+                headerImage: linkImage.length > 0 ? linkImage : imageURL[0]
             }
+            //  let url = `http://localhost:8080/post/${loggedUser._id}`;
+            let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}`;
+
+            const authAxios = EmbedJWTToken(url);
+            authAxios.post(url, payload).
+                then((res) => {
+                    if (res.status === 201) {
+                        alert("Blog Posted");
+                        settitle("");
+                        setdes("");
+                        setlinkImageURL("");
+                        setshortDesc("");
+                        setImageURL([]);
+                    }
+                    else alert("Something wrong !");
+                }).catch((err) => {
+                    console.log(err);
+                }).finally(() => setdoing(false));
         }
     }
 
@@ -83,7 +81,7 @@ export default function CreateBlog() {
 
     return (
         <div className="blogcreation">
-            <h2>Create Blog </h2>
+            {/* <h2>Create Blog </h2> */}
             <div className="inputSec">
                 <form>
                     <input className="title" type="text" name="" id="title" value={tit} onChange={(e) => settitle(e.target.value)} placeholder="Title" />
@@ -96,7 +94,14 @@ export default function CreateBlog() {
                     {imageURL.map(imgsrc => <img src={imgsrc} />)}
                     <textarea type="text" name="" id="" value={des} onChange={(e) => setdes(e.target.value)} placeholder="Description" /> <br />
                 </form>
-                <button onClick={handlePost}>Post</button>
+                {doing ? <Button
+                    isLoading
+                    loadingText='Submitting'
+                    colorScheme='teal'
+                    variant='outline'
+                >
+                    Submit
+                </Button> : <button onClick={handlePost}>Post</button>}
             </div>
         </div>
     )

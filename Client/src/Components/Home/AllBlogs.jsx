@@ -29,7 +29,8 @@ export default function AllBlogs() {
  // <================ GET all blogs for searching out of all existing =================>
     const getAllBlogs=()=>{
         const loggedUser = getLoggedUser();
-        let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all`
+        let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all`;
+        
         const authAxios = EmbedJWTToken(url);
         authAxios.get(url).
             then((res) => {
@@ -101,7 +102,7 @@ export default function AllBlogs() {
             <div className="homaMainDiv">
                 <h2>All Exist Blogs</h2>
                 <div id="searchBar">
-                    <input type="search" value={searchStr} onChange={(e) => setsearchStr(e.target.value)} placeholder="Search Blog" /> <button onClick={handleSearch} >Search</button>
+                    <input type="search" style={{color:'black'}} value={searchStr} onChange={(e) => setsearchStr(e.target.value)} placeholder="Search Blog" /> <button onClick={handleSearch} >Search</button>
                 </div>
                 {
                     loading ? <ProgresSkelton/> :

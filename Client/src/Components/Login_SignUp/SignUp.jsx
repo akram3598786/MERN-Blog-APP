@@ -12,6 +12,7 @@ let obj = {
   password: ""
 }
 
+// Post data to database in terms of user registration
 export default function SignUp() {
   const [formData, setformData] = useState(obj);
   const navigate = useNavigate();
