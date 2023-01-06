@@ -21,22 +21,24 @@ User also can see the profile details.
 <li>VS Code </li>
 
 
-# Registration 
-![reg](https://user-images.githubusercontent.com/57341544/210092396-f23ef8ab-3a56-40d2-929a-18c56eb0d67b.png)
+# Login Page 
+![blog-app](https://user-images.githubusercontent.com/57341544/210950539-00d70992-ee07-4194-b162-f3d8f0cadc1b.png)
+
 
 # All Blogs Page
-![homelarge](https://user-images.githubusercontent.com/57341544/209924136-c4f75d7c-45b0-4873-b25e-d467b92567a7.png)
+![blog-app-home](https://user-images.githubusercontent.com/57341544/210950741-ebdd1c5c-516e-4440-bb7a-664ed3a1f50b.png)
 
 
 # Blog View Page
-![blog view](https://user-images.githubusercontent.com/57341544/210167418-b1e6296f-d832-4263-8126-dd605adb1d93.png)
+![blog view](https://user-images.githubusercontent.com/57341544/210951130-51685621-c3e8-48dd-840c-84f8585081e6.png)
+
 
 # User Profile Page
-![profile](https://user-images.githubusercontent.com/57341544/204268691-aa91ed2b-21df-4ff4-9389-01367a68ea70.png)
+![profile-2](https://user-images.githubusercontent.com/57341544/210951457-57721329-679c-4ff2-85bf-2c06894c1afe.png)
 
 
 # Blog Create Page
-![create](https://user-images.githubusercontent.com/57341544/210167430-6c28f299-2183-4145-b4d4-fde7df116399.png)
+![create](https://user-images.githubusercontent.com/57341544/210951699-656b2d06-2694-4a06-8967-5499f2b3f4c5.png)
 
 
 # Getting Started with Create React App
