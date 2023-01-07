@@ -7,6 +7,8 @@ import { Button } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { Link } from "react-router-dom";
 import getLoggedUser from "../Utilities/GetLoggedUser";
+import formateDate from "../Utilities/SetDate";
+import moment from 'moment';
 
 
 export default function BlogDetails() {
@@ -23,22 +25,6 @@ export default function BlogDetails() {
         setloading(true);
         getBlog();
     }, [])
-
-    const setDate = (createdAt, updatedAt) => {
-        let Credate = createdAt.split("T")[0].split(".")[0];
-        let CreTime = createdAt.split("T")[1].split(".")[0];
-        let Update = updatedAt.split("T")[0].split(".")[0];
-        let UpdTime = updatedAt.split("T")[1].split(".")[0];
-
-        const dt = {
-            Credate: Credate,
-            CreTime: CreTime,
-            Update: Update,
-            UpdTime: UpdTime
-        }
-        setdates(dt);
-    }
-
     // Updating publish flag true after blog published =============
 
     const handleUpdate = () => {
@@ -67,7 +53,7 @@ export default function BlogDetails() {
         const authAxios = EmbedJWTToken(url)
         authAxios.get(url).
             then((res) => {
-                setDate(res.data.createdAt, res.data.updatedAt);
+                setdates(formateDate(res.data.createdAt, res.data.updatedAt));
                 setblog(res.data);
             }).
             catch((err) => {
@@ -88,7 +74,10 @@ export default function BlogDetails() {
             const loggedUser = getLoggedUser();
             let url = `http://localhost:8080/publish/${loggedUser._id}`;
             //let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}`;
-
+           let curDate = moment().format('lll');
+            blog.avatar = loggedUser.avatar;
+            blog.curDate = curDate;
+            
             const authAxios = EmbedJWTToken(url);
             authAxios.post(url, blog).
                 then((res) => {
@@ -100,6 +89,7 @@ export default function BlogDetails() {
                 }).catch((err) => {
                     console.log(err);
                 }).finally(() => setpublishing(false));
+                
         }
     }
 

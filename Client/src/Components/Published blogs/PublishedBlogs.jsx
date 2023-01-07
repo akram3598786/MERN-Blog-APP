@@ -14,6 +14,8 @@ import { AddIcon } from '@chakra-ui/icons';
 
 export default function PublishedBlogs() {
 
+
+
     const [loading, setloading] = useState(false);
     const [blogs, setallblogs] = useState([]);
     const [error, seterror] = useState(false);
@@ -40,10 +42,10 @@ export default function PublishedBlogs() {
                 seterror(true);
             }).finally(() => setloading(false))
     }
-    console.log(blogs)
+
     return (
         <div id="MainDiv">
-            <h1 style={{ fontSize: '1.4rem',color:'white',fontWeight:'bolder' }}>All Published blogs</h1>
+            <h1 style={{ fontSize: '1.4rem',color:'white',fontWeight:'bolder',textDecoration:'underline' }}>All Published blogs</h1>
             <div id="headerLinks">
                 <Link to={`/create`}>
                     <Tag size='lg' variant='subtle' colorScheme='cyan'>
@@ -54,7 +56,7 @@ export default function PublishedBlogs() {
             </div>
             {/* <hr /> */}
             <div id="container">
-                {loading ? <BlogSkeleton /> : error ? <h1 color="red">Something went Wrong</h1> :
+                {loading ? <BlogSkeleton /> : error ? <h1 style={{color:"red",textAlign:'center',width:'100%'}}>Something went Wrong</h1> :
                     <>
                         {
                             blogs.map((blog) => {
