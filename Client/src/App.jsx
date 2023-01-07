@@ -9,24 +9,26 @@ import BlogDetails from './Components/Blogs/BlogDetails';
 import CreateBlog from './Components/Blogs/CreateBlog';
 import Profile from './Components/User/Profile';
 import EditBlog from './Components/Blogs/EditBlog';
+import PublishedBlogs from './Components/Published blogs/PublishedBlogs';
 
 
 function App() {
-   const isAuth = useSelector((store) => store.isAuth.isAuth);
+  const isAuth = useSelector((store) => store.isAuth.isAuth);
 
   return (
     <div className="App">
       <NavBar />
-    
-      <Routes>
-         <Route path='/home' element={<Homepage />}></Route>              {/* Private Route */}
-         <Route path='/post/:blogId' element={<BlogDetails />}></Route>   {/* Private Route */}
-         <Route path='/post/edit/:blogId' element={<EditBlog />}></Route> {/* Private Route */}
-         <Route path='/create' element={<CreateBlog/> }></Route>          {/* Private Route */}
-         <Route path='/profile' element={<Profile/> }></Route>            {/* Private Route */}
 
-        <Route path='/' element={<Login />}></Route>                      {/* Public Route */}
-        <Route path='/signup' element={<SignUp />}></Route>               {/* Public Route */}
+      <Routes>
+        <Route path='/dashboard' element={<Homepage />}></Route>         {/* Private Route */}
+        <Route path='/post/:blogId' element={<BlogDetails />}></Route>   {/* Private Route */}
+        <Route path='/post/edit/:blogId' element={<EditBlog />}></Route> {/* Private Route */}
+        <Route path='/create' element={<CreateBlog />}></Route>          {/* Private Route */}
+        <Route path='/profile' element={<Profile />}></Route>            {/* Private Route */}
+
+        <Route path='/login' element={<Login />}></Route>                {/* Public Route */}
+        <Route path='/signup' element={<SignUp />}></Route>              {/* Public Route */}
+        <Route path='/' element={<PublishedBlogs />}></Route>            {/* Public Route */}
       </Routes>
     </div>
   );

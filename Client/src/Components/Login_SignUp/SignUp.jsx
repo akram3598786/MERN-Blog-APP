@@ -31,13 +31,13 @@ export default function SignUp() {
       alert("Wait for some time !");
     } else {
       setdoing(true);
-      // let url = "http://localhost:8080/auth/signup";
-      let url = "https://mern-app-blog-ver01.onrender.com/auth/signup";
+       let url = "http://localhost:8080/auth/signup";
+      // let url = "https://mern-app-blog-ver01.onrender.com/auth/signup";
       axios.post(url, formData).
         then((res) => {
           if (res.status === 201) {
             alert(`${name} registred successfully`);
-            navigate("/");
+            navigate("/login");
           }
         }).catch((err) => {
           console.log(err);
@@ -65,7 +65,7 @@ export default function SignUp() {
         <label htmlFor=""> <input type="password" name="password" value={password} onChange={handeChange} placeholder="PASSWORD" /></label>
       </form>
       <button id="submitBtn" onClick={handlsSubmit}>Submit</button>
-      <p>Already have an account : <Link style={{ color: 'blue', fontWeight: '' }} to="/">Sign In</Link></p>
+      <p>Already have an account : <Link style={{ color: 'blue', fontWeight: '' }} to="/login">Sign In</Link></p>
     </div>
     </div>
   );

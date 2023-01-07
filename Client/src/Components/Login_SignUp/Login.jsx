@@ -32,6 +32,7 @@ export default function Login() {
     setShow((prev) => (!prev));
   }
 
+  // Post data to for verification at backend
   const handleSubmit = () => {
     if (formData.email.length == 0 || formData.password.length == 0) {
       alert("kindly fill all field !")
@@ -39,8 +40,8 @@ export default function Login() {
       alert("Wait for some time !");
     } else {
       setdoing(true);
-      //  let url = "http://localhost:8080/auth/login";
-      let url = "https://mern-app-blog-ver01.onrender.com/auth/login";
+        let url = "http://localhost:8080/auth/login";
+      // let url = "https://mern-app-blog-ver01.onrender.com/auth/login";
       axios.post(url, formData).
         then((res) => {
           if (res.status === 201) {
@@ -51,7 +52,7 @@ export default function Login() {
               expires: new Date(decoded.exp * 1000)
             });
             dispatch(isAuthHandler(true));
-            navigate("/home");
+            navigate("/dashboard");
           } else {
             alert("Kindly register first    !");
           }

@@ -29,7 +29,8 @@ export default function AllBlogs() {
  // <================ GET all blogs for searching out of all existing =================>
     const getAllBlogs=()=>{
         const loggedUser = getLoggedUser();
-        let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all`;
+        let url = `http://localhost:8080/post/${loggedUser._id}/all`;
+        // let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all`;
         
         const authAxios = EmbedJWTToken(url);
         authAxios.get(url).
@@ -49,8 +50,8 @@ export default function AllBlogs() {
     const getBlogsforPage = () => {
         const loggedUser = getLoggedUser();
 
-        // let url = `http://localhost:8080/post/${loggedUser._id}/all?_limit=6&&page=${page-1}`;
-        let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all?_limit=6&&page=${page - 1}`;
+         let url = `http://localhost:8080/post/${loggedUser._id}/all?_limit=5&&page=${page-1}`;
+       // let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all?_limit=6&&page=${page - 1}`;
 
         const authAxios = EmbedJWTToken(url);
         authAxios.get(url).
@@ -69,8 +70,8 @@ export default function AllBlogs() {
 
     // <=================== DELETE a particular blog ===================>
     const handleDelete = (id) => {
-        // let url = `http://localhost:8080/post/${id}`;
-         let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
+         let url = `http://localhost:8080/post/${id}`;
+         //let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
 
         const authAxios = EmbedJWTToken(url);
         authAxios.delete(url).

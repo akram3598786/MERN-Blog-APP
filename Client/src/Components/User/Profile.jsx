@@ -13,7 +13,7 @@ export default function Profile() {
     const [user, setuser] = useState({});
     
     useEffect(() => {
-        if(!isAuth) navigate("/");
+        if(!isAuth) navigate("/login");
         getUserData();
     }, []);
     

@@ -24,6 +24,7 @@
 
 .navLinks>* {
     color: white;
+    color: rgba(255, 254, 254, 0.877);
     text-decoration: none;
 }
 

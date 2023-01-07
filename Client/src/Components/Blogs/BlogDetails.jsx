@@ -6,6 +6,7 @@ import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 import { Button } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { Link } from "react-router-dom";
+import getLoggedUser from "../Utilities/GetLoggedUser";
 
 
 export default function BlogDetails() {
@@ -15,6 +16,8 @@ export default function BlogDetails() {
     const [blog, setblog] = useState({});
     const [dates, setdates] = useState({});
     const { blogId } = useParams();
+    const [publishing, setpublishing] = useState(false);
+    const [published,setpublished] = useState(false)
 
     useEffect(() => {
         setloading(true);
@@ -35,9 +38,31 @@ export default function BlogDetails() {
         }
         setdates(dt);
     }
+
+    // Updating publish flag true after blog published =============
+
+    const handleUpdate = () => {
+        const loggedUser = getLoggedUser();
+        let payload = {
+           published : true
+        }
+         let url = `http://localhost:8080/post/edit/${blogId}`;
+       // let url = `https://mern-app-blog-ver01.onrender.com/post/edit/${blogId}`;
+
+        const authAxios = EmbedJWTToken(url);
+        authAxios.patch(url, payload).
+            then((res) => {
+                if (res.status === 200) setpublished(true);
+                else alert("Something wrong !");
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
+
+    // Getting Blog to display =====================================
     const getBlog = () => {
-        // let url = `http://localhost:8080/post/${blogId}`;
-        let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
+        let url = `http://localhost:8080/post/${blogId}`;
+        // let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
 
         const authAxios = EmbedJWTToken(url)
         authAxios.get(url).
@@ -52,6 +77,33 @@ export default function BlogDetails() {
             finally((res) => setloading(false));
     }
 
+    // Publishing Blog ======================================
+
+    const handlePublish = () => {
+        if (publishing) {
+            alert("Wait for some time !");
+        }
+        else {
+            setpublishing(true);
+            const loggedUser = getLoggedUser();
+            let url = `http://localhost:8080/publish/${loggedUser._id}`;
+            //let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}`;
+
+            const authAxios = EmbedJWTToken(url);
+            authAxios.post(url, blog).
+                then((res) => {
+                    if (res.status === 201) {
+                        handleUpdate();
+                        alert("Blog Published Successfully");
+                    }
+                    else alert("Something wrong !");
+                }).catch((err) => {
+                    console.log(err);
+                }).finally(() => setpublishing(false));
+        }
+    }
+
+
     //console.log(blogId);
     return (
         <div className="blogViewMainDiv">
@@ -61,7 +113,7 @@ export default function BlogDetails() {
                         error ? <h1>Error : Something Went Wrong</h1> :
                             <>
                                 <Button rightIcon={<ArrowForwardIcon />} className='editBlogLink' colorScheme='white' variant='outline'>
-                                <Link to={`/post/edit/${blog._id}`}>Edit this</Link> 
+                                    <Link to={`/post/edit/${blog._id}`}>Edit this</Link>
                                 </Button>
                                 <div className="headerBlog">
                                     <h1>{blog.title}</h1>
@@ -75,6 +127,14 @@ export default function BlogDetails() {
                                 <p>{blog.description}</p>
                             </>
                 }
+                {publishing ? <Button
+                    isLoading
+                    loadingText='Submitting'
+                    colorScheme='teal'
+                    variant='outline'
+                >
+                    Submit
+                </Button> : <Button colorScheme='red' marginTop='14px' disabled={blog.published ==true || published ? true : false} onClick={handlePublish}>{blog.published ==true || published ? "Published": "Publish Post"}</Button>}
 
             </div>
         </div>

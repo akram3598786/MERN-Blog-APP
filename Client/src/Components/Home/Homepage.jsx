@@ -9,14 +9,14 @@ export default function Homepage(){
     
     const isAuth = useSelector((store) => store.isAuth.isAuth);
     const navigate = useNavigate();
-    
+    console.log(isAuth)
     useEffect(()=>{
-        if(!isAuth) navigate("/");
+        if(!isAuth) navigate("/login");
     },[]);
 
     return(
         <div id="blogsDiv">
-         <AllBlogs/>
+        {isAuth ? <AllBlogs/> : <navigate to="/login/>"/>}
         </div>
     )
 }

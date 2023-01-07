@@ -195,7 +195,7 @@ textarea {
 }
 
 #blogView img {
-    width: 70%;
+    width: 73%;
     margin: auto;
     height: 370px;
 }
@@ -209,8 +209,14 @@ textarea {
         color: white;
     }
     .editBlogLink{
-       
         left: 30%;
+    }
+    #blogView{
+        padding: 10px 13px;
+    }
+    #blogView img{
+        width: 100%;
+        height: 290px;
     }
 }
 

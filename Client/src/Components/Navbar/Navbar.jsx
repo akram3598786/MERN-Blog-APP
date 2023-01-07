@@ -13,7 +13,7 @@ export default function NavBar() {
     const cookies = new Cookies();
     cookies.remove("AccessToken");
     dispatch(isAuthHandler(false));
-    navigate("/");
+    navigate("/login");
   }
 
   // console.log(document.location.pathname);
@@ -23,15 +23,16 @@ export default function NavBar() {
       <nav className="navbarDiv">
 
         <div id="leftNav" className="navLinks">
-          <Link to="/home">Home</Link>
+          <Link to="/">Home</Link>
+          <Link to="/dashboard">Dashboard</Link>
           <Link to="/profile">Profile</Link>
-          <Link to="/create">Create blog</Link>
+          <Link to="/create">Write</Link>
         </div>
 
         {
-          document.location.pathname === "/" ?
-            null
-            :
+          // document.location.pathname === "/" ?
+          //   null
+          //   :
             <div id="rightNav" className="navLinks">
               {isAuth ? <button id="SignOutBtn" onClick={handleSignout}>Sign Out</button> : null}
             </div>

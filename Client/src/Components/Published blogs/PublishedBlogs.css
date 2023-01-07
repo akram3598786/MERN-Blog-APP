@@ -1,0 +1,63 @@
+/* All Published Blogs CSS  */
+#MainDiv {
+    background-color: cadetblue;
+}
+
+#headerLinks {
+    display: inline;
+    position: absolute;
+    left: 5%;
+    top: 10%;
+    cursor: pointer;
+}
+
+#headerLinks>* :hover {
+    background-color: rgb(93, 214, 93);
+}
+
+.BlogSkelDiv {}
+
+.BlogSkelDiv>div {
+    width: 50%;
+    margin: auto;
+}
+
+#container {
+    width: 80%;
+    margin: auto;
+    padding: 5px 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 4fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 15px;
+    margin-top: 20px;
+}
+
+#container>* {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+@media screen and (max-width : 700px) {
+    #container {
+        width: 97%;
+        grid-template-columns: repeat(1, 12fr);
+        grid-row-gap: 10px;
+        margin-top: 12%;
+    }
+
+    #headerLinks {
+        top: 21%;
+    }
+}
+
+
+
+/* Blog Crad CSS  */
+.BlogCard {
+    background-color: brown;
+}
+
+.Card {
+    background-color: brown;
+}
