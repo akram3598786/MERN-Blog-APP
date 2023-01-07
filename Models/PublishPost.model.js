@@ -7,7 +7,9 @@ const PublishPostSchema = new mongoose.Schema(
         user:{type : String},
         createdby : {type : String, require : true},
         shortDesc : {type : String},
-        headerImage : {type : String}
+        avatar : {type : String},
+        headerImage : {type : String},
+        curDate : {type : String}
     },{
         timestamps : true,
         versionKey : false

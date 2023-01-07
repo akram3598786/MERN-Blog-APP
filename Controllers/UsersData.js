@@ -2,9 +2,6 @@ const express = require("express");
 const UserModel = require("../Models/User.model");
 const UserRouter = express.Router();
 
-UserRouter.get("/", getAllUsers);
-UserRouter.get("/:userId", getUserData);
-
 async function getAllUsers(req, res){
     try{
         let users = await UserModel.find();
@@ -34,5 +31,24 @@ async function getUserData(req, res){
         res.send(err.message);
     }
 }
+
+    async function EditUserdetails(req,res){
+        try {
+            let { userId } = req.params;
+            let payload = req.body;
+            let user = await UserModel.findByIdAndUpdate(userId, payload,
+                { new: true });
+            // console.log(post)
+            if (user) res.status(201).send("Profile Edited");
+            else res.status(400).send("User not updated !");
+        } catch (err) {
+            res.send(err.message);
+        }
+    }
+
+    UserRouter.get("/", getAllUsers);
+    UserRouter.get("/:userId", getUserData);
+    UserRouter.patch("/edit/:userId",EditUserdetails);
+
 
 module.exports = UserRouter;

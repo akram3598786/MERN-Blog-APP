@@ -25,7 +25,7 @@ async function publishPost(req, res){
 async function getPublishedPost(req, res){
     try {
 
-        let posts = await PublishPostModel.find().sort({updatedAt : -1});  
+        let posts = await PublishPostModel.find().sort({curDate : -1});  
         let totalCount = await PublishPostModel.find().count();
 
         if (posts.length > 0) {
