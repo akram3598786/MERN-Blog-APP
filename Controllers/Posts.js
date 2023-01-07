@@ -62,6 +62,7 @@ async function getSinglePost(req, res) {
     }
 }
 
+
 async function EditPost(req, res) {
     try {
         let { postId } = req.params;
@@ -87,12 +88,10 @@ async function deletePost(req, res) {
     }
 }
 
-
-
 PostRouter.post("/:userId", CreatePost);
 PostRouter.patch("/edit/:postId", EditPost);
 PostRouter.get("/:userId/all", getALLposts);
-PostRouter.get("/:postId", getSinglePost);
+PostRouter.get("/:ostId",getSinglePost);
 PostRouter.delete("/:postId", deletePost);
 
 
