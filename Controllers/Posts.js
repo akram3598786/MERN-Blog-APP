@@ -1,6 +1,7 @@
 const PostModel = require("../Models/Post.model");
 const express = require("express");
 const UserModel = require("../Models/User.model");
+
 const PostRouter = express.Router();
 
 async function CreatePost(req, res) {
@@ -87,11 +88,13 @@ async function deletePost(req, res) {
 }
 
 
+
 PostRouter.post("/:userId", CreatePost);
 PostRouter.patch("/edit/:postId", EditPost);
 PostRouter.get("/:userId/all", getALLposts);
 PostRouter.get("/:postId", getSinglePost);
 PostRouter.delete("/:postId", deletePost);
+
 
 
 module.exports = PostRouter;

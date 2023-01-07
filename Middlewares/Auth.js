@@ -1,6 +1,5 @@
 const { Verify } = require("../Utilities/JWT.js");
 
-
 async function auth(req, res, next) {
 
   // const token = req.headers

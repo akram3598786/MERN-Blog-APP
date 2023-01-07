@@ -6,13 +6,15 @@ const UserRouter = require("./Controllers/UsersData.js");
 const AuthRouter = require("./Controllers/Authentication.js");
 const cors = require("cors");
 const auth = require("./Middlewares/Auth.js");
+const PublishPostRouter = require("./Controllers/PublishPosts.js");
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-app.use("/auth", AuthRouter);
-app.use(auth) // Authourization purpose
+app.use("/auth", AuthRouter); // Authentication
+app.use("/publish", PublishPostRouter); // For published blogs
+app.use(auth) // Authourization purpose ===>
 
 app.use("/post", PostRouter);
 app.use("/user", UserRouter);
