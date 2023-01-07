@@ -31,8 +31,8 @@ export default function EditBlog() {
 
     // Get Data for editing
     function getData() {
-         let url = `http://localhost:8080/post/${blogId}`;
-        //let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
+       //  let url = `http://localhost:8080/post/${blogId}`;
+        let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
 
         const authAxios = EmbedJWTToken(url);
         authAxios.get(url).
@@ -59,8 +59,8 @@ export default function EditBlog() {
             shortDesc: shortDesc,
             headerImage: linkImage.length > 0 ? linkImage : imageURL[0]
         }
-         let url = `http://localhost:8080/post/edit/${blogId}`;
-       // let url = `https://mern-app-blog-ver01.onrender.com/post/edit/${blogId}`;
+       //  let url = `http://localhost:8080/post/edit/${blogId}`;
+        let url = `https://mern-app-blog-ver01.onrender.com/post/edit/${blogId}`;
 
         const authAxios = EmbedJWTToken(url);
         authAxios.patch(url, payload).

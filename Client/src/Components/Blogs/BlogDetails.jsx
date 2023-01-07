@@ -32,8 +32,8 @@ export default function BlogDetails() {
         let payload = {
            published : true
         }
-         let url = `http://localhost:8080/post/edit/${blogId}`;
-       // let url = `https://mern-app-blog-ver01.onrender.com/post/edit/${blogId}`;
+        // let url = `http://localhost:8080/post/edit/${blogId}`;
+        let url = `https://mern-app-blog-ver01.onrender.com/post/edit/${blogId}`;
 
         const authAxios = EmbedJWTToken(url);
         authAxios.patch(url, payload).
@@ -47,8 +47,8 @@ export default function BlogDetails() {
 
     // Getting Blog to display =====================================
     const getBlog = () => {
-        let url = `http://localhost:8080/post/${blogId}`;
-        // let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
+        //let url = `http://localhost:8080/post/${blogId}`;
+         let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
 
         const authAxios = EmbedJWTToken(url)
         authAxios.get(url).
@@ -72,8 +72,8 @@ export default function BlogDetails() {
         else {
             setpublishing(true);
             const loggedUser = getLoggedUser();
-            let url = `http://localhost:8080/publish/${loggedUser._id}`;
-            //let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}`;
+           // let url = `http://localhost:8080/publish/${loggedUser._id}`;
+            let url = `https://mern-app-blog-ver01.onrender.com/publish/${loggedUser._id}`;
            let curDate = moment().format('lll');
             blog.avatar = loggedUser.avatar;
             blog.curDate = curDate;

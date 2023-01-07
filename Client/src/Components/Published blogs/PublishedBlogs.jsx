@@ -29,7 +29,8 @@ export default function PublishedBlogs() {
     // <================ GET all Published blogs for display=================>
     const getPublishedBlogs = () => {
 
-        let url = `http://localhost:8080/publish`;
+        // let url = `http://localhost:8080/publish`;
+        let url = `https://mern-app-blog-ver01.onrender.com/publish`;
 
         axios.get(url).
             then((res) => {
