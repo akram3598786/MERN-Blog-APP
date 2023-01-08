@@ -53,7 +53,9 @@ async function getALLposts(req, res) {
 async function getSinglePost(req, res) {
     try {
         let { postId } = req.params;
+        console.log(postId)
         let post = await PostModel.findById(postId);
+        console.log(post)
         if (post) res.status(200).send(post);
         else res.status(404).send("Post not found !");
     }
@@ -91,7 +93,7 @@ async function deletePost(req, res) {
 PostRouter.post("/:userId", CreatePost);
 PostRouter.patch("/edit/:postId", EditPost);
 PostRouter.get("/:userId/all", getALLposts);
-PostRouter.get("/:ostId",getSinglePost);
+PostRouter.get("/:postId",getSinglePost);
 PostRouter.delete("/:postId", deletePost);
 
 
