@@ -2,6 +2,7 @@ const express = require("express");
 const UserModel = require("../Models/User.model.js");
 const { Sign } = require("../Utilities/JWT.js");
 const AuthRouter = express.Router();
+const bcrypt = require('bcrypt');
 
 
 AuthRouter.post("/signup", SignUp);
@@ -19,14 +20,16 @@ async function SignUp(req, res) {
                 message: 'Email is already registered.'
             })
         } else {
+            let salt = await bcrypt.genSalt(10);
+            let hashedPassword = await bcrypt.hash(userData.password,salt);
+            userData.password = hashedPassword;
             let user = await UserModel.create(userData);
             user = user.toJSON();
             delete user.password;
             return res.status(201).send({
                 status: 'success',
-                message: 'Account has been created.',
-                data: user
-            })
+                message: 'Account has been created.'
+            });
         }
 
     }
@@ -43,19 +46,21 @@ async function Login(req, res) {
 
     try {
         const payload = req.body;
-        let foundUser = await UserModel.findOne(payload);
-        foundUser = foundUser.toJSON();;
-        delete foundUser.password;
-        if (foundUser) {
+        let foundUser = await UserModel.findOne({email : payload.email});
+        if(!foundUser) return res.status(404).send("User not registered");
+        foundUser = foundUser.toJSON();
+        const validatedPass = await bcrypt.compare(payload.password,foundUser.password);
+        if (validatedPass){
             const token = Sign(foundUser);
+            delete foundUser.password;
             res.status(201).send({
                 message: `${foundUser.name} logged in successfully`,
                 token: token,
                 user: foundUser
             })
+        }else{
+            res.status(400).send("Wrong Password");
         }
-        else res.status(404).send("User not registered");
-
     }
     catch (err) {
         res.status(500).send(err.message)

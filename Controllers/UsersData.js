@@ -9,7 +9,7 @@ async function getAllUsers(req, res){
         if(users.length > 0){
             res.status(200).send(users);
         }else{
-            res.send("No user exist yet !");
+            res.status(400).send("No user exist yet !");
         }
     }
     catch(err){

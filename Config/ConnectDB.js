@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Mongodb = require("mongodb");
 
 async function ConnectDB(req, res){
-    //let url =  "mongodb://127.0.0.1:27017/MERN-APP";
+    // let url =  "mongodb://127.0.0.1:27017/MERN-APP";
     let url =  process.env.MONGODB_URI;
 
   return new Promise((resolve, reject)=>{
@@ -16,6 +16,13 @@ async function ConnectDB(req, res){
     })
   })
 }
+
+
+
+
+
+
+
   // await ConnectMultiple(); NOTE :  get All present databases
 /*
 function  ConnectMultiple(){

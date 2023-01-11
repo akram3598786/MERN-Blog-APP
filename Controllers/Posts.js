@@ -53,9 +53,9 @@ async function getALLposts(req, res) {
 async function getSinglePost(req, res) {
     try {
         let { postId } = req.params;
-        console.log(postId)
+        // console.log(postId)
         let post = await PostModel.findById(postId);
-        console.log(post)
+        // console.log(post)
         if (post) res.status(200).send(post);
         else res.status(404).send("Post not found !");
     }
