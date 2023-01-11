@@ -5,5 +5,7 @@ export default function getLoggedUser(){
     const cookie = new Cookies();
     const token = cookie.get("AccessToken");
     let loggedUser =  jwt_decode(token);
+
     return loggedUser;
 }
+

@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 import getLoggedUser from "../Utilities/GetLoggedUser";
 import "./Blog.css";
-import { Button } from '@chakra-ui/react';
 
 
 export default function EditBlog() {
@@ -91,7 +90,7 @@ export default function EditBlog() {
             <div className="inputSec">
             <form>
                     <input className="title" type="text" name="" id="title" value={tit} onChange={(e) => settitle(e.target.value)} placeholder="Title" />
-                    <textarea  className="shortDesc" type="text" maxlength="160" name="" id="title" value={shortDesc} onChange={(e) => setshortDesc(e.target.value)} placeholder="Blog Header" />
+                    <textarea  className="shortDesc" type="text" maxlength="190" name="" id="title" value={shortDesc} onChange={(e) => setshortDesc(e.target.value)} placeholder="Blog Header" />
                     <div>
                     <input type="file" multiple accept="image/*" onChange={hangleImageUpload}/>
                     <p style={{fontSize:'20px',fontWeight:'18'}}>OR</p>

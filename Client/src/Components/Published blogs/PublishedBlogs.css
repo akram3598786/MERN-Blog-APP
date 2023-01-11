@@ -1,6 +1,7 @@
 /* All Published Blogs CSS  */
 #MainDiv {
     background-color: cadetblue;
+    /* height: 100%; */
 }
 
 #headerLinks {
@@ -47,7 +48,7 @@
     }
 
     #headerLinks {
-        top: 21%;
+        top: 20%;
     }
 }
 

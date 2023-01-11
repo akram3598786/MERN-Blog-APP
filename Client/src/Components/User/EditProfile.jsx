@@ -4,6 +4,7 @@ import { PhoneIcon, AttachmentIcon, EditIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import getLoggedUser from '../Utilities/GetLoggedUser';
 import EmbedJWTToken from '../EmbedToRequest/EmbedJWTToken';
+import Cookies from 'universal-cookie';
 
 export default function EditProfile({userdetails,upadteduser,setShowEditForm}) {
 
@@ -30,6 +31,8 @@ export default function EditProfile({userdetails,upadteduser,setShowEditForm}) {
                 then((res) => {
                     if (res.status === 201){ 
                         upadteduser(payload);
+                        const cookies = new Cookies();
+                        cookies.set("loggedUser",payload);
                         setShowEditForm(false);
                     }
                     else alert("Something wrong !");

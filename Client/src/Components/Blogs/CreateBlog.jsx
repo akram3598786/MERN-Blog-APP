@@ -47,7 +47,7 @@ export default function CreateBlog() {
                 shortDesc: shortDesc,
                 headerImage: linkImage.length > 0 ? linkImage : imageURL[0]
             }
-             // let url = `http://localhost:8080/post/${loggedUser._id}`;
+            // let url = `http://localhost:8080/post/${loggedUser._id}`;
             let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}`;
 
             const authAxios = EmbedJWTToken(url);
@@ -86,7 +86,7 @@ export default function CreateBlog() {
             <div className="inputSec">
                 <form>
                     <input className="title" type="text" name="" id="title" value={tit} onChange={(e) => settitle(e.target.value)} placeholder="Title" />
-                    <textarea className="shortDesc" type="text" maxlength="160" name="" id="title" value={shortDesc} onChange={(e) => setshortDesc(e.target.value)} placeholder="Blog Header" />
+                    <textarea className="shortDesc" type="text" maxlength="190" name="" id="title" value={shortDesc} onChange={(e) => setshortDesc(e.target.value)} placeholder="Blog Header" />
                     <div>
                         <input type="file" multiple accept="image/*" onChange={hangleImageUpload} />
                         <p style={{ fontSize: '20px', fontWeight: '18' }}>OR</p>

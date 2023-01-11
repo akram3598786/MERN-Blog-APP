@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 // import moment from 'moment';
 import { Button } from '@chakra-ui/react';
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import getLoggedUser from "../Utilities/GetLoggedUser";
 import formateDate from "../Utilities/SetDate";
 import moment from 'moment';
+import { useSelector } from "react-redux";
 
 
 export default function BlogDetails() {
@@ -19,12 +20,17 @@ export default function BlogDetails() {
     const [dates, setdates] = useState({});
     const { blogId } = useParams();
     const [publishing, setpublishing] = useState(false);
-    const [published,setpublished] = useState(false)
+    const [published,setpublished] = useState(false);
+    const isAuth = useSelector((store) => store.isAuth.isAuth);
+    const {state} = useLocation();
 
     useEffect(() => {
+        // console.log("path ",state);
         setloading(true);
         getBlog();
     }, [])
+
+    
     // Updating publish flag true after blog published =============
 
     const handleUpdate = () => {
@@ -47,11 +53,11 @@ export default function BlogDetails() {
 
     // Getting Blog to display =====================================
     const getBlog = () => {
-        //let url = `http://localhost:8080/post/${blogId}`;
-         let url = `https://mern-app-blog-ver01.onrender.com/post/${blogId}`;
-
-        const authAxios = EmbedJWTToken(url)
-        authAxios.get(url).
+       // let url = `http://localhost:8080/public/${blogId}`;
+         let url = `https://mern-app-blog-ver01.onrender.com/public/${blogId}`;
+     
+        // const authAxios = EmbedJWTToken(url)
+        axios.get(url).
             then((res) => {
                 setdates(formateDate(res.data.createdAt, res.data.updatedAt));
                 setblog(res.data);
@@ -75,11 +81,21 @@ export default function BlogDetails() {
            // let url = `http://localhost:8080/publish/${loggedUser._id}`;
             let url = `https://mern-app-blog-ver01.onrender.com/publish/${loggedUser._id}`;
            let curDate = moment().format('lll');
-            blog.avatar = loggedUser.avatar;
-            blog.curDate = curDate;
-            
+           
+           let toPublishBlog={
+             title : blog.title,
+             shortDesc : blog.shortDesc,
+             description : blog.description,
+             avatar : loggedUser.avatar,
+             curDate : curDate,
+             headerImage : blog.headerImage,
+             createdby : blog.createdby,
+             user : loggedUser.name
+           }
+
+            //  console.log(toPublishBlog)
             const authAxios = EmbedJWTToken(url);
-            authAxios.post(url, blog).
+            authAxios.post(url, toPublishBlog).
                 then((res) => {
                     if (res.status === 201) {
                         handleUpdate();
@@ -88,8 +104,7 @@ export default function BlogDetails() {
                     else alert("Something wrong !");
                 }).catch((err) => {
                     console.log(err);
-                }).finally(() => setpublishing(false));
-                
+                }).finally(() => setpublishing(false));     
         }
     }
 
@@ -102,9 +117,9 @@ export default function BlogDetails() {
                     loading ? <h1>Loading...</h1> :
                         error ? <h1>Error : Something Went Wrong</h1> :
                             <>
-                                <Button rightIcon={<ArrowForwardIcon />} className='editBlogLink' colorScheme='white' variant='outline'>
+                               { state ?<Button rightIcon={<ArrowForwardIcon />} className='editBlogLink' colorScheme='white' variant='outline'>
                                     <Link to={`/post/edit/${blog._id}`}>Edit this</Link>
-                                </Button>
+                                </Button> : null}
                                 <div className="headerBlog">
                                     <h1>{blog.title}</h1>
                                     <div>
@@ -117,6 +132,7 @@ export default function BlogDetails() {
                                 <p>{blog.description}</p>
                             </>
                 }
+                
                 {publishing ? <Button
                     isLoading
                     loadingText='Submitting'
@@ -124,7 +140,9 @@ export default function BlogDetails() {
                     variant='outline'
                 >
                     Submit
-                </Button> : <Button colorScheme='red' marginTop='14px' disabled={blog.published ==true || published ? true : false} onClick={handlePublish}>{blog.published ==true || published ? "Published": "Publish Post"}</Button>}
+                    </Button> : state ? <Button colorScheme='red' marginTop='14px' disabled={blog.published ==true || published ? true : false} onClick={handlePublish}>{blog.published ==true || published ? "Published": "Publish Post"}</Button>
+                    : null
+                }
 
             </div>
         </div>

@@ -11,14 +11,16 @@ import {
     TagLeftIcon
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
+import { useDispatch, useSelector } from "react-redux";
+import { getPublishedDone } from "../Redux/BlogsContext.js/action";
 
 export default function PublishedBlogs() {
 
-
-
     const [loading, setloading] = useState(false);
-    const [blogs, setallblogs] = useState([]);
     const [error, seterror] = useState(false);
+    const dispatch = useDispatch();
+    const published = useSelector((store) => { return store.publishedBlogs.published });
+    //  console.log(published);
 
     useEffect(() => {
         setloading(true);
@@ -29,13 +31,15 @@ export default function PublishedBlogs() {
     // <================ GET all Published blogs for display=================>
     const getPublishedBlogs = () => {
 
-        // let url = `http://localhost:8080/publish`;
+       // let url = `http://localhost:8080/publish`;
         let url = `https://mern-app-blog-ver01.onrender.com/publish`;
 
         axios.get(url).
             then((res) => {
-                //    console.log(res)   
-                if (res.data.posts.length > 0) setallblogs(res.data.posts);
+                if (res.data.posts.length > 0) {
+                    //  console.log(res.data.posts)
+                    dispatch(getPublishedDone(res.data.posts));
+                }
                 else seterror(true);
             }).
             catch((err) => {
@@ -46,7 +50,7 @@ export default function PublishedBlogs() {
 
     return (
         <div id="MainDiv">
-            <h1 style={{ fontSize: '1.4rem',color:'white',fontWeight:'bolder',textDecoration:'underline' }}>All Published blogs</h1>
+            <h1 style={{ fontSize: '1.4rem', color: 'white', fontWeight: 'bolder', textDecoration: 'underline' }}>All Published blogs</h1>
             <div id="headerLinks">
                 <Link to={`/create`}>
                     <Tag size='lg' variant='subtle' colorScheme='cyan'>
@@ -57,10 +61,10 @@ export default function PublishedBlogs() {
             </div>
             {/* <hr /> */}
             <div id="container">
-                {loading ? <BlogSkeleton /> : error ? <h1 style={{color:"red",textAlign:'center',width:'100%'}}>Something went Wrong</h1> :
+                {loading ? <BlogSkeleton /> : error ? <h1 style={{ color: "red", textAlign: 'center', width: '100%' }}>Something went Wrong</h1> :
                     <>
                         {
-                            blogs.map((blog) => {
+                            published.length > 0 && published.map((blog) => {
                                 return <SingleBlog key={blog._id} blog={blog} />
                             })
                         }

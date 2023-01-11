@@ -50,7 +50,7 @@ export default function AllBlogs() {
     const getBlogsforPage = () => {
         const loggedUser = getLoggedUser();
 
-        // let url = `http://localhost:8080/post/${loggedUser._id}/all?_limit=5&&page=${page-1}`;
+        // let url = `http://localhost:8080/post/${loggedUser._id}/all?_limit=6&&page=${page-1}`;
         let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all?_limit=6&&page=${page - 1}`;
 
         const authAxios = EmbedJWTToken(url);
@@ -121,8 +121,8 @@ export default function AllBlogs() {
                                             return (
                                                 <tr key={blog._id}>
                                                     <td>{blog.title}</td>
-                                                    <td className="Links"><Link to={`/post/${blog._id}`}>See Blog</Link></td>
-                                                    <td className="Links"><Link to={`/post/edit/${blog._id}`}>Edit Blog</Link></td>
+                                                    <td className="Links"><Link to= {`/post/${blog._id}`} state={{pathFrom: "dashboard"}} >See Blog</Link></td>
+                                                    <td className="Links"><Link to={`/post/edit/${blog._id}`} state={{pathFrom: "dashboard"}}>Edit Blog</Link></td>
                                                     <td><button className="deleteBtn" onClick={() => handleDelete(blog._id)}>Remove</button></td>
                                                 </tr>
                                             )

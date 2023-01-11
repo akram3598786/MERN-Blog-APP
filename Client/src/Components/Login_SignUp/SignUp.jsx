@@ -61,8 +61,8 @@ export default function SignUp() {
       <form action="submit"  >
         <label htmlFor=""> <input type="text" name="name" value={name} onChange={handeChange} id="" placeholder="NAME" /></label>
         <label htmlFor=""><input type="email" name="email" value={email} onChange={handeChange} placeholder="EMAIL" /></label>
-        <label htmlFor=""><input type="mobile" name="mobile" value={mobile} onChange={handeChange} placeholder="MOBILE NO." /></label>
-        <label htmlFor=""> <input type="password" name="password" value={password} onChange={handeChange} placeholder="PASSWORD" /></label>
+        <label htmlFor=""><input type="text" name="mobile" maxLength='10' title="Please use a 10 digit telephone number with no dashes or dots" pattern="[0-9]{10}" value={mobile} onChange={handeChange} placeholder="MOBILE NO." /></label>
+        <label htmlFor=""><input type="password" name="password" value={password} onChange={handeChange} placeholder="PASSWORD" /></label>
       </form>
       <button id="submitBtn" onClick={handlsSubmit}>Submit</button>
       <p>Already have an account : <Link style={{ color: 'blue', fontWeight: '' }} to="/login">Sign In</Link></p>

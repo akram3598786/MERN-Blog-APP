@@ -12,6 +12,7 @@ export default function NavBar() {
   const handleSignout = () => {
     const cookies = new Cookies();
     cookies.remove("AccessToken");
+    cookies.remove("loggedUser");
     dispatch(isAuthHandler(false));
     navigate("/login");
   }
