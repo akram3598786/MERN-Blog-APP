@@ -53,6 +53,6 @@ async function deletePost(req, res) {
 
 PublishPostRouter.post("/:userId", publishPost);
 PublishPostRouter.get("/", getPublishedPost);
-PublishPostRouter.delete('/:postId',deletePost);
+PublishPostRouter.delete('/del/:postId',deletePost);
 
 module.exports = PublishPostRouter;
