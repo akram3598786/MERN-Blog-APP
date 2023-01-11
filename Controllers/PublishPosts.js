@@ -40,7 +40,9 @@ async function getPublishedPost(req, res){
 
 async function deletePost(req, res) {
     try {
-        let { postId, userId} = req.params;
+        let { postId} = req.params;
+        // console.log(postId)
+        // console.log(userId);
         let post = await PublishPostModel.deleteOne({ _id: postId });
         //  console.log(post)
         res.status(200).send("deleted successfully");
@@ -51,6 +53,6 @@ async function deletePost(req, res) {
 
 PublishPostRouter.post("/:userId", publishPost);
 PublishPostRouter.get("/", getPublishedPost);
-PublishPostRouter.delete('/:postId/:userId',deletePost);
+PublishPostRouter.delete('/:postId',deletePost);
 
 module.exports = PublishPostRouter;
