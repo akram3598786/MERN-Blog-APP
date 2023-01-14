@@ -21,7 +21,8 @@ export default function EditProfile({userdetails,upadteduser,setShowEditForm}) {
                 name: name,
                 email : loggedUser.email,
                 mobile: mobile,
-                avatar: avatar
+                avatar: avatar,
+                _id : loggedUser._id
             }
             // let url = `http://localhost:8080/user/edit/${loggedUser._id}`;
             let url = `https://mern-app-blog-ver01.onrender.com/user/edit/${loggedUser._id}`;

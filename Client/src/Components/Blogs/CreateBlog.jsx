@@ -86,7 +86,7 @@ export default function CreateBlog() {
             <div className="inputSec">
                 <form>
                     <input className="title" type="text" name="" id="title" value={tit} onChange={(e) => settitle(e.target.value)} placeholder="Title" />
-                    <textarea className="shortDesc" type="text" maxlength="190" name="" id="title" value={shortDesc} onChange={(e) => setshortDesc(e.target.value)} placeholder="Blog Header" />
+                    <textarea className="shortDesc" type="text" maxlength="200" name="" id="title" value={shortDesc} onChange={(e) => setshortDesc(e.target.value)} placeholder="Blog Header" />
                     <div>
                         <input type="file" multiple accept="image/*" onChange={hangleImageUpload} />
                         <p style={{ fontSize: '20px', fontWeight: '18' }}>OR</p>

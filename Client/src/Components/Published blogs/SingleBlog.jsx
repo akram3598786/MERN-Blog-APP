@@ -10,12 +10,15 @@ import { useState } from 'react';
 import {
     Menu,
     MenuButton,
-    MenuList
+    MenuList,
+    MenuItemOption,
+    MenuOptionGroup
 } from '@chakra-ui/react'
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPublishedDone } from '../Redux/BlogsContext.js/action';
+import EmbedJWTToken from '../EmbedToRequest/EmbedJWTToken';
 
 
 export default function SingleBlog({ blog }) {
@@ -24,9 +27,10 @@ export default function SingleBlog({ blog }) {
     const cookie = new Cookies();
     const loggedUser = cookie.get("loggedUser") || undefined;
     const published = useSelector((store) => { return store.publishedBlogs.published })
-    console.log(loggedUser)
+
+    const [doing, setdoing] = useState(false);
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         setdates(formateDate(blog.createdAt, blog.updatedAt))
     }, []);
@@ -34,16 +38,34 @@ export default function SingleBlog({ blog }) {
 
     // <=================== DELETE a particular published blog ===================>
     const handleDelete = () => {
-        // let url = `http://localhost:8080/publish/${blog._id}/${loggedUser._id}`;
-        let url = `https://mern-app-blog-ver01.onrender.com/post/${blog._id}/${loggedUser._id}`;
+        //  let url = `http://localhost:8080/publish/${blog._id}`;
+        let url = `https://mern-app-blog-ver01.onrender.com/publish/del/${blog._id}`;
         axios.delete(url).
             then((res) => {
                 if (res.status === 200) {
                     let updated = published.filter((blg) => blg._id != blog._id);
                     dispatch(getPublishedDone(updated));
+                    handleUpdateforDashboard();
                     alert("Blog deleted");
                 }
             }).catch((err) => console.log(err));
+    }
+
+    // Update data to databse
+    const handleUpdateforDashboard = () => {
+        setdoing(true);
+        let payload = {
+            published : false
+        }
+        //  let url = `http://localhost:8080/post/edit/${blogId}`;
+        let url = `https://mern-app-blog-ver01.onrender.com/post/edit/${blog._id}`;
+        const authAxios = EmbedJWTToken(url);
+        authAxios.patch(url, payload).
+            then((res) => {
+                //
+            }).catch((err) => {
+                console.log(err);
+            }).finally(() => setdoing(false));
     }
 
     return (
@@ -72,14 +94,13 @@ export default function SingleBlog({ blog }) {
                                 />
                             </MenuButton>
 
-                            {loggedUser ? loggedUser._id == blog.createdby ? <MenuList minWidth='150px' marginLeft="-50px" marginTop='-20px' backgroundColor='black' color='white'>
-                                {/* <MenuOptionGroup defaultValue='asc' title='Order' type='radio'>
-                                    <MenuItemOption value='asc'>Ascending</MenuItemOption>
-                                    <MenuItemOption value='desc'>Descending</MenuItemOption>
-                                </MenuOptionGroup> */}
-                                <Text width='30%' onClick={handleDelete} cursor='pointer' fontSize='small'>Delete</Text>
-
-                            </MenuList> : null : null}
+                            <MenuList minWidth='150px' marginLeft="-110px" marginTop='-20px' backgroundColor='black' color='white'>
+                                <MenuOptionGroup defaultValue='asc' type='radio' backgroundColor='black'>
+                                    {loggedUser ? loggedUser._id == blog.createdby ? <Text title='Delete Blog' onClick={handleDelete} textAlign='center' cursor='pointer' >Delete</Text> : null : null}
+                                    <MenuItemOption value='asc' backgroundColor='black'>Ascending</MenuItemOption>
+                                    <MenuItemOption value='desc' backgroundColor='black'>Descending</MenuItemOption>
+                                </MenuOptionGroup>
+                            </MenuList>
                         </Menu>
 
                     </Flex>

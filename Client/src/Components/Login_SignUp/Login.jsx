@@ -41,7 +41,7 @@ export default function Login() {
       alert("Wait for some time !");
     } else {
       setdoing(true);
-     // let url = "http://localhost:8080/auth/login";
+      //let url = "http://localhost:8080/auth/login";
        let url = "https://mern-app-blog-ver01.onrender.com/auth/login";
       axios.post(url, formData).
         then((res) => {

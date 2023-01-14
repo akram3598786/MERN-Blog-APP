@@ -30,7 +30,7 @@ export default function BlogDetails() {
         getBlog();
     }, [])
 
-    
+
     // Updating publish flag true after blog published =============
 
     const handleUpdate = () => {
@@ -83,6 +83,7 @@ export default function BlogDetails() {
            let curDate = moment().format('lll');
            
            let toPublishBlog={
+             _id : blog._id,
              title : blog.title,
              shortDesc : blog.shortDesc,
              description : blog.description,

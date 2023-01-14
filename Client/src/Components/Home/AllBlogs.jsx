@@ -50,7 +50,7 @@ export default function AllBlogs() {
     const getBlogsforPage = () => {
         const loggedUser = getLoggedUser();
 
-        // let url = `http://localhost:8080/post/${loggedUser._id}/all?_limit=6&&page=${page-1}`;
+       //  let url = `http://localhost:8080/post/${loggedUser._id}/all?_limit=6&&page=${page-1}`;
         let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all?_limit=6&&page=${page - 1}`;
 
         const authAxios = EmbedJWTToken(url);
