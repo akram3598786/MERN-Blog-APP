@@ -47,6 +47,7 @@ export default function CreateBlog() {
                 shortDesc: shortDesc,
                 headerImage: linkImage.length > 0 ? linkImage : imageURL[0]
             }
+            console.log(payload);
             // let url = `http://localhost:8080/post/${loggedUser._id}`;
             let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}`;
 

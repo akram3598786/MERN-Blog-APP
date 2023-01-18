@@ -15,11 +15,12 @@ export default function Profile() {
     const navigate = useNavigate();
     const [user, setuser] = useState({});
     const [ShowEditForm,setShowEditForm] = useState(false);
-    const loggedUser = getLoggedUser();
+    let loggedUser = {};
+    if(isAuth) loggedUser = getLoggedUser();
 
     useEffect(() => {
         if (!isAuth) navigate("/login");
-        getUserData();
+        else getUserData();
     }, []);
 
     const getUserData = async () => {
