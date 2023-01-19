@@ -61,6 +61,7 @@ table {
 .deleteBtn {
     background-color: rgb(211, 63, 18);
     cursor: pointer;
+    padding: 0px 4px;
 }
 
 .deleteBtn :hover {

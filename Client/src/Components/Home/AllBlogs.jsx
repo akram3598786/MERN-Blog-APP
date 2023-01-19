@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -13,31 +14,32 @@ export default function AllBlogs() {
     const [allbogs, setallblogs] = useState([]);
     const [blogs, setblogs] = useState([]);
     const [page, setPage] = useState(1);
+
     let [totalCount, setTotalCount] = useState(0);
 
     useEffect(() => {
         setloading(true);
         getBlogsforPage();
-        getAllBlogs(); 
+        getAllBlogs();
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         setloading(true);
         getBlogsforPage();
-    },[page])
+    }, [page])
 
- // <================ GET all blogs for searching out of all existing =================>
-    const getAllBlogs=()=>{
+    // <================ GET all blogs for searching out of all existing =================>
+    const getAllBlogs = () => {
         const loggedUser = getLoggedUser();
-       // let url = `http://localhost:8080/post/${loggedUser._id}/all`;
-         let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all`;
-        
+        // let url = `http://localhost:8080/post/${loggedUser._id}/all`;
+        let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all`;
+
         const authAxios = EmbedJWTToken(url);
         authAxios.get(url).
             then((res) => {
                 //    console.log(res)
                 setallblogs(res.data.posts);
-                if(res.data.posts.length == 0) setPage(0);
+                if (res.data.posts.length == 0) setPage(0);
             }).
             catch((err) => {
                 console.log(err);
@@ -50,7 +52,7 @@ export default function AllBlogs() {
     const getBlogsforPage = () => {
         const loggedUser = getLoggedUser();
 
-       //  let url = `http://localhost:8080/post/${loggedUser._id}/all?_limit=6&&page=${page-1}`;
+        //  let url = `http://localhost:8080/post/${loggedUser._id}/all?_limit=6&&page=${page-1}`;
         let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}/all?_limit=6&&page=${page - 1}`;
 
         const authAxios = EmbedJWTToken(url);
@@ -63,7 +65,7 @@ export default function AllBlogs() {
             catch((err) => {
                 setError(true);
                 console.log(err);
-                
+
             }).
             finally((res) => setloading(false));
     }
@@ -71,18 +73,20 @@ export default function AllBlogs() {
     // <=================== DELETE a particular blog ===================>
     const handleDelete = (id) => {
         // let url = `http://localhost:8080/post/${id}`;
-         let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
+        let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
 
-        const authAxios = EmbedJWTToken(url);
-        authAxios.delete(url).
-            then((res) => {
-                // console.log(res)
-                if (res.status === 200) {
-                    alert("Blog deleted");
-                    getBlogsforPage();
-                    getAllBlogs();
-                }
-            }).catch((err) => console.log(err));
+        if (window.confirm("Want to delete?")) {
+            const authAxios = EmbedJWTToken(url);
+            authAxios.delete(url).
+                then((res) => {
+                    // console.log(res)
+                    if (res.status === 200) {
+                        // alert("Blog deleted");
+                        getBlogsforPage();
+                        getAllBlogs();
+                    }
+                }).catch((err) => console.log(err))
+        }
     }
 
     // <=================== SEARCH blogs by titles ==========================>
@@ -103,10 +107,10 @@ export default function AllBlogs() {
             <div className="homaMainDiv">
                 <h2>All Exist Blogs</h2>
                 <div id="searchBar">
-                    <input type="search" style={{color:'black'}} value={searchStr} onChange={(e) => setsearchStr(e.target.value)} placeholder="Search Blog" /> <button onClick={handleSearch} >Search</button>
+                    <input type="search" style={{ color: 'black' }} value={searchStr} onChange={(e) => setsearchStr(e.target.value)} placeholder="Search Blog" /> <button onClick={handleSearch} >Search</button>
                 </div>
                 {
-                    loading ? <ProgresSkelton/> :
+                    loading ? <ProgresSkelton /> :
                         error ? <h1>No Post yet or Something Went Wrong</h1> :
                             <table className="blogsTable">
                                 <thead>
@@ -121,9 +125,10 @@ export default function AllBlogs() {
                                             return (
                                                 <tr key={blog._id}>
                                                     <td>{blog.title}</td>
-                                                    <td className="Links"><Link to= {`/post/${blog._id}`} state={{pathFrom: "dashboard"}} >See Blog</Link></td>
-                                                    <td className="Links"><Link to={`/post/edit/${blog._id}`} state={{pathFrom: "dashboard"}}>Edit Blog</Link></td>
-                                                    <td><button className="deleteBtn" onClick={() => handleDelete(blog._id)}>Remove</button></td>
+                                                    <td className="Links"><Link to={`/post/${blog._id}`} state={{ pathFrom: "dashboard" }} >See Blog</Link></td>
+                                                    <td className="Links"><Link to={`/post/edit/${blog._id}`} state={{ pathFrom: "dashboard" }}>Edit Blog</Link></td>
+                                                    <td>
+                                                        <button className="deleteBtn" onClick={() => handleDelete(blog._id)}>Delete</button></td>
                                                 </tr>
                                             )
                                         })
@@ -133,8 +138,8 @@ export default function AllBlogs() {
                 }
 
                 <div >
-                    <button className="pagebtns" disabled={page ==  1 || page == 0 ? true : false} onClick={() => setPage((prev) => prev - 1)} style={page ==  1 || page == 0 ? { backgroundColor: "grey" } : { backgroundColor: "white" }}>Prev</button>
-                    <span>{page } of {Math.ceil(totalCount / 6)}</span>
+                    <button className="pagebtns" disabled={page == 1 || page == 0 ? true : false} onClick={() => setPage((prev) => prev - 1)} style={page == 1 || page == 0 ? { backgroundColor: "grey" } : { backgroundColor: "white" }}>Prev</button>
+                    <span>{page} of {Math.ceil(totalCount / 6)}</span>
                     <button className="pagebtns" disabled={page == Math.ceil(totalCount / 6) || blogs.length == 0 ? true : false} onClick={() => setPage((prev) => prev + 1)} style={page == Math.ceil(totalCount / 6) || blogs.length == 0 ? { backgroundColor: "grey" } : { backgroundColor: "white" }}>Next</button>
                 </div>
             </div>

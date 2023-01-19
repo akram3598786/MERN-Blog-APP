@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 import {
     Tag,
     TagLabel,
-    TagLeftIcon
+    TagLeftIcon,
+    Text
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from "react-redux";
@@ -31,7 +32,7 @@ export default function PublishedBlogs() {
     // <================ GET all Published blogs for display=================>
     const getPublishedBlogs = () => {
 
-       // let url = `http://localhost:8080/publish`;
+        // let url = `http://localhost:8080/publish`;
         let url = `https://mern-app-blog-ver01.onrender.com/publish`;
 
         axios.get(url).
@@ -50,6 +51,16 @@ export default function PublishedBlogs() {
 
     return (
         <div id="MainDiv">
+            {/* <Text
+                // bgGradient='linear(to-l, #7928CA, #FF0080)'
+                bgGradient='linear(to-l, white, green)'
+                bgClip='text'
+                fontSize='1.4rem'
+                fontWeight='extrabold'
+                textDecoration = 'underline'
+            >
+                All Published blogs
+            </Text> */}
             <h1 style={{ fontSize: '1.4rem', color: 'white', fontWeight: 'bolder', textDecoration: 'underline' }}>All Published blogs</h1>
             <div id="headerLinks">
                 <Link to={`/create`}>
