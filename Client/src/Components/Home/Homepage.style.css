@@ -117,4 +117,8 @@ table {
     .deleteBtn{
         padding: 0px;
     }
+    #blogsDiv::before{
+        background: url("https://mcdn.wallpapersafari.com/medium/41/98/bTovEQ.jpg") no-repeat center center/cover;
+        height: 100%;
+    }
 }
