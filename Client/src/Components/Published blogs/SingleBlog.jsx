@@ -19,6 +19,7 @@ import Cookies from 'universal-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPublishedDone } from '../Redux/BlogsContext.js/action';
 import EmbedJWTToken from '../EmbedToRequest/EmbedJWTToken';
+import { DeleteIcon, PlusSquareIcon } from '@chakra-ui/icons';
 
 
 export default function SingleBlog({ blog }) {
@@ -49,6 +50,13 @@ export default function SingleBlog({ blog }) {
                     alert("Blog deleted");
                 }
             }).catch((err) => console.log(err));
+    }
+
+
+    /// Bookmark Blog
+    const handleBookmark=()=>{
+        alert("bookmarked")
+
     }
 
     // Update data to databse
@@ -96,9 +104,11 @@ export default function SingleBlog({ blog }) {
 
                             <MenuList minWidth='150px' marginLeft="-110px" marginTop='-20px' backgroundColor='black' color='white'>
                                 <MenuOptionGroup defaultValue='asc' type='radio' backgroundColor='black'>
-                                    {loggedUser ? loggedUser._id == blog.createdby ? <Text title='Delete Blog' onClick={handleDelete} textAlign='center' cursor='pointer' >Delete</Text> : null : null}
-                                    <MenuItemOption value='asc' backgroundColor='black'>Ascending</MenuItemOption>
-                                    <MenuItemOption value='desc' backgroundColor='black'>Descending</MenuItemOption>
+                                     {loggedUser ? loggedUser._id == blog.createdby ? <Text title='Delete Blog' _hover={{backgroundColor:"grey"}} onClick={handleDelete}  cursor='pointer' > {/*<DeleteIcon/> */}Delete</Text> : null : null} 
+                                     {loggedUser  ? <Text title='Bookmark Blog' _hover={{backgroundColor:"grey"}} onClick={handleBookmark}  cursor='pointer' > {/*<PlusSquareIcon/> */}BookMark this</Text> : null } 
+                                    {/* <MenuItemOption value='book' backgroundColor='black' ><PlusSquareIcon/> BookMark this</MenuItemOption> */}
+                                    <MenuItemOption value='asc' _hover={{backgroundColor:"grey"}} backgroundColor='black'>Ascending</MenuItemOption>
+                                    <MenuItemOption value='desc' _hover={{backgroundColor:"grey"}} backgroundColor='black'>Descending</MenuItemOption>
                                 </MenuOptionGroup>
                             </MenuList>
                         </Menu>

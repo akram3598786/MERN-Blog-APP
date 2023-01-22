@@ -161,8 +161,16 @@ textarea {
     right: 40%;
     top: 5%;  
 }
+.boomarkBlogLink{
+    position: absolute;
+    right: 40%;
+    top: 5%; 
+}
 .editBlogLink:hover{
   color: red;
+}
+.boomarkBlogLink:hover{
+    color: yellow;
 }
 .headerBlog{
     display: flex;

@@ -1,4 +1,5 @@
-import { Button } from "@chakra-ui/react";
+import { CloseIcon } from "@chakra-ui/icons";
+import { Alert, AlertIcon, Button } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -14,6 +15,7 @@ export default function AllBlogs() {
     const [allbogs, setallblogs] = useState([]);
     const [blogs, setblogs] = useState([]);
     const [page, setPage] = useState(1);
+    const [done, setdone] = useState(false);
 
     let [totalCount, setTotalCount] = useState(0);
 
@@ -75,7 +77,7 @@ export default function AllBlogs() {
         // let url = `http://localhost:8080/post/${id}`;
         let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
 
-        if (window.confirm("Want to delete?")) {
+        if (window.confirm("Do you want to delete ?")) {
             const authAxios = EmbedJWTToken(url);
             authAxios.delete(url).
                 then((res) => {
@@ -105,7 +107,7 @@ export default function AllBlogs() {
     return (
         <>
             <div className="homaMainDiv">
-                <h2>All Exist Blogs</h2>
+                
                 <div id="searchBar">
                     <input type="search" style={{ color: 'black' }} value={searchStr} onChange={(e) => setsearchStr(e.target.value)} placeholder="Search Blog" /> <button onClick={handleSearch} >Search</button>
                 </div>

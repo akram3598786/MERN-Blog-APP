@@ -10,7 +10,7 @@ import getLoggedUser from "../Utilities/GetLoggedUser";
 import formateDate from "../Utilities/SetDate";
 import moment from 'moment';
 import { useSelector } from "react-redux";
-
+import { BsFillBookmarkStarFill } from "react-icons/bs";
 
 export default function BlogDetails() {
 
@@ -120,7 +120,9 @@ export default function BlogDetails() {
                             <>
                                { state ?<Button rightIcon={<ArrowForwardIcon />} className='editBlogLink' colorScheme='white' variant='outline'>
                                     <Link to={`/post/edit/${blog._id}`}>Edit this</Link>
-                                </Button> : null}
+                                </Button> : <Button leftIcon={<BsFillBookmarkStarFill fill="orange"/>} className='boomarkBlogLink' colorScheme='white' variant='outline'>
+                                    Bookmark
+                                </Button>}
                                 <div className="headerBlog">
                                     <h1>{blog.title}</h1>
                                     <div>

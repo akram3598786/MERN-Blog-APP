@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 import getLoggedUser from "../Utilities/GetLoggedUser";
-import { Button } from '@chakra-ui/react';
+import { Alert, AlertIcon, Button, CloseButton } from '@chakra-ui/react';
+import { CloseIcon } from '@chakra-ui/icons'
 import "./Blog.css";
 
 
@@ -17,6 +18,7 @@ export default function CreateBlog() {
     const [imageURL, setImageURL] = useState([]);
     const [linkImage, setlinkImageURL] = useState('');
     const [doing, setdoing] = useState(false);
+    const [done, setdone] = useState(false);
 
     const isAuth = useSelector((store) => store.isAuth.isAuth);
     const navigate = useNavigate();
@@ -32,6 +34,7 @@ export default function CreateBlog() {
     }, [image])
 
     const handlePost = () => {
+
         if (doing) {
             alert("Wait for some time !");
         } else if (tit.length === 0 || des.length === 0) {
@@ -42,12 +45,12 @@ export default function CreateBlog() {
             let payload = {
                 title: tit,
                 description: des,
-                user : loggedUser.name,
+                user: loggedUser.name,
                 createdby: loggedUser._id,
                 shortDesc: shortDesc,
                 headerImage: linkImage.length > 0 ? linkImage : imageURL[0]
             }
-            console.log(payload);
+            // console.log(payload);
             // let url = `http://localhost:8080/post/${loggedUser._id}`;
             let url = `https://mern-app-blog-ver01.onrender.com/post/${loggedUser._id}`;
 
@@ -55,7 +58,8 @@ export default function CreateBlog() {
             authAxios.post(url, payload).
                 then((res) => {
                     if (res.status === 201) {
-                        alert("Blog Posted");
+                        // alert("Blog Posted");
+                        setdone(true);
                         settitle("");
                         setdes("");
                         setlinkImageURL("");
@@ -84,7 +88,24 @@ export default function CreateBlog() {
     return (
         <div className="blogcreation">
             {/* <h2>Create Blog </h2> */}
+
+
             <div className="inputSec">
+                {done ? <Alert  status='success' width='80%' display='flex' variant='top-accent' backgroundColor='green' margin='0px 10px'>
+                    
+                    <AlertIcon />
+                    Blog Created successfully 
+                    <CloseIcon 
+                    position='absolute'
+                    top='5px'
+                    right="5px"
+                    _hover={{background : "red"}}
+                    cursor='pointer'
+                    onClick={()=>setdone(false)}
+
+                    />
+                
+                </Alert> : null}
                 <form>
                     <input className="title" type="text" name="" id="title" value={tit} onChange={(e) => settitle(e.target.value)} placeholder="Title" />
                     <textarea className="shortDesc" type="text" maxlength="200" name="" id="title" value={shortDesc} onChange={(e) => setshortDesc(e.target.value)} placeholder="Blog Header" />

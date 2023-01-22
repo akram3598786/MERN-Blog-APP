@@ -5,8 +5,6 @@ import AllBlogs from "./AllBlogs";
 import styles from "./Homepage.style.css";
 
 export default function Homepage(){
-
-    
     const isAuth = useSelector((store) => store.isAuth.isAuth);
     const navigate = useNavigate();
     // console.log(isAuth)
