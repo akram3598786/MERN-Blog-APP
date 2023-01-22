@@ -105,7 +105,7 @@ export default function SingleBlog({ blog }) {
                             <MenuList minWidth='150px' marginLeft="-110px" marginTop='-20px' backgroundColor='black' color='white'>
                                 <MenuOptionGroup defaultValue='asc' type='radio' backgroundColor='black'>
                                      {loggedUser ? loggedUser._id == blog.createdby ? <Text title='Delete Blog' _hover={{backgroundColor:"grey"}} onClick={handleDelete}  cursor='pointer' > {/*<DeleteIcon/> */}Delete</Text> : null : null} 
-                                     {loggedUser  ? <Text title='Bookmark Blog' _hover={{backgroundColor:"grey"}} onClick={handleBookmark}  cursor='pointer' > {/*<PlusSquareIcon/> */}BookMark this</Text> : null } 
+                                     {loggedUser  ? <Text title='Bookmark Blog' _hover={{backgroundColor:"grey"}} onClick={handleBookmark}  cursor='pointer' > {/*<PlusSquareIcon/> */}BookMark</Text> : null } 
                                     {/* <MenuItemOption value='book' backgroundColor='black' ><PlusSquareIcon/> BookMark this</MenuItemOption> */}
                                     <MenuItemOption value='asc' _hover={{backgroundColor:"grey"}} backgroundColor='black'>Ascending</MenuItemOption>
                                     <MenuItemOption value='desc' _hover={{backgroundColor:"grey"}} backgroundColor='black'>Descending</MenuItemOption>

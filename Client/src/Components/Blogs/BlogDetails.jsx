@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 // import moment from 'moment';
 import { Button } from '@chakra-ui/react';
@@ -10,6 +10,7 @@ import getLoggedUser from "../Utilities/GetLoggedUser";
 import formateDate from "../Utilities/SetDate";
 import moment from 'moment';
 import { useSelector } from "react-redux";
+import Cookies from 'universal-cookie';
 import { BsFillBookmarkStarFill } from "react-icons/bs";
 
 export default function BlogDetails() {
@@ -23,6 +24,9 @@ export default function BlogDetails() {
     const [published,setpublished] = useState(false);
     const isAuth = useSelector((store) => store.isAuth.isAuth);
     const {state} = useLocation();
+    const cookie = new Cookies();
+    const loggedUser = cookie.get("loggedUser") || undefined;
+    const navigate = useNavigate();
 
     useEffect(() => {
         // console.log("path ",state);
@@ -60,7 +64,9 @@ export default function BlogDetails() {
         axios.get(url).
             then((res) => {
                 setdates(formateDate(res.data.createdAt, res.data.updatedAt));
+                console.log(res.data);
                 setblog(res.data);
+                
             }).
             catch((err) => {
                 console.log(err)
@@ -109,6 +115,13 @@ export default function BlogDetails() {
         }
     }
 
+    // Handle Bookmark Blog
+
+    const handleBookmark=(blogId)=>{
+        if(loggedUser) alert(blogId);
+        else navigate("/login")
+        
+    }
 
     //console.log(blogId);
     return (
@@ -120,15 +133,18 @@ export default function BlogDetails() {
                             <>
                                { state ?<Button rightIcon={<ArrowForwardIcon />} className='editBlogLink' colorScheme='white' variant='outline'>
                                     <Link to={`/post/edit/${blog._id}`}>Edit this</Link>
-                                </Button> : <Button leftIcon={<BsFillBookmarkStarFill fill="orange"/>} className='boomarkBlogLink' colorScheme='white' variant='outline'>
+                                </Button> : <Button leftIcon={<BsFillBookmarkStarFill fill="orange"/>} onClick={()=>handleBookmark(blog._id)} className='boomarkBlogLink' colorScheme='white' variant='outline'>
                                     Bookmark
                                 </Button>}
                                 <div className="headerBlog">
                                     <h1>{blog.title}</h1>
-                                    <div>
+                                  { !state ? 
+                                  <div>
+                                  <p> Created : {dates.Credate} {dates.CreTime} </p>
+                                   </div> : <div>
                                         <p> Created : {dates.Credate} {dates.CreTime} </p>
                                         <p> Updated : {dates.Update} {dates.UpdTime}</p>
-                                    </div>
+                                    </div> }
                                 </div>
                                 <p>{blog.shortDesc}</p> <br />
                                 <img src={blog.headerImage} alt="Loading Img" /> <br />

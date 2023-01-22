@@ -216,7 +216,7 @@ textarea {
         background-color: rgb(9, 46, 88);
         color: white;
     }
-    .editBlogLink{
+    .editBlogLink,.boomarkBlogLink{
         left: 30%;
     }
     #blogView{

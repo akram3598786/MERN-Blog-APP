@@ -7,6 +7,7 @@ import getLoggedUser from "../Utilities/GetLoggedUser";
 import { Alert, AlertIcon, Button, CloseButton } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons'
 import "./Blog.css";
+import Cookies from 'universal-cookie';
 
 
 export default function CreateBlog() {
@@ -20,12 +21,15 @@ export default function CreateBlog() {
     const [doing, setdoing] = useState(false);
     const [done, setdone] = useState(false);
 
+    const cookie = new Cookies();
+    const loggedUser = cookie.get("loggedUser") || undefined;
+
     const isAuth = useSelector((store) => store.isAuth.isAuth);
     const navigate = useNavigate();
 
     // Checking for Auth
     useEffect(() => {
-        if (!isAuth) navigate("/login");
+        if (!isAuth || !loggedUser ) navigate("/login");
     }, []);
 
     useEffect(() => {

@@ -3,10 +3,11 @@ import Cookies from 'universal-cookie';
 
 const cookie = new Cookies();
 let token = cookie.get("AccessToken");
+const loggedUser = cookie.get("loggedUser") || undefined;
 let initState = {
-   isAuth :  false
+   isAuth : loggedUser ? true : false
 }
-if(token) initState.isAuth = true;;
+// if(token) initState.isAuth = true;;
 export const Authreducer=(state = initState, {type, payload} )=>{
     switch(type){
 

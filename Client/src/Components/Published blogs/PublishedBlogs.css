@@ -1,16 +1,38 @@
 /* All Published Blogs CSS  */
 #MainDiv {
-    background-color: cadetblue;
+    /* background-color: cadetblue; */
     background-color: rgb(52, 95, 97);
     /* height: 100%; */
 }
 
-#headerLinks {
-    display: inline;
+#MainDiv::before {
+    content: '';
+    /* background: url("https://newjerseycog.org/wp-content/uploads/2014/08/Blog-Web-Header-Background.jpg") no-repeat center center/cover; */
+    /* background: url("https://mcdn.wallpapersafari.com/medium/9/57/PdJiN3.jpg") no-repeat center center/cover; */
+    background: url("https://mcdn.wallpapersafari.com/medium/18/3/voZ23G.jpg") no-repeat center center/cover;
+    /* background: url("https://mcdn.wallpapersafari.com/medium/41/98/bTovEQ.jpg") no-repeat center center/cover; */
+    /* background: url("https://mcdn.wallpapersafari.com/medium/88/13/1RiXrN.jpg") no-repeat center center/cover; */
+    background-color: rgb(52, 95, 97);
     position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    opacity: 0.9;
+  }
+
+#headerLinks {
+    /* display: inline; */
+    /* position: absolute; */
+    align-self: left;
     left: 5%;
     top: 10%;
     cursor: pointer;
+    display: flex;
+    margin-left: 11%;
+    margin-top: 1%;
+    margin-bottom: -10px;
 }
 
 #headerLinks>* :hover {
@@ -49,7 +71,9 @@
     }
 
     #headerLinks {
-        top: 21%;
+        margin-left: 5%;
+        margin-top: 3%;
+        margin-bottom: -20px;
     }
 }
 

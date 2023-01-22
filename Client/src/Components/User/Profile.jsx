@@ -19,7 +19,7 @@ export default function Profile() {
     if(isAuth) loggedUser = getLoggedUser();
 
     useEffect(() => {
-        if (!isAuth) navigate("/login");
+        if (!isAuth || !loggedUser) navigate("/login");
         else getUserData();
     }, []);
 
