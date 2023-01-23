@@ -2,7 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import './Auth.css';
-import { Spinner } from '@chakra-ui/react'
+import { Spinner } from '@chakra-ui/react';
+import swal from 'sweetalert';
 
 
 let obj = {
@@ -26,9 +27,10 @@ export default function SignUp() {
   }
   const handlsSubmit = (e) => {
     e.preventDefault();
-    if (!name || !email || !password || !mobile) alert("Kindly fill all details !")
+    if (!name || !email || !password || !mobile) swal("Kindly fill all details !",{buttons:false})
+    else{
     if (doing) {
-      alert("Wait for some time !");
+      swal("Wait for some time !",{buttons:false});
     } else {
       setdoing(true);
        //let url = "http://localhost:8080/auth/signup";
@@ -36,15 +38,24 @@ export default function SignUp() {
       axios.post(url, formData).
         then((res) => {
           if (res.status === 201) {
-            alert(`${name} registred successfully`);
+            swal({
+              title: `${name} registred successfully`,
+              icon: "success",
+              timer: 3000,
+              button: false,
+            }).then((value) => {
             navigate("/login");
+            });
           }
         }).catch((err) => {
           console.log(err);
-          if (err.response.data.message == "Email is already registered.") alert("This email already registered");
-          else alert("something went wrong !");
+          if (err.response.data.message == "Email is already registered.") {
+            swal("This email already registered",{color : "red"})
+          }
+          else swal("something went wrong !");
         }).finally(() => setdoing(false));
     }
+  }
   }
 
   return (

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import swal from "sweetalert";
 import EmbedJWTToken from "../EmbedToRequest/EmbedJWTToken";
 import getLoggedUser from "../Utilities/GetLoggedUser";
 import "./Blog.css";
@@ -64,8 +65,8 @@ export default function EditBlog() {
         const authAxios = EmbedJWTToken(url);
         authAxios.patch(url, payload).
             then((res) => {
-                if (res.status === 200) alert("Blog Edited");
-                else alert("Something wrong !");
+                if (res.status === 200) swal("Blog Updated",{timer : 2000,button : false});
+                else swal("Something wrong !");
             }).catch((err) => {
                 console.log(err);
             }).finally(()=>setdoing(false));

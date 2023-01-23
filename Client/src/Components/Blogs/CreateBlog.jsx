@@ -8,6 +8,7 @@ import { Alert, AlertIcon, Button, CloseButton } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons'
 import "./Blog.css";
 import Cookies from 'universal-cookie';
+import swal from "sweetalert";
 
 
 export default function CreateBlog() {
@@ -40,9 +41,9 @@ export default function CreateBlog() {
     const handlePost = () => {
 
         if (doing) {
-            alert("Wait for some time !");
+            swal("Wait for some time !",{button: false});
         } else if (tit.length === 0 || des.length === 0) {
-            alert("Kindly complete your blog inputs !")
+            swal("Complete Blogs deatils !",{button: false,icon:'error'});
         } else {
             setdoing(true);
             const loggedUser = getLoggedUser();
@@ -62,7 +63,12 @@ export default function CreateBlog() {
             authAxios.post(url, payload).
                 then((res) => {
                     if (res.status === 201) {
-                        // alert("Blog Posted");
+                        swal({
+                            title: "Created Successfully",
+                            timer: 2000,
+                            icon: 'success',
+                            button: false,
+                          })
                         setdone(true);
                         settitle("");
                         setdes("");
@@ -70,7 +76,7 @@ export default function CreateBlog() {
                         setshortDesc("");
                         setImageURL([]);
                     }
-                    else alert("Something wrong !");
+                    else swal("Something wrong !");
                 }).catch((err) => {
                     console.log(err);
                 }).finally(() => setdoing(false));

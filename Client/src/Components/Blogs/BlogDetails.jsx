@@ -12,6 +12,7 @@ import moment from 'moment';
 import { useSelector } from "react-redux";
 import Cookies from 'universal-cookie';
 import { BsFillBookmarkStarFill } from "react-icons/bs";
+import swal from "sweetalert";
 
 export default function BlogDetails() {
 
@@ -49,7 +50,7 @@ export default function BlogDetails() {
         authAxios.patch(url, payload).
             then((res) => {
                 if (res.status === 200) setpublished(true);
-                else alert("Something wrong !");
+                else swal("Something wrong !");
             }).catch((err) => {
                 console.log(err);
             })
@@ -64,7 +65,6 @@ export default function BlogDetails() {
         axios.get(url).
             then((res) => {
                 setdates(formateDate(res.data.createdAt, res.data.updatedAt));
-                console.log(res.data);
                 setblog(res.data);
                 
             }).
@@ -79,7 +79,7 @@ export default function BlogDetails() {
 
     const handlePublish = () => {
         if (publishing) {
-            alert("Wait for some time !");
+            swal("Wait for some time !",{button:false,timer:1200});
         }
         else {
             setpublishing(true);
@@ -106,9 +106,9 @@ export default function BlogDetails() {
                 then((res) => {
                     if (res.status === 201) {
                         handleUpdate();
-                        alert("Blog Published Successfully");
+                        swal("Blog Published Successfully",{button : false, timer : 1500});
                     }
-                    else alert("Something wrong !");
+                    else swal("Something wrong !");
                 }).catch((err) => {
                     console.log(err);
                 }).finally(() => setpublishing(false));     
@@ -118,7 +118,7 @@ export default function BlogDetails() {
     // Handle Bookmark Blog
 
     const handleBookmark=(blogId)=>{
-        if(loggedUser) alert(blogId);
+        if(loggedUser) swal(blogId);
         else navigate("/login")
         
     }

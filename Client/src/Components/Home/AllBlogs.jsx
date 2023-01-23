@@ -1,5 +1,5 @@
 import { CloseIcon } from "@chakra-ui/icons";
-import { Alert, AlertIcon, Button } from "@chakra-ui/react";
+import swal from 'sweetalert';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -77,18 +77,26 @@ export default function AllBlogs() {
         // let url = `http://localhost:8080/post/${id}`;
         let url = `https://mern-app-blog-ver01.onrender.com/post/${id}`;
 
-        if (window.confirm("Do you want to delete ?")) {
-            const authAxios = EmbedJWTToken(url);
-            authAxios.delete(url).
-                then((res) => {
-                    // console.log(res)
-                    if (res.status === 200) {
-                        // alert("Blog deleted");
-                        getBlogsforPage();
-                        getAllBlogs();
-                    }
-                }).catch((err) => console.log(err))
-        }
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this blog!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    const authAxios = EmbedJWTToken(url);
+                    authAxios.delete(url).
+                        then((res) => {
+                            if (res.status === 200) {
+                                getBlogsforPage();
+                                getAllBlogs();
+                            }
+                        }).catch((err) => console.log(err))
+                }
+            });
+
     }
 
     // <=================== SEARCH blogs by titles ==========================>
@@ -107,7 +115,7 @@ export default function AllBlogs() {
     return (
         <>
             <div className="homaMainDiv">
-                
+
                 <div id="searchBar">
                     <input type="search" style={{ color: 'black' }} value={searchStr} onChange={(e) => setsearchStr(e.target.value)} placeholder="Search Blog" /> <button onClick={handleSearch} >Search</button>
                 </div>

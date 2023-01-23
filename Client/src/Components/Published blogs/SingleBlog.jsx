@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPublishedDone } from '../Redux/BlogsContext.js/action';
 import EmbedJWTToken from '../EmbedToRequest/EmbedJWTToken';
 import { DeleteIcon, PlusSquareIcon } from '@chakra-ui/icons';
+import swal from 'sweetalert';
 
 
 export default function SingleBlog({ blog }) {
@@ -47,7 +48,7 @@ export default function SingleBlog({ blog }) {
                     let updated = published.filter((blg) => blg._id != blog._id);
                     dispatch(getPublishedDone(updated));
                     handleUpdateforDashboard();
-                    alert("Blog deleted");
+                    swal("Blog deleted",{button : false, timer:1300});
                 }
             }).catch((err) => console.log(err));
     }
