@@ -22,9 +22,9 @@ export default function BlogDetails() {
     const [dates, setdates] = useState({});
     const { blogId } = useParams();
     const [publishing, setpublishing] = useState(false);
-    const [published,setpublished] = useState(false);
+    const [published, setpublished] = useState(false);
     const isAuth = useSelector((store) => store.isAuth.isAuth);
-    const {state} = useLocation();
+    const { state } = useLocation();
     const cookie = new Cookies();
     const loggedUser = cookie.get("loggedUser") || undefined;
     const navigate = useNavigate();
@@ -41,7 +41,7 @@ export default function BlogDetails() {
     const handleUpdate = () => {
         const loggedUser = getLoggedUser();
         let payload = {
-           published : true
+            published: true
         }
         // let url = `http://localhost:8080/post/edit/${blogId}`;
         let url = `https://mern-app-blog-ver01.onrender.com/post/edit/${blogId}`;
@@ -58,15 +58,15 @@ export default function BlogDetails() {
 
     // Getting Blog to display =====================================
     const getBlog = () => {
-       // let url = `http://localhost:8080/public/${blogId}`;
-         let url = `https://mern-app-blog-ver01.onrender.com/public/${blogId}`;
-     
+        // let url = `http://localhost:8080/public/${blogId}`;
+        let url = `https://mern-app-blog-ver01.onrender.com/public/${blogId}`;
+
         // const authAxios = EmbedJWTToken(url)
         axios.get(url).
             then((res) => {
                 setdates(formateDate(res.data.createdAt, res.data.updatedAt));
                 setblog(res.data);
-                
+
             }).
             catch((err) => {
                 console.log(err)
@@ -79,26 +79,26 @@ export default function BlogDetails() {
 
     const handlePublish = () => {
         if (publishing) {
-            swal("Wait for some time !",{button:false,timer:1200});
+            swal("Wait for some time !", { button: false, timer: 1200 });
         }
         else {
             setpublishing(true);
             const loggedUser = getLoggedUser();
-           // let url = `http://localhost:8080/publish/${loggedUser._id}`;
+            // let url = `http://localhost:8080/publish/${loggedUser._id}`;
             let url = `https://mern-app-blog-ver01.onrender.com/publish/${loggedUser._id}`;
-           let curDate = moment().format('lll');
-           
-           let toPublishBlog={
-             _id : blog._id,
-             title : blog.title,
-             shortDesc : blog.shortDesc,
-             description : blog.description,
-             avatar : loggedUser.avatar,
-             curDate : curDate,
-             headerImage : blog.headerImage,
-             createdby : blog.createdby,
-             user : loggedUser.name
-           }
+            let curDate = moment().format('lll');
+
+            let toPublishBlog = {
+                _id: blog._id,
+                title: blog.title,
+                shortDesc: blog.shortDesc,
+                description: blog.description,
+                avatar: loggedUser.avatar,
+                curDate: curDate,
+                headerImage: blog.headerImage,
+                createdby: blog.createdby,
+                user: loggedUser.name
+            }
 
             //  console.log(toPublishBlog)
             const authAxios = EmbedJWTToken(url);
@@ -106,21 +106,21 @@ export default function BlogDetails() {
                 then((res) => {
                     if (res.status === 201) {
                         handleUpdate();
-                        swal("Blog Published Successfully",{button : false, timer : 1500});
+                        swal("Blog Published Successfully", { button: false, timer: 1500 });
                     }
                     else swal("Something wrong !");
                 }).catch((err) => {
                     console.log(err);
-                }).finally(() => setpublishing(false));     
+                }).finally(() => setpublishing(false));
         }
     }
 
     // Handle Bookmark Blog
 
-    const handleBookmark=(blogId)=>{
-        if(loggedUser) swal(blogId);
+    const handleBookmark = (blogId) => {
+        if (loggedUser) swal(blogId);
         else navigate("/login")
-        
+
     }
 
     //console.log(blogId);
@@ -131,27 +131,29 @@ export default function BlogDetails() {
                     loading ? <h1>Loading...</h1> :
                         error ? <h1>Error : Something Went Wrong</h1> :
                             <>
-                               { state ?<Button rightIcon={<ArrowForwardIcon />} className='editBlogLink' colorScheme='white' variant='outline'>
+                                {state.pathFrom == 'dashboard' ? <Button rightIcon={<ArrowForwardIcon />} className='editBlogLink' colorScheme='white' variant='outline'>
                                     <Link to={`/post/edit/${blog._id}`}>Edit this</Link>
-                                </Button> : <Button leftIcon={<BsFillBookmarkStarFill fill="orange"/>} onClick={()=>handleBookmark(blog._id)} className='boomarkBlogLink' colorScheme='white' variant='outline'>
-                                    Bookmark
-                                </Button>}
+                                </Button> : state.pathFrom == 'bookmark' ? null : state.pathFrom == 'published' ?
+                                    <Button leftIcon={<BsFillBookmarkStarFill fill="orange" />} onClick={() => handleBookmark(blog._id)} className='boomarkBlogLink' colorScheme='white' variant='outline'>
+                                        Bookmark
+                                    </Button> : null}
                                 <div className="headerBlog">
                                     <h1>{blog.title}</h1>
-                                  { !state ? 
-                                  <div>
-                                  <p> Created : {dates.Credate} {dates.CreTime} </p>
-                                   </div> : <div>
-                                        <p> Created : {dates.Credate} {dates.CreTime} </p>
-                                        <p> Updated : {dates.Update} {dates.UpdTime}</p>
-                                    </div> }
+                                    {state.pathFrom == 'dashboard' ?
+                                        <div>
+                                            <p> Created : {dates.Credate} {dates.CreTime} </p>
+                                            <p> Updated : {dates.Update} {dates.UpdTime}</p>
+                                        </div> : <div>
+                                            <p> Created : {dates.Credate} {dates.CreTime} </p>
+                                        </div>
+                                    }
                                 </div>
                                 <p>{blog.shortDesc}</p> <br />
                                 <img src={blog.headerImage} alt="Loading Img" /> <br />
                                 <p>{blog.description}</p>
                             </>
                 }
-                
+
                 {publishing ? <Button
                     isLoading
                     loadingText='Submitting'
@@ -159,7 +161,7 @@ export default function BlogDetails() {
                     variant='outline'
                 >
                     Submit
-                    </Button> : state ? <Button colorScheme='red' marginTop='14px' disabled={blog.published ==true || published ? true : false} onClick={handlePublish}>{blog.published ==true || published ? "Published": "Publish Post"}</Button>
+                </Button> : state.pathFrom == 'dashboard' ? <Button colorScheme='red' marginTop='14px' disabled={blog.published == true || published ? true : false} onClick={handlePublish}>{blog.published == true || published ? "Published" : "Publish Post"}</Button>
                     : null
                 }
 

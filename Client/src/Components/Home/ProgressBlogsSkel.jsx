@@ -10,7 +10,6 @@ export default function ProgresSkelton() {
             </Skeleton>
             <Skeleton
                 height='40px'
-                width='550px'
                 isLoaded={isLoaded}
                 bg='green.500'
                 color='white'

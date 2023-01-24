@@ -74,7 +74,7 @@ export default function Right_Drawer() {
                     </DrawerHeader>
 
                     <DrawerBody>
-                        <Input placeholder='Type here...' />
+                        <Input placeholder='Search' />
 
                         <Divider orientation='horizontal' />
                         <List spacing={3} marginTop='15px'>
@@ -85,7 +85,7 @@ export default function Right_Drawer() {
                                 View Profile</Link>
                             </ListItem>
                             <ListItem style={{ padding: '3px 2px' }} _hover={{ backgroundColor: 'black', borderRadius: '8px', color: 'white' }}>
-                            <Link to='/bookmark' style={{ fontSize: 'md', fontWeight: 'bold' }} >
+                            <Link to='/bookmarks' style={{ fontSize: 'md', fontWeight: 'bold' }} >
                                  <ListIcon as={RiBookMarkFill} width='50px' color='red.600' />
                                 Bookmarks</Link>
                             </ListItem>

@@ -119,7 +119,7 @@ export default function SingleBlog({ blog }) {
                 <CardBody marginTop='-10px' padding='18px 5px 4px'>
                     <Text height='120px' textAlign='start'>{blog.shortDesc}</Text>
                 </CardBody >
-                <Link to={`/post/${blog._id}`} ><Image
+                <Link to={`/post/${blog._id}`} state={{pathFrom : 'published'}}><Image
                     objectFit='cover'
                     src={blog.headerImage}
                     // src='https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
