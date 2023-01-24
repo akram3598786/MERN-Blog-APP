@@ -17,6 +17,7 @@ export default function Profile() {
     const [ShowEditForm,setShowEditForm] = useState(false);
     let loggedUser = {};
     if(isAuth) loggedUser = getLoggedUser();
+    
 
     useEffect(() => {
         if (!isAuth || !loggedUser) navigate("/login");

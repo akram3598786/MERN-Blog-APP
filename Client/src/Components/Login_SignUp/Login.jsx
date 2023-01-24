@@ -46,7 +46,7 @@ export default function Login() {
             swal({
               title: "Logged In Successfully",
               icon: "success",
-              timer: 2000,
+              timer: 1400,
               button: false,
             }).then((value) => {
               

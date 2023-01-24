@@ -112,7 +112,7 @@ table {
         border-radius: 9px;
     }
     .blogsTable tbody tr td{
-        padding: 0px;
+        padding: 1px;
     }
     .deleteBtn{
         padding: 0px;
