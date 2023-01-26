@@ -52,6 +52,7 @@ async function deletePost(req, res) {
     }
 }
 
+//  ============================= Bookmark Bolg ============================
 
 // Bookmark specific Blog
 async function BookmarkPost(req, res) {
@@ -74,9 +75,33 @@ async function BookmarkPost(req, res) {
     }
 }
 
+// Delete Sepecific bookmarked Blog
+async function RemoveFromBookmarks(req, res) {
+    try {
+        const payload = req.body;
+        const userId = payload.bookmarkBy;
+        const postId = payload.postId;
+        let user = await UserModel.findById(userId);
+        // console.log(user);
+        if (user) {
+            let updated = user.bookmarks.filter((blg)=>blg._id != postId);
+            user.bookmarks = updated;
+            await user.save();
+            res.status(200).send({ message: "Blog Removed from bookmarks"});
+        } else {
+            res.status(404).send("User not authorized");
+        }
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+}
+
+
 PublishPostRouter.post("/:userId", publishPost);
 PublishPostRouter.get("/", getPublishedPost);
 PublishPostRouter.delete('/del/:postId',deletePost);
 PublishPostRouter.patch('/bookmark',BookmarkPost);
+PublishPostRouter.patch('/remove',RemoveFromBookmarks);
 
 module.exports = PublishPostRouter;

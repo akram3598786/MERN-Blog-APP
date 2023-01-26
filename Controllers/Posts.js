@@ -97,32 +97,11 @@ async function deletePost(req, res) {
     }
 }
 
-// Bookmark specific Blog
-async function BookmarkPost(req, res) {
-    try {
-        const payload = req.body;
-        const userId = payload.bookmarkBy;
-        const postId = payload.postId;
-        let user = await UserModel.findById(userId);
-        // console.log(user);
-        if (user) {;
-            user.bookmarks = [...user.bookmarks,postId];
-            await user.save();
-            res.status(201).send({ message: "Blog bookmarked"});
-        } else {
-            res.status(404).send("User not authorized");
-        }
-    }
-    catch (err) {
-        res.status(500).send(err.message);
-    }
-}
 
 PostRouter.post("/:userId", CreatePost);
 PostRouter.patch("/edit/:postId", EditPost);
 PostRouter.get("/:userId/all", getALLposts);
 PostRouter.get("/:postId",getSinglePost);
 PostRouter.delete("/:postId", deletePost);
-
 
 module.exports = PostRouter;
