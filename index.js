@@ -15,7 +15,16 @@ app.use(express.json());
 app.use(cors());
 app.use("/auth", AuthRouter); // Authentication
 app.use("/publish", PublishPostRouter); // For published blogs
- app.use("/public",PublicPostRouter) // Public Router
+app.use("/public", PublicPostRouter) // Public Router
+
+/*
+const handleImgPost=(req, res)=>{
+ let img = req.body;
+ console.log(img)
+ res.send("posted")
+}
+app.post('/postimg',handleImgPost)
+*/
 app.use(auth) // Authourization purpose ===>
 
 app.use("/post", PostRouter);
@@ -27,8 +36,8 @@ let port = process.env.PORT || 8080;
 //  ])
 app.listen(port, async (req, res) => {
   try {
-     await ConnectDB();
-    console.log("server running on 8080 port");
+    await ConnectDB();
+    console.log(`server running on ${port} port`);
   }
   catch (err) {
     console.log("Error occured", err);

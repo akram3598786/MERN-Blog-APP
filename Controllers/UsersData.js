@@ -17,6 +17,8 @@ async function getAllUsers(req, res){
     }
 }
 
+
+// Get user profile data
 async function getUserData(req, res){
     try{
         let {userId} = req.params;
@@ -32,6 +34,7 @@ async function getUserData(req, res){
     }
 }
 
+// Edit user profile data
     async function EditUserdetails(req,res){
         try {
             let { userId } = req.params;

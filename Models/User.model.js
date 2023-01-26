@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema(
         mobile : {type : Number},
         password : {type : String, require:true},
         posts : [String],
+        bookmarks : [String],
         avatar : {type : String},
     },{
         versionKey : false,

@@ -42,6 +42,7 @@ async function SignUp(req, res) {
     }
 }
 
+
 async function Login(req, res) {
 
     try {
@@ -51,8 +52,8 @@ async function Login(req, res) {
         foundUser = foundUser.toJSON();
         const validatedPass = await bcrypt.compare(payload.password,foundUser.password);
         if (validatedPass){
-            const token = Sign(foundUser);
             delete foundUser.password;
+            const token = Sign(foundUser);
             res.status(201).send({
                 message: `${foundUser.name} logged in successfully`,
                 token: token,

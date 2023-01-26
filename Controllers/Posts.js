@@ -4,6 +4,8 @@ const UserModel = require("../Models/User.model");
 
 const PostRouter = express.Router();
 
+
+// Create Blog
 async function CreatePost(req, res) {
     try {
         const payload = req.body;
@@ -17,7 +19,7 @@ async function CreatePost(req, res) {
             await user.save();
             res.status(201).send({ message: "Post created", post });
         } else {
-            res.status(404).send("User not exist");
+            res.status(404).send("User not authorized");
         }
     }
     catch (err) {
@@ -25,6 +27,7 @@ async function CreatePost(req, res) {
     }
 }
 
+// Get all user private blogs
 async function getALLposts(req, res) {
     try {
 
@@ -50,6 +53,7 @@ async function getALLposts(req, res) {
     }
 }
 
+// Get specific blog 
 async function getSinglePost(req, res) {
     try {
         let { postId } = req.params;
@@ -65,6 +69,7 @@ async function getSinglePost(req, res) {
 }
 
 
+// Update Blog 
 async function EditPost(req, res) {
     try {
         let { postId } = req.params;
@@ -79,6 +84,8 @@ async function EditPost(req, res) {
     }
 }
 
+
+// Delete Sepecific Blog
 async function deletePost(req, res) {
     try {
         let { postId } = req.params;
@@ -90,12 +97,32 @@ async function deletePost(req, res) {
     }
 }
 
+// Bookmark specific Blog
+async function BookmarkPost(req, res) {
+    try {
+        const payload = req.body;
+        const userId = payload.bookmarkBy;
+        const postId = payload.postId;
+        let user = await UserModel.findById(userId);
+        // console.log(user);
+        if (user) {;
+            user.bookmarks = [...user.bookmarks,postId];
+            await user.save();
+            res.status(201).send({ message: "Blog bookmarked"});
+        } else {
+            res.status(404).send("User not authorized");
+        }
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+}
+
 PostRouter.post("/:userId", CreatePost);
 PostRouter.patch("/edit/:postId", EditPost);
 PostRouter.get("/:userId/all", getALLposts);
 PostRouter.get("/:postId",getSinglePost);
 PostRouter.delete("/:postId", deletePost);
-
 
 
 module.exports = PostRouter;
