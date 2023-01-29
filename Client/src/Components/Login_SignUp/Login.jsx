@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { isAuthHandler } from '../Redux/Auth-context/action';
+import { isAuthHandler, saveUser } from '../Redux/Auth-context/action';
 import './Auth.css';
 import React from "react";
 import swal from 'sweetalert';
@@ -37,7 +37,7 @@ export default function Login() {
       swal("Wait for some time !",{button: false});
     } else {
       setdoing(true);
-      //let url = "http://localhost:8080/auth/login";
+     // let url = "http://localhost:8080/auth/login";
       let url = "https://mern-app-blog-ver01.onrender.com/auth/login";
       axios.post(url, formData).
         then((res) => {
@@ -51,7 +51,6 @@ export default function Login() {
             }).then((value) => {
               
               const decoded = jwt_decode(res.data.token);
-
               const cookies = new Cookies();
               cookies.set("AccessToken", res.data.token, decoded, {
                 expires: new Date(decoded.exp * 1000)
@@ -59,6 +58,7 @@ export default function Login() {
               cookies.set("loggedUser", decoded, {
                 expires: new Date(decoded.exp * 1000)
               });
+              dispatch(saveUser(decoded));
               dispatch(isAuthHandler(true));
               getLoggedUser();
               navigate("/dashboard");
@@ -125,4 +125,3 @@ export default function Login() {
     </div>
   )
 }
-

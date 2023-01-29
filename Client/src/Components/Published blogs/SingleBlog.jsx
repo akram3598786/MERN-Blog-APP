@@ -21,13 +21,16 @@ import { getPublishedDone } from '../Redux/BlogsContext.js/action';
 import EmbedJWTToken from '../EmbedToRequest/EmbedJWTToken';
 import { DeleteIcon, PlusSquareIcon } from '@chakra-ui/icons';
 import swal from 'sweetalert';
+import {BookmarkBlog} from '../Utilities/BookmarkBlog';
+import { updateUser } from '../Redux/Auth-context/action';
 
 
 export default function SingleBlog({ blog }) {
 
     const [dates, setdates] = useState({});
     const cookie = new Cookies();
-    const loggedUser = cookie.get("loggedUser") || undefined;
+    // const loggedUser = cookie.get("loggedUser") || undefined;
+    const loggedUser = useSelector((store) => { return store.user.userData });
     const published = useSelector((store) => { return store.publishedBlogs.published })
 
     const [doing, setdoing] = useState(false);
@@ -53,13 +56,6 @@ export default function SingleBlog({ blog }) {
             }).catch((err) => console.log(err));
     }
 
-
-    /// Bookmark Blog
-    const handleBookmark=()=>{
-        alert("bookmarked")
-
-    }
-
     // Update data to databse
     const handleUpdateforDashboard = () => {
         setdoing(true);
@@ -75,6 +71,22 @@ export default function SingleBlog({ blog }) {
             }).catch((err) => {
                 console.log(err);
             }).finally(() => setdoing(false));
+    }
+
+    // Add Blog in Bookmarks
+    const handleBookmarkBlog=async()=>{
+        try{
+            await BookmarkBlog(blog._id);
+            // if(!loggedUser.bookmarks.includes(blog._id))
+             loggedUser.bookmarks = [...loggedUser.bookmarks,blog._id];
+            //  console.log(loggedUser.bookmarks)
+            dispatch(updateUser(loggedUser))
+            swal("Blog Bookmarked", { timer: 1300, button: false });
+        }
+        catch(err){
+            console.log(err)
+        }
+       
     }
 
     return (
@@ -106,7 +118,7 @@ export default function SingleBlog({ blog }) {
                             <MenuList minWidth='150px' marginLeft="-110px" marginTop='-20px' backgroundColor='black' color='white'>
                                 <MenuOptionGroup defaultValue='asc' type='radio' backgroundColor='black'>
                                      {loggedUser ? loggedUser._id == blog.createdby ? <Text title='Delete Blog' _hover={{backgroundColor:"grey"}} onClick={handleDelete}  cursor='pointer' > {/*<DeleteIcon/> */}Delete</Text> : null : null} 
-                                     {loggedUser  ? <Text title='Bookmark Blog' _hover={{backgroundColor:"grey"}} onClick={handleBookmark}  cursor='pointer' > {/*<PlusSquareIcon/> */}BookMark</Text> : null } 
+                                     {loggedUser && !loggedUser.bookmarks.includes(blog._id)  ? <Text title='Bookmark Blog' _hover={{backgroundColor:"grey"}} onClick={()=>handleBookmarkBlog(blog._id)}  cursor='pointer' disabled={loggedUser.bookmarks.includes(blog._id) ? true : false} > {/*<PlusSquareIcon/> */}BookMark</Text> : null } 
                                     {/* <MenuItemOption value='book' backgroundColor='black' ><PlusSquareIcon/> BookMark this</MenuItemOption> */}
                                     <MenuItemOption value='asc' _hover={{backgroundColor:"grey"}} backgroundColor='black'>Ascending</MenuItemOption>
                                     <MenuItemOption value='desc' _hover={{backgroundColor:"grey"}} backgroundColor='black'>Descending</MenuItemOption>

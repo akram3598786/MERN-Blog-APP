@@ -14,7 +14,9 @@ import SavedBlogList from './Components/User/Bookmarks';
 
 
 function App() {
-  const isAuth = useSelector((store) => store.isAuth.isAuth);
+  const isAuth = useSelector((store) => {
+    return store.user.isAuth
+  });
 
   return (
     <div className="App">
@@ -26,7 +28,7 @@ function App() {
         <Route path='/post/edit/:blogId' element={<EditBlog />}></Route> {/* Private Route */}
         <Route path='/create' element={<CreateBlog />}></Route>          {/* Private Route */}
         <Route path='/profile' element={<Profile />}></Route>            {/* Private Route */}
-        <Route path='/bookmarks' element={<SavedBlogList />}></Route>            {/* Private Route */}
+        <Route path='/bookmarks' element={<SavedBlogList />}></Route>    {/* Private Route */}
 
         <Route path='/login' element={<Login />}></Route>                {/* Public Route */}
         <Route path='/signup' element={<SignUp />}></Route>              {/* Public Route */}

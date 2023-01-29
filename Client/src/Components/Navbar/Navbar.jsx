@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.style.css";
-import { isAuthHandler } from '../Redux/Auth-context/action';
+import { DeleteUser, deleteUser, isAuthHandler } from '../Redux/Auth-context/action';
 import Cookies from 'universal-cookie';
 import { Button } from "@chakra-ui/react";
 import Right_Drawer from "./Rightdrawer";
@@ -9,7 +9,7 @@ import { useState } from "react";
 import Login from "../Login_SignUp/Login";
 
 export default function NavBar() {
-  const isAuth = useSelector((store) => store.isAuth.isAuth);
+  const isAuth = useSelector((store) => store.user.isAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openDrawer,setopenDrawer] = useState(false);
@@ -19,6 +19,7 @@ export default function NavBar() {
     cookies.remove("AccessToken");
     cookies.remove("loggedUser");
     dispatch(isAuthHandler(false));
+    dispatch(DeleteUser());
     navigate("/login");
   }
   const handleOpenDrawer=()=>{

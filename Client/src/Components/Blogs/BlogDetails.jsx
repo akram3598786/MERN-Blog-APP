@@ -9,10 +9,12 @@ import { Link } from "react-router-dom";
 import getLoggedUser from "../Utilities/GetLoggedUser";
 import formateDate from "../Utilities/SetDate";
 import moment from 'moment';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Cookies from 'universal-cookie';
 import { BsFillBookmarkStarFill } from "react-icons/bs";
 import swal from "sweetalert";
+import { updateUser } from "../Redux/Auth-context/action";
+import { BookmarkBlog } from "../Utilities/BookmarkBlog";
 
 export default function BlogDetails() {
 
@@ -23,11 +25,13 @@ export default function BlogDetails() {
     const { blogId } = useParams();
     const [publishing, setpublishing] = useState(false);
     const [published, setpublished] = useState(false);
-    const isAuth = useSelector((store) => store.isAuth.isAuth);
+    const isAuth = useSelector((store) => store.user.isAuth);
     const { state } = useLocation();
     const cookie = new Cookies();
-    const loggedUser = cookie.get("loggedUser") || undefined;
+    // const loggedUser = cookie.get("loggedUser") || undefined;
+    const loggedUser = useSelector((store) => { return store.user.userData });
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         // console.log("path ",state);
@@ -39,7 +43,6 @@ export default function BlogDetails() {
     // Updating publish flag true after blog published =============
 
     const handleUpdate = () => {
-        const loggedUser = getLoggedUser();
         let payload = {
             published: true
         }
@@ -74,6 +77,7 @@ export default function BlogDetails() {
             }).
             finally((res) => setloading(false));
     }
+
 
     // Publishing Blog ======================================
 
@@ -115,12 +119,23 @@ export default function BlogDetails() {
         }
     }
 
-    // Handle Bookmark Blog
+    // Handle Bookmark Blog ====================
 
-    const handleBookmark = (blogId) => {
-        if (loggedUser) swal(blogId);
-        else navigate("/login")
-
+    const handleBookmark = async(blogId) => {
+        if (loggedUser){ 
+            try{
+                await BookmarkBlog(blogId);
+                // if(!loggedUser.bookmarks.includes(blog._id))
+                 loggedUser.bookmarks = [...loggedUser.bookmarks,blogId];
+                //  console.log(loggedUser.bookmarks)
+                dispatch(updateUser(loggedUser))
+                swal("Blog Bookmarked", { timer: 1300, button: false });
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+        else navigate("/login");
     }
 
     //console.log(blogId);
@@ -134,8 +149,8 @@ export default function BlogDetails() {
                                 {state.pathFrom == 'dashboard' ? <Button rightIcon={<ArrowForwardIcon />} className='editBlogLink' colorScheme='white' variant='outline'>
                                     <Link to={`/post/edit/${blog._id}`}>Edit this</Link>
                                 </Button> : state.pathFrom == 'bookmark' ? null : state.pathFrom == 'published' ?
-                                    <Button leftIcon={<BsFillBookmarkStarFill fill="orange" />} onClick={() => handleBookmark(blog._id)} className='boomarkBlogLink' colorScheme='white' variant='outline'>
-                                        Bookmark
+                                    <Button disabled={loggedUser.bookmarks.includes(blog._id) ? true : false} leftIcon={<BsFillBookmarkStarFill fill="orange" />} onClick={() => handleBookmark(blog._id)} className='boomarkBlogLink' colorScheme='white' variant='outline'>
+                                        {loggedUser.bookmarks.includes(blog._id) ? "Bookmarked" : "Bookmark"}
                                     </Button> : null}
                                 <div className="headerBlog">
                                     <h1>{blog.title}</h1>

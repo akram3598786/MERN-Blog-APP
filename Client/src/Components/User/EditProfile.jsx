@@ -5,18 +5,22 @@ import { useState } from 'react';
 import getLoggedUser from '../Utilities/GetLoggedUser';
 import EmbedJWTToken from '../EmbedToRequest/EmbedJWTToken';
 import Cookies from 'universal-cookie';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUser } from '../Redux/Auth-context/action';
 
 export default function EditProfile({userdetails,upadteduser,setShowEditForm}) {
-
 
     const [name,setname] = useState(userdetails.name || "");
     const [mobile,setmobile] = useState(userdetails.mobile || "");
     const [avatar,setavatar] = useState(userdetails.avatar || "");
     const [doing, setdoing] = useState(false);
+    const dispatch = useDispatch();
+    const loggedUser = useSelector((store) => { return store.user.userData });
     
         const handleEditProfile = () => {
             setdoing(true);
-            const loggedUser = getLoggedUser();
+            // const loggedUser = getLoggedUser();\
+           
             let payload = {
                 name: name,
                 email : loggedUser.email,
@@ -24,13 +28,17 @@ export default function EditProfile({userdetails,upadteduser,setShowEditForm}) {
                 avatar: avatar,
                 _id : loggedUser._id
             }
+            loggedUser.name = name;
+            loggedUser.mobile = mobile;
+            loggedUser.avatar = avatar;
             // let url = `http://localhost:8080/user/edit/${loggedUser._id}`;
-            let url = `https://mern-app-blog-ver01.onrender.com/user/edit/${loggedUser._id}`;
+             let url = `https://mern-app-blog-ver01.onrender.com/user/edit/${loggedUser._id}`;
     
             const authAxios = EmbedJWTToken(url);
             authAxios.patch(url, payload).
                 then((res) => {
                     if (res.status === 201){ 
+                        dispatch(updateUser(loggedUser));
                         upadteduser(payload);
                         const cookies = new Cookies();
                         cookies.set("loggedUser",payload);

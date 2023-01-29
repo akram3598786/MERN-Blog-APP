@@ -6,7 +6,7 @@ import styles from "./Homepage.style.css";
 import Cookies from 'universal-cookie';
 
 export default function Homepage(){
-    const isAuth = useSelector((store) => store.isAuth.isAuth);
+    const isAuth = useSelector((store) => store.user.isAuth);
     const navigate = useNavigate();
 
     const cookie = new Cookies();

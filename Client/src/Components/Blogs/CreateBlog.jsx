@@ -25,7 +25,7 @@ export default function CreateBlog() {
     const cookie = new Cookies();
     const loggedUser = cookie.get("loggedUser") || undefined;
 
-    const isAuth = useSelector((store) => store.isAuth.isAuth);
+    const isAuth = useSelector((store) => store.user.isAuth);
     const navigate = useNavigate();
 
     // Checking for Auth

@@ -13,6 +13,7 @@ export default function ProgresSkelton() {
                 isLoaded={isLoaded}
                 bg='green.500'
                 color='white'
+                width='800px'
                 fadeDuration={1}
             >
                 <Box>Hello React!</Box>

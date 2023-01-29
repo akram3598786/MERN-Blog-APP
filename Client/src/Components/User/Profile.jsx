@@ -11,13 +11,12 @@ import EditProfile from "./EditProfile";
 
 export default function Profile() {
 
-    const isAuth = useSelector((store) => store.isAuth.isAuth);
+    const isAuth = useSelector((store) => store.user.isAuth);
     const navigate = useNavigate();
     const [user, setuser] = useState({});
     const [ShowEditForm,setShowEditForm] = useState(false);
-    let loggedUser = {};
-    if(isAuth) loggedUser = getLoggedUser();
-    
+    let loggedUser = useSelector((store) => { return store.user.userData });
+    // if(isAuth) loggedUser = 
 
     useEffect(() => {
         if (!isAuth || !loggedUser) navigate("/login");

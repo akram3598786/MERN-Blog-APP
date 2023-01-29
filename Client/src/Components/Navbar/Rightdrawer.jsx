@@ -25,13 +25,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import { RiAwardFill, RiBookMarkFill, RiGroupFill, RiHeart3Fill, RiProfileFill, RiTeamFill, RiTeamLine } from 'react-icons/ri';
 import { isAuthHandler } from '../Redux/Auth-context/action';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Right_Drawer() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef();
     const cookie = new Cookies();
-    const loggedUser = cookie.get("loggedUser") || undefined;
+    // const loggedUser = cookie.get("loggedUser") || undefined;
+    const loggedUser = useSelector((store) => { return store.user.userData });
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -59,10 +60,10 @@ export default function Right_Drawer() {
                     <DrawerCloseButton />
                     <DrawerHeader>
                         <Flex>
-                            <Avatar src={loggedUser.avatar} />
+                            <Avatar src={loggedUser ? loggedUser.avatar: "" } />
                             <Box ml='3'>
                                 <Text fontWeight='bold'>
-                                    {loggedUser.name}
+                                {loggedUser ? loggedUser.name: "" }
                                     <Badge ml='1' colorScheme='green'>
                                         New
                                     </Badge>

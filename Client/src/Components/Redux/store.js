@@ -5,7 +5,7 @@ import { PublishedBogReducer } from "./BlogsContext.js/reducer.js";
 
 const rootReducer = combineReducers({
     publishedBlogs : PublishedBogReducer,
-    isAuth : Authreducer,
+    user : Authreducer,
 });
 
 export const store = legacy_createStore(rootReducer,
