@@ -41,7 +41,7 @@ async function getPublishedPost(req, res){
     }
 }
 
-// Delet Specific post
+// Delete Specific post
 async function deletePost(req, res) {
     try {
         let { postId} = req.params;
@@ -54,17 +54,17 @@ async function deletePost(req, res) {
 
 //  ============================= Bookmark Bolg ============================
 
-// Bookmark specific Blog
+// Bookmark specific Blog 
 async function BookmarkPost(req, res) {
     try {
         const payload = req.body;
         const userId = payload.bookmarkBy;
         const postId = payload.postId;
         let user = await UserModel.findById(userId);
-        // console.log(user);
         if (user) {;
             user.bookmarks = [...user.bookmarks,postId];
             await user.save();
+
             res.status(201).send({ message: "Blog bookmarked"});
         } else {
             res.status(404).send("User not authorized");
@@ -84,8 +84,9 @@ async function RemoveFromBookmarks(req, res) {
         let user = await UserModel.findById(userId);
         // console.log(user);
         if (user) {
-            let updated = user.bookmarks.filter((blg)=>blg._id != postId);
+            let updated = user.bookmarks.filter((blgid)=>blgid != postId);
             user.bookmarks = updated;
+            // console.log(user)
             await user.save();
             res.status(200).send({ message: "Blog Removed from bookmarks"});
         } else {
