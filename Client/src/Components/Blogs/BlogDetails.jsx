@@ -121,17 +121,17 @@ export default function BlogDetails() {
 
     // Handle Bookmark Blog ====================
 
-    const handleBookmark = async(blogId) => {
-        if (loggedUser){ 
-            try{
+    const handleBookmark = async (blogId) => {
+        if (isAuth) {
+            try {
                 await BookmarkBlog(blogId);
                 // if(!loggedUser.bookmarks.includes(blog._id))
-                 loggedUser.bookmarks = [...loggedUser.bookmarks,blogId];
+                loggedUser.bookmarks = [...loggedUser.bookmarks, blogId];
                 //  console.log(loggedUser.bookmarks)
                 dispatch(updateUser(loggedUser))
                 swal("Blog Bookmarked", { timer: 1300, button: false });
             }
-            catch(err){
+            catch (err) {
                 console.log(err)
             }
         }
@@ -146,12 +146,15 @@ export default function BlogDetails() {
                     loading ? <h1>Loading...</h1> :
                         error ? <h1>Error : Something Went Wrong</h1> :
                             <>
-                                {state.pathFrom == 'dashboard' ? <Button rightIcon={<ArrowForwardIcon />} className='editBlogLink' colorScheme='white' variant='outline'>
+                                {state.pathFrom == 'dashboard' && isAuth ? <Button rightIcon={<ArrowForwardIcon />} className='editBlogLink' colorScheme='white' variant='outline'>
                                     <Link to={`/post/edit/${blog._id}`}>Edit this</Link>
-                                </Button> : state.pathFrom == 'bookmark' ? null : state.pathFrom == 'published' ?
+                                </Button> : state.pathFrom == 'bookmark' && isAuth ? null : state.pathFrom == 'published' && isAuth ?
                                     <Button disabled={loggedUser.bookmarks.includes(blog._id) ? true : false} leftIcon={<BsFillBookmarkStarFill fill="orange" />} onClick={() => handleBookmark(blog._id)} className='boomarkBlogLink' colorScheme='white' variant='outline'>
-                                        {loggedUser.bookmarks.includes(blog._id) ? "Bookmarked" : "Bookmark"}
-                                    </Button> : null}
+                                       {loggedUser.bookmarks.includes(blog._id) ? "Bookmarked" : "Bookmark"}
+                                    </Button> :
+                                    <Button  leftIcon={<BsFillBookmarkStarFill fill="orange" />} onClick={() => handleBookmark(blog._id)} className='boomarkBlogLink' colorScheme='white' variant='outline'>
+                                    Bookmark
+                                 </Button> }
                                 <div className="headerBlog">
                                     <h1>{blog.title}</h1>
                                     {state.pathFrom == 'dashboard' ?

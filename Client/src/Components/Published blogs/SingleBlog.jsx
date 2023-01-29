@@ -30,7 +30,9 @@ export default function SingleBlog({ blog }) {
     const [dates, setdates] = useState({});
     const cookie = new Cookies();
     // const loggedUser = cookie.get("loggedUser") || undefined;
+    const isAuth = useSelector((store) => store.user.isAuth);
     const loggedUser = useSelector((store) => { return store.user.userData });
+    if(loggedUser == {}) loggedUser = undefined;
     const published = useSelector((store) => { return store.publishedBlogs.published })
 
     const [doing, setdoing] = useState(false);
@@ -117,8 +119,8 @@ export default function SingleBlog({ blog }) {
 
                             <MenuList minWidth='150px' marginLeft="-110px" marginTop='-20px' backgroundColor='black' color='white'>
                                 <MenuOptionGroup defaultValue='asc' type='radio' backgroundColor='black'>
-                                     {loggedUser ? loggedUser._id == blog.createdby ? <Text title='Delete Blog' _hover={{backgroundColor:"grey"}} onClick={handleDelete}  cursor='pointer' > {/*<DeleteIcon/> */}Delete</Text> : null : null} 
-                                     {loggedUser && !loggedUser.bookmarks.includes(blog._id)  ? <Text title='Bookmark Blog' _hover={{backgroundColor:"grey"}} onClick={()=>handleBookmarkBlog(blog._id)}  cursor='pointer' disabled={loggedUser.bookmarks.includes(blog._id) ? true : false} > {/*<PlusSquareIcon/> */}BookMark</Text> : null } 
+                                     {isAuth ? loggedUser._id == blog.createdby ? <Text title='Delete Blog' _hover={{backgroundColor:"grey"}} onClick={handleDelete}  cursor='pointer' > {/*<DeleteIcon/> */}Delete</Text> : null : null} 
+                                     {isAuth  ? <Text title='Bookmark Blog' _hover={{backgroundColor:"grey"}} onClick={()=>handleBookmarkBlog(blog._id)}  cursor='pointer' _disabled={loggedUser.bookmarks.includes(blog._id) ? true : false} > {/*<PlusSquareIcon/> */}BookMark</Text> : null } 
                                     {/* <MenuItemOption value='book' backgroundColor='black' ><PlusSquareIcon/> BookMark this</MenuItemOption> */}
                                     <MenuItemOption value='asc' _hover={{backgroundColor:"grey"}} backgroundColor='black'>Ascending</MenuItemOption>
                                     <MenuItemOption value='desc' _hover={{backgroundColor:"grey"}} backgroundColor='black'>Descending</MenuItemOption>
